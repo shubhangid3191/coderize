@@ -1,17 +1,12 @@
 import React from "react";
 
-import AppRouter from "./routes/AppRouter";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./compoenents/Navbar";
+import Footer from "./compoenents/Footer";
 
 function App() {
   return (
     <>
-     
       <Navbar />
-
-      <AppRouter />
-
       <Footer />
     </>
   );
