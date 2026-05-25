@@ -50,7 +50,7 @@ const softwareLinks = [
 
 const quickLinks = [
   { label: 'Industries', href: '#' },
-  { label: 'Career', href: '#' },
+  { label: 'Career', href: '/career' },
   { label: 'Contact Us', href: '#' },
   { label: 'About Us', href: '#' },
   { label: 'Privacy Policy', href: '#' },
