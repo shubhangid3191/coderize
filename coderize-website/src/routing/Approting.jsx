@@ -8,6 +8,12 @@ import GeoSpherePage from "../pages/product/GeoSphere";
 import GeoScanPage from "../pages/product/GeoScan";
 import GeoFlowPage from "../pages/product/GeoFlow";
 import IndustriesPage from "../pages/Industries";
+import BlogsPage from "../pages/library/Blogs";
+import CaseStudiesPage from "../pages/library/CaseStudies";
+import ContactPage from "../pages/Contact";
+import CodeOfConduct from "../pages/AboutUs/CodeOfConduct";
+import Leadership from "../pages/AboutUs/Leadership";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
 
 
 export default function AppRouter() {
@@ -24,7 +30,12 @@ export default function AppRouter() {
         <Route path="/GeoScan" element={<GeoScanPage/>} />
         <Route path="/GeoFlow" element={<GeoFlowPage/>} />
         <Route path="/Industries" element={<IndustriesPage/>} />
-
+        <Route path="/Blogs" element={<BlogsPage/>} />
+        <Route path="/CaseStudies" element={<CaseStudiesPage/>} />
+        <Route path="/Contact" element={<ContactPage/>} />
+        <Route path="/CodeOfConduct" element={<CodeOfConduct/>} />
+        <Route path="/Leadership" element={<Leadership/>} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy/>} />
 
       </Routes>
     </BrowserRouter>

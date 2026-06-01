@@ -49,11 +49,11 @@ const softwareLinks = [
 ];
 
 const quickLinks = [
-  { label: 'Industries', href: '#' },
+  { label: 'Industries', href: '/Industries' },
   { label: 'Career', href: '/career' },
-  { label: 'Contact Us', href: '#' },
+  { label: 'Contact Us', href: '/Contact' },
   { label: 'About Us', href: '#' },
-  { label: 'Privacy Policy', href: '#' },
+  { label: 'Privacy Policy', href: 'PrivacyPolicy' },
   { label: 'Terms & Conditions', href: '#' },
 ];
 

@@ -4,12 +4,14 @@ import {
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import careerImg1 from "../assets/career-img1.jpg";
-import careerImg2 from "../assets/career-img2.jpg";
-import careerGrowth from "../assets/career-growth.jpg";
 
 const ACCENT = "#e8622a";
 const DARK = "#0d1b2a";
+
+// ── Replaced local imports with reliable Unsplash URLs ──
+const careerImg1 = "https://coderize.in/wp-content/uploads/2024/09/career-img1.jpg";
+const careerImg2 = "https://coderize.in/wp-content/uploads/2024/09/career-img2.jpg";
+const careerGrowth = "https://coderize.in/wp-content/uploads/2024/09/career-growth.jpg";
 
 const jobListings = [
   { title: "Python Developer Intern", desc: "We are looking for a Python Developer Intern to join our team" },
@@ -95,7 +97,10 @@ const TickerDot = () => (
 function TickerBar() {
   const doubled = [...tickerTags, ...tickerTags];
   return (
-    <Box sx={{ overflow: "hidden", bgcolor: "#fff", borderTop: "1px solid #e8edf2", borderBottom: "1px solid #e8edf2", py: "14px" }}>
+    <Box sx={{
+      overflow: "hidden", bgcolor: "#fff",
+      borderTop: "1px solid #e8edf2", borderBottom: "1px solid #e8edf2", py: "14px",
+    }}>
       <style>{`
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .ticker-inner { display: flex; width: max-content; animation: ticker 28s linear infinite; }
@@ -103,7 +108,11 @@ function TickerBar() {
       `}</style>
       <Box className="ticker-inner">
         {doubled.map((tag, i) => (
-          <Box key={i} component="span" sx={{ display: "inline-flex", alignItems: "center", gap: 1, px: "24px", whiteSpace: "nowrap", fontSize: "0.88rem", color: "#3a5068", fontFamily: "'Segoe UI', sans-serif" }}>
+          <Box key={i} component="span" sx={{
+            display: "inline-flex", alignItems: "center", gap: 1,
+            px: "24px", whiteSpace: "nowrap",
+            fontSize: "0.88rem", color: "#3a5068", fontFamily: "'Segoe UI', sans-serif",
+          }}>
             <TickerDot />
             {tag}
           </Box>
@@ -122,7 +131,10 @@ function TestimonialSlider() {
   return (
     <Box sx={{ bgcolor: "#cdd9e3", py: { xs: 6, md: "72px" }, pb: { xs: 8, md: "88px" } }}>
       <Container maxWidth="lg" sx={{ position: "relative" }}>
-        <Typography variant="h4" sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 5.5 }}>
+        <Typography variant="h4" sx={{
+          fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
+          fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 5.5,
+        }}>
           What Our Employee Say
         </Typography>
         <Box sx={{ display: "flex", gap: 3.5, alignItems: "flex-start" }}>
@@ -130,7 +142,10 @@ function TestimonialSlider() {
             <text x="0" y="42" fontSize="68" fill={ACCENT} fontFamily="Georgia, serif" opacity="0.85">"</text>
           </Box>
           <Box sx={{ flex: 1 }}>
-            <Typography sx={{ fontFamily: "'Segoe UI', sans-serif", fontSize: "1rem", color: "#1e3347", lineHeight: 1.85, mb: 3.5, maxWidth: 860 }}>
+            <Typography sx={{
+              fontFamily: "'Segoe UI', sans-serif", fontSize: "1rem",
+              color: "#1e3347", lineHeight: 1.85, mb: 3.5, maxWidth: 860,
+            }}>
               {t.text}
             </Typography>
             <Typography sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: DARK }}>
@@ -143,9 +158,15 @@ function TestimonialSlider() {
         </Box>
         <Box sx={{ display: "flex", gap: 1.5, position: "absolute", right: { xs: 16, md: 24 }, bottom: { xs: -48, md: -52 } }}>
           {[{ fn: prev, icon: <ArrowBackIcon sx={{ fontSize: 16, color: "#4a6070" }} /> },
-            { fn: next, icon: <ArrowForwardIcon sx={{ fontSize: 16, color: "#4a6070" }} /> }
+            { fn: next, icon: <ArrowForwardIcon sx={{ fontSize: 16, color: "#4a6070" }} /> },
           ].map(({ fn, icon }, i) => (
-            <Box key={i} component="button" onClick={fn} sx={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid #8aaabb", bgcolor: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color 0.2s", "&:hover": { borderColor: ACCENT } }}>
+            <Box key={i} component="button" onClick={fn} sx={{
+              width: 42, height: 42, borderRadius: "50%",
+              border: "1.5px solid #8aaabb", bgcolor: "#fff",
+              cursor: "pointer", display: "flex", alignItems: "center",
+              justifyContent: "center", transition: "border-color 0.2s",
+              "&:hover": { borderColor: ACCENT },
+            }}>
               {icon}
             </Box>
           ))}
@@ -155,22 +176,80 @@ function TestimonialSlider() {
   );
 }
 
+// ── Hero image collage — matches the screenshot layout exactly ──
+function HeroImages() {
+  const imgStyle = { width: "100%", height: "100%", objectFit: "cover", display: "block" };
+
+  return (
+    <Box sx={{
+      position: "relative",
+      width: "100%",
+      height: { xs: 320, sm: 400, md: 420 },
+    }}>
+      {/* TOP-LEFT: woman at monitor */}
+      <Box sx={{
+        position: "absolute",
+        top: 0, left: 0,
+        width: { xs: "56%", md: "54%" },
+        height: { xs: "55%", md: "57%" },
+        borderRadius: "10px", overflow: "hidden",
+        zIndex: 1, boxShadow: "0 4px 18px rgba(0,0,0,0.13)",
+      }}>
+        <Box component="img" src={careerImg2} alt="Team at work" sx={imgStyle} />
+      </Box>
+
+      {/* RIGHT TALL: man with laptop */}
+      <Box sx={{
+        position: "absolute",
+        top: { xs: "8%", md: "6%" }, right: 0,
+        width: { xs: "48%", md: "49%" },
+        height: { xs: "88%", md: "92%" },
+        borderRadius: "10px", overflow: "hidden",
+        zIndex: 3, boxShadow: "0 6px 24px rgba(0,0,0,0.16)",
+      }}>
+        <Box component="img" src={careerImg1} alt="Career growth" sx={imgStyle} />
+      </Box>
+
+      {/* BOTTOM-LEFT: growth/stairs */}
+      <Box sx={{
+        position: "absolute",
+        bottom: 0, left: { xs: "4%", md: "3%" },
+        width: { xs: "52%", md: "50%" },
+        height: { xs: "42%", md: "42%" },
+        borderRadius: "10px", overflow: "hidden",
+        zIndex: 2, boxShadow: "0 4px 18px rgba(0,0,0,0.13)",
+      }}>
+        <Box component="img" src={careerGrowth} alt="Professional growth" sx={imgStyle} />
+      </Box>
+    </Box>
+  );
+}
+
 export default function CareerPage() {
   return (
     <Box sx={{ bgcolor: "#fff", minHeight: "100vh", fontFamily: "'Segoe UI', sans-serif" }}>
 
-      {/* HERO */}
-      <Box sx={{ background: "linear-gradient(160deg, #f9ede6 0%, #f5e0d3 30%, #eeddd8 55%, #e8dbd8 75%, #e0dce0 100%)", pt: { xs: 5, md: "56px" }, overflow: "hidden" }}>
+      {/* ── HERO ── */}
+      <Box sx={{
+        background: "linear-gradient(160deg, #f9ede6 0%, #f5e0d3 30%, #eeddd8 55%, #e8dbd8 75%, #e0dce0 100%)",
+        pt: { xs: 5, md: "56px" }, overflow: "hidden",
+      }}>
         <Container maxWidth="lg" sx={{ pb: { xs: 6, md: "64px" } }}>
           <Typography sx={{ fontSize: "0.82rem", color: "#6a8090", mb: 4, fontFamily: "'Segoe UI', sans-serif" }}>
             Home » Career
           </Typography>
-          <Grid container spacing={7} alignItems="flex-start">
+          <Grid container spacing={{ xs: 4, md: 7 }} alignItems="flex-start">
             <Grid item xs={12} md={5}>
-              <Typography variant="h1" sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 800, fontSize: { xs: "2rem", md: "2.6rem" }, color: DARK, mb: 2.5, lineHeight: 1.2 }}>
+              <Typography variant="h1" sx={{
+                fontFamily: "'Segoe UI', sans-serif", fontWeight: 800,
+                fontSize: { xs: "2rem", md: "2.6rem" }, color: DARK, mb: 2.5, lineHeight: 1.2,
+              }}>
                 Grow With Us!!
               </Typography>
-              <Typography sx={{ color: "#3a5068", fontSize: "0.96rem", lineHeight: 1.85, mb: 1.5, maxWidth: 500, fontFamily: "'Segoe UI', sans-serif" }}>
+              <Typography sx={{
+                color: "#3a5068", fontSize: "0.96rem", lineHeight: 1.85,
+                mb: 1.5, maxWidth: 500, fontFamily: "'Segoe UI', sans-serif",
+              }}>
                 At CodeRize Technologies, we drive innovation and excellence in geospatial and IT solutions.
                 Our dynamic team values creativity and collaboration. We provide exciting career opportunities
                 through internships. Exploratory programs and entry-level roles are also available. These positions
@@ -185,17 +264,7 @@ export default function CareerPage() {
               </Typography>
             </Grid>
             <Grid item xs={12} md={7}>
-              <Box sx={{ position: "relative", height: { xs: 280, md: 400 } }}>
-                <Box sx={{ position: "absolute", top: 0, left: 0, width: "57%", height: { xs: 160, md: 250 }, borderRadius: "10px", overflow: "hidden", bgcolor: "#b8c8d4", zIndex: 1 }}>
-                  <Box component="img" src={careerImg2} alt="team" sx={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
-                </Box>
-                <Box sx={{ position: "absolute", top: 0, right: 0, width: "46%", height: { xs: 270, md: 390 }, borderRadius: "10px", overflow: "hidden", bgcolor: "#c8d8e0", zIndex: 2 }}>
-                  <Box component="img" src={careerImg1} alt="career" sx={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
-                </Box>
-                <Box sx={{ position: "absolute", bottom: 0, left: 0, width: "62%", height: { xs: 130, md: 180 }, borderRadius: "10px", overflow: "hidden", bgcolor: "#d0dadf", zIndex: 3 }}>
-                  <Box component="img" src={careerGrowth} alt="growth" sx={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
-                </Box>
-              </Box>
+              <HeroImages />
             </Grid>
           </Grid>
         </Container>
@@ -203,12 +272,15 @@ export default function CareerPage() {
 
       <TickerBar />
 
-      {/* WHY WORK WITH US */}
+      {/* ── WHY WORK WITH US ── */}
       <Box sx={{ py: { xs: 6, md: "80px" }, bgcolor: "#fff" }}>
         <Container maxWidth="lg">
           <Grid container spacing={10} alignItems="flex-start">
             <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 2.5 }}>
+              <Typography variant="h4" sx={{
+                fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
+                fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 2.5,
+              }}>
                 Why Work With Us?
               </Typography>
               <Typography sx={{ color: "#4a6070", fontSize: "0.95rem", lineHeight: 1.9, fontFamily: "'Segoe UI', sans-serif" }}>
@@ -241,12 +313,15 @@ export default function CareerPage() {
 
       <TestimonialSlider />
 
-      {/* JOB LISTINGS */}
+      {/* ── JOB LISTINGS ── */}
       <Box sx={{ py: { xs: 6, md: "80px" }, pb: { xs: 8, md: "100px" }, bgcolor: "#fff" }}>
         <Container maxWidth="lg">
           <Grid container spacing={7} sx={{ mb: 5 }} alignItems="flex-start">
             <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK }}>
+              <Typography variant="h4" sx={{
+                fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
+                fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK,
+              }}>
                 Our Job Offers
               </Typography>
             </Grid>
@@ -258,15 +333,23 @@ export default function CareerPage() {
           </Grid>
           <Box sx={{ height: 1, bgcolor: "#dde5ec" }} />
           {jobListings.map((job) => (
-            <Box key={job.title} sx={{ borderBottom: "1px solid #dde5ec", py: "30px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 3 }}>
+            <Box key={job.title} sx={{
+              borderBottom: "1px solid #dde5ec", py: "30px",
+              display: "flex", alignItems: { xs: "flex-start", sm: "center" },
+              justifyContent: "space-between", gap: 3,
+              flexDirection: { xs: "column", sm: "row" },
+            }}>
               <Box sx={{ flex: 1 }}>
-                <Typography sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: "1.1rem", color: DARK, mb: 0.75 }}>
+                <Typography sx={{
+                  fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
+                  fontSize: "1.1rem", color: DARK, mb: 0.75,
+                }}>
                   {job.title}
                 </Typography>
                 <Typography sx={{ color: "#4a6070", fontSize: "0.88rem", mb: 1.75, fontFamily: "'Segoe UI', sans-serif" }}>
                   {job.desc}
                 </Typography>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
                   {["Full Time", "Intern", "Work From Office"].map((tag, i) => (
                     <Box key={tag} component="span" sx={{ display: "inline-flex", alignItems: "center" }}>
                       <Typography component="span" sx={{ color: "#4a6070", fontSize: "0.86rem", fontFamily: "'Segoe UI', sans-serif" }}>
@@ -282,7 +365,14 @@ export default function CareerPage() {
               <Button
                 href="#"
                 endIcon={<ArrowForwardIcon sx={{ fontSize: "15px !important" }} />}
-                sx={{ color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.88rem", textTransform: "none", flexShrink: 0, borderBottom: `1.5px solid ${ACCENT}`, borderRadius: 0, pb: "2px", px: 0, minWidth: 0, "&:hover": { bgcolor: "transparent", color: ACCENT } }}
+                sx={{
+                  color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600,
+                  fontSize: "0.88rem", textTransform: "none", flexShrink: 0,
+                  borderBottom: `1.5px solid ${ACCENT}`, borderRadius: 0,
+                  pb: "2px", px: 0, minWidth: 0,
+                  alignSelf: { xs: "flex-start", sm: "center" },
+                  "&:hover": { bgcolor: "transparent", color: ACCENT },
+                }}
               >
                 View Details
               </Button>

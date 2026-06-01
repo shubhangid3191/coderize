@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   AppBar, Toolbar, Box, Button, Link, IconButton,
   Drawer, List, ListItem, ListItemText, Collapse, Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ACCENT = '#e8622a';
 const NAV_BG = '#ffffff';
@@ -32,52 +32,74 @@ const navItems = [
     label: 'About Us',
     children: [
       { label: 'About Company', href: '#' },
-      { label: 'Leadership', href: '#' },
-      { label: 'Code of Conduct', href: '#' },
+      { label: 'Leadership', href: '/Leadership' },
+      { label: 'Code of Conduct', href: '/CodeOfConduct' },
     ],
   },
   { label: 'Careers', href: '/career' },
   {
     label: 'Library',
     children: [
-      { label: 'Blogs', href: '#' },
-      { label: 'Case Studies', href: '#' },
+      { label: 'Blogs', href: '/Blogs' },
+      { label: 'Case Studies', href: '/CaseStudies' },
     ],
   },
 ];
 
-const CoderizeLogoSVG = () => (
-  <svg width="130" height="50" viewBox="0 0 210 72" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M 44 10 C 24 10 8 26 8 46 C 8 61 18 71 31 71 C 21 64 16 56 18 44 C 21 26 36 18 51 21 C 64 24 71 36 66 51 C 62 62 51 68 40 66"
-      stroke={ACCENT} strokeWidth="5" fill="none" strokeLinecap="round"
-    />
-    <path
-      d="M 26 46 C 26 38 32 32 40 32 C 46 32 51 36 52 42"
-      stroke={ACCENT} strokeWidth="4" fill="none" strokeLinecap="round"
-    />
-    <text x="76" y="39" fontFamily="'Segoe UI',Arial,sans-serif" fontWeight="800" fontSize="20" fill="#0d1b2a" letterSpacing="1.5">CODERIZE</text>
-    <text x="76" y="54" fontFamily="'Segoe UI',Arial,sans-serif" fontSize="6" fill="#6a8099" letterSpacing="2.5">TRANS·INNOVATE SPATIALLY</text>
-  </svg>
-);
-
-function DropdownMenu({ items }) {
+function DropdownMenu({ items, visible }) {
   return (
-    <Box sx={{
-      position: 'absolute', top: '100%', left: 0, minWidth: 200,
-      bgcolor: '#fff', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-      borderRadius: '8px', py: 1, zIndex: 1300,
-      border: '1px solid #edf0f4',
-    }}>
+    <Box
+      sx={{
+        position: 'absolute',
+        top: 'calc(100% + 8px)',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        minWidth: 210,
+        bgcolor: '#fff',
+        boxShadow: '0 12px 32px rgba(0,0,0,0.13)',
+        borderRadius: '10px',
+        py: 1,
+        zIndex: 1300,
+        border: '1px solid #f0f0f0',
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? 'all' : 'none',
+        transform: visible
+          ? 'translateX(-50%) translateY(0)'
+          : 'translateX(-50%) translateY(-6px)',
+        transition: 'opacity 0.18s ease, transform 0.18s ease',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: -6,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 12,
+          height: 12,
+          bgcolor: '#fff',
+          border: '1px solid #f0f0f0',
+          borderRight: 'none',
+          borderBottom: 'none',
+          rotate: '45deg',
+        },
+      }}
+    >
       {items.map((item) => (
-        <Link key={item.label} href={item.href} underline="none"
+        <Link
+          key={item.label}
+          href={item.href}
+          underline="none"
           sx={{
-            display: 'block', px: 2.5, py: 1,
-            color: '#2a3a4a', fontSize: '0.875rem',
+            display: 'block',
+            px: 2.5,
+            py: 1,
+            color: '#2a3a4a',
+            fontSize: '0.875rem',
             fontFamily: "'Segoe UI', sans-serif",
+            fontWeight: 400,
             transition: 'color 0.15s, background 0.15s',
             '&:hover': { color: ACCENT, bgcolor: '#fdf3ee' },
-          }}>
+          }}
+        >
           {item.label}
         </Link>
       ))}
@@ -89,115 +111,286 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState({});
   const [hovered, setHovered] = useState(null);
+  const timerRef = useRef({});
+
+  const handleMouseEnter = (label) => {
+    clearTimeout(timerRef.current[label]);
+    setHovered(label);
+  };
+
+  const handleMouseLeave = (label) => {
+    timerRef.current[label] = setTimeout(() => {
+      setHovered((prev) => (prev === label ? null : prev));
+    }, 120);
+  };
 
   const toggleMobileMenu = (label) =>
     setOpenMenus((p) => ({ ...p, [label]: !p[label] }));
 
   return (
     <>
-      <AppBar position="sticky" elevation={0}
-        sx={{ bgcolor: NAV_BG, borderBottom: '1px solid #edf0f4', zIndex: 1200 }}>
-        <Toolbar sx={{
-          maxWidth: '1200px', width: '100%', mx: 'auto',
-          px: { xs: 2, md: 4 }, py: 0.5, justifyContent: 'space-between',
-        }}>
-          <Link href="#"><CoderizeLogoSVG /></Link>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          bgcolor: NAV_BG,
+          borderBottom: '1px solid #e8ecf0',
+          zIndex: 1200,
+        }}
+      >
+        <Toolbar
+          disableGutters
+          sx={{
+            maxWidth: '1280px',
+            width: '100%',
+            mx: 'auto',
+            px: { xs: 2, sm: 3, md: 4, lg: 5 },
+            py: { xs: 0.5, md: 1 },
+            minHeight: { xs: 64, md: 72 },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* ── Logo ── */}
+          <Link href="/" sx={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+            <Box
+              component="img"
+              src="https://coderize.in/wp-content/uploads/2024/08/logo.svg"
+              alt="Coderize"
+              sx={{
+                height: { xs: 40, md: 52 },
+                width: 'auto',
+                display: 'block',
+              }}
+            />
+          </Link>
 
-          {/* Desktop Nav */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+          {/* ── Desktop Nav ── */}
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              gap: { md: 0.5, lg: 1 },
+              flex: 1,
+              justifyContent: 'center',
+            }}
+          >
             {navItems.map((item) => (
-              <Box key={item.label} sx={{ position: 'relative' }}
-                onMouseEnter={() => setHovered(item.label)}
-                onMouseLeave={() => setHovered(null)}>
+              <Box
+                key={item.label}
+                sx={{ position: 'relative' }}
+                onMouseEnter={() => handleMouseEnter(item.label)}
+                onMouseLeave={() => handleMouseLeave(item.label)}
+              >
                 {item.children ? (
                   <Button
+                    disableRipple
                     endIcon={
-                      <ExpandMoreIcon sx={{
-                        fontSize: '14px !important',
-                        transition: 'transform 0.2s',
-                        transform: hovered === item.label ? 'rotate(180deg)' : 'none',
-                      }} />
+                      <KeyboardArrowDownIcon
+                        sx={{
+                          fontSize: '16px !important',
+                          transition: 'transform 0.2s',
+                          transform:
+                            hovered === item.label
+                              ? 'rotate(180deg)'
+                              : 'rotate(0deg)',
+                          color: 'inherit',
+                        }}
+                      />
                     }
                     sx={{
-                      color: item.label === 'Careers' ? ACCENT : '#2a3a4a',
-                      fontFamily: "'Segoe UI', sans-serif", fontWeight: 500,
-                      fontSize: '0.875rem', textTransform: 'none', px: 1.5,
-                      '&:hover': { color: ACCENT, bgcolor: 'transparent' },
-                    }}>
+                      color: '#1a2a3a',
+                      fontFamily: "'Segoe UI', sans-serif",
+                      fontWeight: 500,
+                      fontSize: { md: '0.9rem', lg: '1rem' },
+                      textTransform: 'none',
+                      px: { md: 1, lg: 1.5 },
+                      py: 1,
+                      borderRadius: '6px',
+                      bgcolor: 'transparent',
+                      '&:hover': {
+                        color: ACCENT,
+                        bgcolor: 'transparent',
+                      },
+                      '& .MuiButton-endIcon': { ml: 0.3 },
+                    }}
+                  >
                     {item.label}
                   </Button>
                 ) : (
-                  <Button href={item.href}
+                  <Button
+                    href={item.href}
+                    disableRipple
                     sx={{
-                      color: item.label === 'Careers' ? ACCENT : '#2a3a4a',
+                      color: item.label === 'Careers' ? ACCENT : '#1a2a3a',
                       fontFamily: "'Segoe UI', sans-serif",
-                      fontWeight: item.label === 'Careers' ? 600 : 500,
-                      fontSize: '0.875rem', textTransform: 'none', px: 1.5,
-                      '&:hover': { color: ACCENT, bgcolor: 'transparent' },
-                    }}>
+                      fontWeight: item.label === 'Careers' ? 700 : 500,
+                      fontSize: { md: '0.9rem', lg: '1rem' },
+                      textTransform: 'none',
+                      px: { md: 1, lg: 1.5 },
+                      py: 1,
+                      borderRadius: '6px',
+                      bgcolor: 'transparent',
+                      '&:hover': {
+                        color: ACCENT,
+                        bgcolor: 'transparent',
+                      },
+                    }}
+                  >
                     {item.label}
                   </Button>
                 )}
-                {item.children && hovered === item.label && (
-                  <DropdownMenu items={item.children} />
+                {item.children && (
+                  <DropdownMenu
+                    items={item.children}
+                    visible={hovered === item.label}
+                  />
                 )}
               </Box>
             ))}
-            <Button href="#" variant="contained"
-              sx={{
-                ml: 1.5, bgcolor: ACCENT, color: '#fff',
-                fontFamily: "'Segoe UI', sans-serif",
-                fontWeight: 600, fontSize: '0.875rem',
-                textTransform: 'none', px: 2.5, py: 1,
-                borderRadius: '6px', boxShadow: 'none',
-                '&:hover': { bgcolor: '#c94f1c', boxShadow: 'none' },
-              }}>
-              Contact Us
-            </Button>
           </Box>
 
-          {/* Mobile hamburger */}
+          {/* ── Contact Us button (desktop) ── */}
+          <Button
+            href="#"
+            variant="contained"
+            disableElevation
+            sx={{
+              display: { xs: 'none', md: 'inline-flex' },
+              bgcolor: ACCENT,
+              color: '#fff',
+              fontFamily: "'Segoe UI', sans-serif",
+              fontWeight: 700,
+              fontSize: { md: '0.9rem', lg: '1rem' },
+              textTransform: 'none',
+              px: { md: 3, lg: 4 },
+              py: { md: 1.2, lg: 1.5 },
+              borderRadius: '8px',
+              flexShrink: 0,
+              letterSpacing: 0.3,
+              '&:hover': { bgcolor: '#c94f1c' },
+            }}
+          >
+            Contact Us
+          </Button>
+
+          {/* ── Mobile hamburger ── */}
           <IconButton
-            sx={{ display: { md: 'none' }, color: '#2a3a4a' }}
-            onClick={() => setMobileOpen(true)}>
-            <MenuIcon />
+            sx={{
+              display: { md: 'none' },
+              color: '#1a2a3a',
+              ml: 'auto',
+            }}
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+          >
+            <MenuIcon sx={{ fontSize: 28 }} />
           </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
-      <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}
-        PaperProps={{ sx: { width: 280, bgcolor: '#fff' } }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1.5 }}>
-          <IconButton onClick={() => setMobileOpen(false)}><CloseIcon /></IconButton>
+      {/* ── Mobile Drawer ── */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        PaperProps={{
+          sx: {
+            width: { xs: '80vw', sm: 300 },
+            bgcolor: '#fff',
+            borderTopLeftRadius: 12,
+            borderBottomLeftRadius: 12,
+          },
+        }}
+      >
+        {/* Drawer header */}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            px: 2,
+            py: 1.5,
+            borderBottom: '1px solid #f0f0f0',
+          }}
+        >
+          <Box
+            component="img"
+            src="https://coderize.in/wp-content/uploads/2025/03/cropped-coderize-logo.png"
+            alt="Coderize"
+            sx={{ height: 36, width: 'auto' }}
+          />
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#1a2a3a' }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-        <Divider />
-        <List sx={{ px: 1 }}>
+
+        <List sx={{ px: 1.5, pt: 1 }}>
           {navItems.map((item) => (
             <Box key={item.label}>
               <ListItem
                 button
-                onClick={() => item.children ? toggleMobileMenu(item.label) : null}
-                sx={{ borderRadius: '6px', '&:hover': { bgcolor: '#fdf3ee' } }}>
-                <ListItemText primary={item.label}
+                onClick={() =>
+                  item.children
+                    ? toggleMobileMenu(item.label)
+                    : setMobileOpen(false)
+                }
+                component={item.children ? 'div' : 'a'}
+                href={item.children ? undefined : item.href}
+                sx={{
+                  borderRadius: '8px',
+                  mb: 0.5,
+                  py: 1.1,
+                  '&:hover': { bgcolor: '#fdf3ee' },
+                }}
+              >
+                <ListItemText
+                  primary={item.label}
                   primaryTypographyProps={{
-                    fontFamily: "'Segoe UI', sans-serif", fontSize: '0.9rem',
-                    fontWeight: item.label === 'Careers' ? 600 : 400,
-                    color: item.label === 'Careers' ? ACCENT : '#2a3a4a',
-                  }} />
-                {item.children && <ExpandMoreIcon sx={{ color: '#aaa', fontSize: 18 }} />}
+                    fontFamily: "'Segoe UI', sans-serif",
+                    fontSize: '0.95rem',
+                    fontWeight: item.label === 'Careers' ? 700 : 500,
+                    color: item.label === 'Careers' ? ACCENT : '#1a2a3a',
+                  }}
+                />
+                {item.children && (
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      color: '#aaa',
+                      fontSize: 20,
+                      transition: 'transform 0.2s',
+                      transform: openMenus[item.label]
+                        ? 'rotate(180deg)'
+                        : 'rotate(0deg)',
+                    }}
+                  />
+                )}
               </ListItem>
+
               {item.children && (
                 <Collapse in={openMenus[item.label]}>
-                  <List sx={{ pl: 2 }}>
+                  <List sx={{ pl: 2, pb: 0.5 }}>
                     {item.children.map((c) => (
-                      <ListItem key={c.label} button component="a" href={c.href}
-                        sx={{ borderRadius: '6px', '&:hover': { bgcolor: '#fdf3ee' } }}>
-                        <ListItemText primary={c.label}
+                      <ListItem
+                        key={c.label}
+                        button
+                        component="a"
+                        href={c.href}
+                        sx={{
+                          borderRadius: '8px',
+                          py: 0.8,
+                          '&:hover': { bgcolor: '#fdf3ee' },
+                        }}
+                      >
+                        <ListItemText
+                          primary={c.label}
                           primaryTypographyProps={{
                             fontFamily: "'Segoe UI', sans-serif",
-                            fontSize: '0.85rem', color: '#4a6070',
-                          }} />
+                            fontSize: '0.875rem',
+                            color: '#4a6070',
+                          }}
+                        />
                       </ListItem>
                     ))}
                   </List>
@@ -205,15 +398,26 @@ export default function Navbar() {
               )}
             </Box>
           ))}
-          <Box sx={{ px: 2, pt: 2 }}>
-            <Button fullWidth href="#" variant="contained"
+
+          {/* Contact Us in drawer */}
+          <Box sx={{ px: 1, pt: 2, pb: 2 }}>
+            <Button
+              fullWidth
+              href="#"
+              variant="contained"
+              disableElevation
               sx={{
-                bgcolor: ACCENT, color: '#fff',
+                bgcolor: ACCENT,
+                color: '#fff',
                 fontFamily: "'Segoe UI', sans-serif",
-                fontWeight: 600, textTransform: 'none',
-                borderRadius: '6px', boxShadow: 'none',
-                '&:hover': { bgcolor: '#c94f1c', boxShadow: 'none' },
-              }}>
+                fontWeight: 700,
+                textTransform: 'none',
+                borderRadius: '8px',
+                py: 1.3,
+                fontSize: '0.95rem',
+                '&:hover': { bgcolor: '#c94f1c' },
+              }}
+            >
               Contact Us
             </Button>
           </Box>
