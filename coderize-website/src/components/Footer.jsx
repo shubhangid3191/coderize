@@ -54,7 +54,7 @@ const quickLinks = [
   { label: 'Contact Us', href: '/Contact' },
   { label: 'About Us', href: '#' },
   { label: 'Privacy Policy', href: 'PrivacyPolicy' },
-  { label: 'Terms & Conditions', href: '#' },
+  { label: 'Terms & Conditions', href: 'TermsConditions' },
 ];
 
 const LinkItem = ({ label, href }) => (
