@@ -49,11 +49,11 @@ const softwareLinks = [
 ];
 
 const quickLinks = [
-  { label: 'Industries', href: '#' },
+  { label: 'Industries', href: '/Industries' },
   { label: 'Career', href: '/career' },
-  { label: 'Contact Us', href: '#' },
+  { label: 'Contact Us', href: '/Contact' },
   { label: 'About Us', href: '#' },
-  { label: 'Privacy Policy', href: '#' },
+  { label: 'Privacy Policy', href: 'PrivacyPolicy' },
   { label: 'Terms & Conditions', href: '#' },
 ];
 
@@ -146,7 +146,7 @@ export default function Footer() {
               fontFamily: "'Segoe UI', sans-serif",
               fontWeight: 500,
               fontSize: { xs: '1.5rem', sm: '1.8rem', md: '2.1rem' },
-              color: 'white',
+              color: '#b2b9cc',
             }}
           >
             Ready to supercharge your business?
@@ -157,7 +157,7 @@ export default function Footer() {
           </Stack>
         </Box>
 
-        <Divider sx={{ mb: 5, borderColor: '#1e3048' }} />
+        <Divider sx={{ mb: 5, borderColor: '#e7eaed' }} />
 
         {/* Main Grid */}
         <Grid container spacing={{ xs: 4, md: 10 }}>
@@ -215,7 +215,7 @@ export default function Footer() {
         </Grid>
 
         {/* Bottom Bar */}
-        <Divider sx={{ mt: 6, mb: 3, borderColor: '#1e3048' }} />
+        <Divider sx={{ mt: 6, mb: 3, borderColor: '#e5eaf1' }} />
         <Box
           sx={{
             display: 'flex',
