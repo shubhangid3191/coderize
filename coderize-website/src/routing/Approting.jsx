@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
 import CareerPage from "../pages/Career";
 import GeospatialPage from "../pages/services/Geospatial";
 import SoftwarePage from "../pages/services/Software";
@@ -20,6 +21,7 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
 
          {/* Career Route */}
         <Route path="/career" element={<CareerPage/>} />
