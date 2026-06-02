@@ -16,6 +16,7 @@ import CodeOfConduct from "../pages/AboutUs/CodeOfConduct";
 import Leadership from "../pages/AboutUs/Leadership";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsConditions from "../pages/TermsConditions";
+import AboutCompany from "../pages/AboutUs/AboutCompany";
 
 
 export default function AppRouter() {
@@ -40,6 +41,7 @@ export default function AppRouter() {
         <Route path="/Leadership" element={<Leadership/>} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy/>} />
         <Route path="/TermsConditions" element={<TermsConditions/>} />
+        <Route path="/AboutCompany" element={<AboutCompany />} />
 
       </Routes>
     </BrowserRouter>

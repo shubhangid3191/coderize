@@ -31,7 +31,7 @@ const navItems = [
   {
     label: 'About Us',
     children: [
-      { label: 'About Company', href: '#' },
+      { label: 'About Company', href: '/AboutCompany' },
       { label: 'Leadership', href: '/Leadership' },
       { label: 'Code of Conduct', href: '/CodeOfConduct' },
     ],
