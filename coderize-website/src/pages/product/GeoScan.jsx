@@ -17,6 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
+import Navbar from "../../components/Navbar";
 
 const menuItems = [
   "Services",
@@ -52,6 +53,7 @@ function HeroSection() {
         width: "100%",
         height: { xs: "280px", sm: "320px", md: "380px" },
         overflow: "hidden",
+        marginTop: { xs: "-64px", md: "-72px" },
       }}
     >
       {/* BACKGROUND IMAGE */}
@@ -256,6 +258,7 @@ function FlipCard({ product }) {
 export default function GeoScanPage() {
   return (
     <Box sx={{ bgcolor: "#fff", minHeight: "100vh" }}>
+      <Navbar transparentHero={true} />
       {/* HERO SECTION */}
       <HeroSection />
 

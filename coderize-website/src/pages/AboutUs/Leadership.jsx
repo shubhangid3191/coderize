@@ -19,6 +19,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Navbar from "../../components/Navbar";
 
 export default function Leadership() {
   const mobile = useMediaQuery("(max-width:900px)");
@@ -62,6 +63,7 @@ export default function Leadership() {
 
   return (
     <>
+    <Navbar transparentHero={true} />
       {/* HERO SECTION */}
 
       <Box
@@ -72,6 +74,7 @@ export default function Leadership() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
+          marginTop: { xs: "-64px", md: "-72px" },
         }}
       >
         {/* Overlay */}

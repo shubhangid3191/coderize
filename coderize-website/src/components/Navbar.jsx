@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 import {
   AppBar, Toolbar, Box, Button, Link, IconButton,
-  Drawer, List, ListItem, ListItemText, Collapse, Divider,
+  Drawer, List, ListItem, ListItemText, Collapse,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ACCENT = '#e8622a';
-const NAV_BG = '#ffffff';
+const NAVBAR_HEIGHT_XS = 64;
+const NAVBAR_HEIGHT_MD = 72;
+const SCROLL_THRESHOLD = 80;
 
 const navItems = [
   {
@@ -53,7 +55,6 @@ function DropdownMenu({ items, visible }) {
         position: 'absolute',
         top: 'calc(100% + 8px)',
         left: '50%',
-        transform: 'translateX(-50%)',
         minWidth: 210,
         bgcolor: '#fff',
         boxShadow: '0 12px 32px rgba(0,0,0,0.13)',
@@ -107,35 +108,54 @@ function DropdownMenu({ items, visible }) {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ transparentHero = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState({});
   const [hovered, setHovered] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const timerRef = useRef({});
+
+  useEffect(() => {
+    // Remove MUI's default body padding-top that causes white gap
+    document.body.style.paddingTop = '0px';
+
+    if (!transparentHero) return;
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [transparentHero]);
+
+  const isTransparent = transparentHero && !scrolled;
 
   const handleMouseEnter = (label) => {
     clearTimeout(timerRef.current[label]);
     setHovered(label);
   };
-
   const handleMouseLeave = (label) => {
     timerRef.current[label] = setTimeout(() => {
       setHovered((prev) => (prev === label ? null : prev));
     }, 120);
   };
-
   const toggleMobileMenu = (label) =>
     setOpenMenus((p) => ({ ...p, [label]: !p[label] }));
 
   return (
     <>
       <AppBar
-        position="sticky"
+        position="fixed"
         elevation={0}
         sx={{
-          bgcolor: NAV_BG,
-          borderBottom: '1px solid #e8ecf0',
+          top: 0,
+          left: 0,
+          right: 0,
+          bgcolor: isTransparent ? 'transparent' : 'transparent',
+          borderBottom: isTransparent ? 'none' : '1px solid #e8ecf0',
+          boxShadow: isTransparent ? 'none' : '0 2px 12px rgba(0,0,0,0.07)',
+          transition: 'background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease',
           zIndex: 1200,
+          margin: 0,
+          padding: 0,
         }}
       >
         <Toolbar
@@ -145,14 +165,13 @@ export default function Navbar() {
             width: '100%',
             mx: 'auto',
             px: { xs: 2, sm: 3, md: 4, lg: 5 },
-            py: { xs: 0.5, md: 1 },
-            minHeight: { xs: 64, md: 72 },
+            minHeight: { xs: `${NAVBAR_HEIGHT_XS}px !important`, md: `${NAVBAR_HEIGHT_MD}px !important` },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
-          {/* ── Logo ── */}
+          {/* Logo */}
           <Link href="/" sx={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <Box
               component="img"
@@ -162,11 +181,13 @@ export default function Navbar() {
                 height: { xs: 40, md: 52 },
                 width: 'auto',
                 display: 'block',
+                filter: isTransparent ? 'brightness(0) invert(1)' : 'none',
+                transition: 'filter 0.4s ease',
               }}
             />
           </Link>
 
-          {/* ── Desktop Nav ── */}
+          {/* Desktop Nav */}
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
@@ -191,16 +212,13 @@ export default function Navbar() {
                         sx={{
                           fontSize: '16px !important',
                           transition: 'transform 0.2s',
-                          transform:
-                            hovered === item.label
-                              ? 'rotate(180deg)'
-                              : 'rotate(0deg)',
+                          transform: hovered === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
                           color: 'inherit',
                         }}
                       />
                     }
                     sx={{
-                      color: '#1a2a3a',
+                      color: isTransparent ? '#ffffff' : '#1a2a3a',
                       fontFamily: "'Segoe UI', sans-serif",
                       fontWeight: 500,
                       fontSize: { md: '0.9rem', lg: '1rem' },
@@ -209,8 +227,9 @@ export default function Navbar() {
                       py: 1,
                       borderRadius: '6px',
                       bgcolor: 'transparent',
+                      transition: 'color 0.4s ease',
                       '&:hover': {
-                        color: ACCENT,
+                        color: isTransparent ? 'rgba(255,255,255,0.75)' : ACCENT,
                         bgcolor: 'transparent',
                       },
                       '& .MuiButton-endIcon': { ml: 0.3 },
@@ -223,7 +242,7 @@ export default function Navbar() {
                     href={item.href}
                     disableRipple
                     sx={{
-                      color: item.label === 'Careers' ? ACCENT : '#1a2a3a',
+                      color: item.label === 'Careers' ? ACCENT : isTransparent ? '#ffffff' : '#1a2a3a',
                       fontFamily: "'Segoe UI', sans-serif",
                       fontWeight: item.label === 'Careers' ? 700 : 500,
                       fontSize: { md: '0.9rem', lg: '1rem' },
@@ -232,8 +251,9 @@ export default function Navbar() {
                       py: 1,
                       borderRadius: '6px',
                       bgcolor: 'transparent',
+                      transition: 'color 0.4s ease',
                       '&:hover': {
-                        color: ACCENT,
+                        color: isTransparent ? 'rgba(255,255,255,0.75)' : ACCENT,
                         bgcolor: 'transparent',
                       },
                     }}
@@ -241,25 +261,24 @@ export default function Navbar() {
                     {item.label}
                   </Button>
                 )}
+
                 {item.children && (
-                  <DropdownMenu
-                    items={item.children}
-                    visible={hovered === item.label}
-                  />
+                  <DropdownMenu items={item.children} visible={hovered === item.label} />
                 )}
               </Box>
             ))}
           </Box>
 
-          {/* ── Contact Us button (desktop) ── */}
+          {/* Contact Us Button */}
           <Button
-            href="#"
+            href="/contact"
             variant="contained"
             disableElevation
             sx={{
               display: { xs: 'none', md: 'inline-flex' },
-              bgcolor: ACCENT,
+              bgcolor: isTransparent ? 'rgba(255,255,255,0.15)' : ACCENT,
               color: '#fff',
+              border: isTransparent ? '1.5px solid rgba(255,255,255,0.6)' : '1.5px solid transparent',
               fontFamily: "'Segoe UI', sans-serif",
               fontWeight: 700,
               fontSize: { md: '0.9rem', lg: '1rem' },
@@ -269,18 +288,24 @@ export default function Navbar() {
               borderRadius: '8px',
               flexShrink: 0,
               letterSpacing: 0.3,
-              '&:hover': { bgcolor: '#c94f1c' },
+              backdropFilter: isTransparent ? 'blur(4px)' : 'none',
+              transition: 'all 0.4s ease',
+              '&:hover': {
+                bgcolor: isTransparent ? 'rgba(255,255,255,0.25)' : '#c94f1c',
+                borderColor: isTransparent ? 'rgba(255,255,255,0.9)' : 'transparent',
+              },
             }}
           >
             Contact Us
           </Button>
 
-          {/* ── Mobile hamburger ── */}
+          {/* Mobile Hamburger */}
           <IconButton
             sx={{
               display: { md: 'none' },
-              color: '#1a2a3a',
+              color: isTransparent ? '#ffffff' : '#1a2a3a',
               ml: 'auto',
+              transition: 'color 0.4s ease',
             }}
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
@@ -290,7 +315,12 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
 
-      {/* ── Mobile Drawer ── */}
+      {/* Spacer — only on non-hero pages */}
+      {!transparentHero && (
+        <Box sx={{ height: { xs: `${NAVBAR_HEIGHT_XS}px`, md: `${NAVBAR_HEIGHT_MD}px` } }} />
+      )}
+
+      {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
@@ -304,7 +334,6 @@ export default function Navbar() {
           },
         }}
       >
-        {/* Drawer header */}
         <Box
           sx={{
             display: 'flex',
@@ -317,7 +346,7 @@ export default function Navbar() {
         >
           <Box
             component="img"
-            src="https://coderize.in/wp-content/uploads/2025/03/cropped-coderize-logo.png"
+            src="https://coderize.in/wp-content/uploads/2024/08/logo.svg"
             alt="Coderize"
             sx={{ height: 36, width: 'auto' }}
           />
@@ -331,11 +360,7 @@ export default function Navbar() {
             <Box key={item.label}>
               <ListItem
                 button
-                onClick={() =>
-                  item.children
-                    ? toggleMobileMenu(item.label)
-                    : setMobileOpen(false)
-                }
+                onClick={() => (item.children ? toggleMobileMenu(item.label) : setMobileOpen(false))}
                 component={item.children ? 'div' : 'a'}
                 href={item.children ? undefined : item.href}
                 sx={{
@@ -360,9 +385,7 @@ export default function Navbar() {
                       color: '#aaa',
                       fontSize: 20,
                       transition: 'transform 0.2s',
-                      transform: openMenus[item.label]
-                        ? 'rotate(180deg)'
-                        : 'rotate(0deg)',
+                      transform: openMenus[item.label] ? 'rotate(180deg)' : 'rotate(0deg)',
                     }}
                   />
                 )}
@@ -399,11 +422,10 @@ export default function Navbar() {
             </Box>
           ))}
 
-          {/* Contact Us in drawer */}
           <Box sx={{ px: 1, pt: 2, pb: 2 }}>
             <Button
               fullWidth
-              href="#"
+              href="/contact-us"
               variant="contained"
               disableElevation
               sx={{

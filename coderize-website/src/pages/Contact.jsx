@@ -12,36 +12,91 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import DownloadIcon from "@mui/icons-material/Download";
 import { useTheme } from "@mui/material/styles";
+import Navbar from "../components/Navbar";
 
 const menuItems = ["Services","Products","Industries","About Us","Careers","Library"];
 
-function CoderizeLogoSVG({ dark = false }) {
-  return (
-    <Box sx={{ display:"flex", alignItems:"center", gap:"10px", cursor:"pointer" }}>
-      <Box sx={{ width:50, height:50 }}>
-        <svg width="50" height="50" viewBox="0 0 44 44" fill="none">
-          <circle cx="22" cy="22" r="21" stroke="#e8622a" strokeWidth="2" fill="none" />
-          <path d="M14 12 L14 32 M14 12 L24 12 Q30 12 30 18 Q30 24 24 24 L14 24 M22 24 L30 32"
-            stroke="#e8622a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        </svg>
-      </Box>
-      <Box>
-        <Typography sx={{ fontWeight:800, fontSize:"1.1rem", color:dark?"#1a1a1a":"#fff", lineHeight:1, letterSpacing:"1px" }}>CODERIZE</Typography>
-        <Typography sx={{ fontSize:"0.48rem", color:dark?"#666":"#b9c7d3", letterSpacing:"1.5px", lineHeight:1.2 }}>TRANSINNOVATE SPATIALLY</Typography>
-      </Box>
-    </Box>
-  );
-}
-
 function HeroSection() {
   return (
-    <Box sx={{ position:"relative", width:"100%", height:{ xs:"280px", md:"360px" }, overflow:"hidden", bgcolor:"#0a2a3a" }}>
-      <Box component="img" src="https://coderize.in/wp-content/uploads/2024/09/contact-banner.jpg" alt="Contact Banner" onError={(e) => { e.target.style.display="none"; }} sx={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", opacity:0.6 }} />
-      <Box sx={{ position:"absolute", inset:0, background:"linear-gradient(135deg, rgba(10,42,58,0.85) 0%, rgba(15,80,100,0.6) 100%)" }} />
-      <Container maxWidth="xl" sx={{ position:"relative", zIndex:2, height:"100%", display:"flex", alignItems:"center" }}>
-        <Box sx={{ mt:{ xs:8, md:10 } }}>
-          <Typography sx={{ color:"#ffffff", fontSize:"14px", fontWeight:400, mb:1.5, opacity:0.9 }}>Home &nbsp; » &nbsp; Contact Us</Typography>
-          <Typography sx={{ color:"#ffffff", fontWeight:600, fontSize:{ xs:"32px", md:"42px" }, lineHeight:1.2 }}>Contact Us</Typography>
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: {
+          xs: "280px",
+          sm: "340px",
+          md: "420px",
+        },
+        overflow: "hidden",
+        marginTop: { xs: "-64px", md: "-72px" }, 
+      }}
+    >
+      <Box
+        component="img"
+        src="https://coderize.in/wp-content/uploads/2024/09/contact-title.jpg"
+        alt="Industries Banner"
+        loading="eager"
+        sx={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center top",
+        }}
+      />
+
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(90deg, rgba(0,10,20,0.75) 0%, rgba(0,15,30,0.55) 50%, rgba(0,15,30,0.2) 100%)",
+        }}
+      />
+
+
+      <Container
+        maxWidth="xl"
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ mt: { xs: 2, md: 2 } }}>
+          <Typography
+            sx={{
+              color: "#ffffff",
+              fontSize: {
+                xs: "13px",
+                md: "15px",
+              },
+              fontWeight: 400,
+              mb: 1.5,
+            }}
+          >
+            Home &nbsp; » &nbsp; Contact-Us
+          </Typography>
+
+          <Typography
+            sx={{
+              color: "#ffffff",
+              fontWeight: 300,
+              lineHeight: 1.1,
+              letterSpacing: "-1px",
+              fontSize: {
+                xs: "38px",
+                sm: "52px",
+                md: "64px",
+              },
+              maxWidth: "600px",
+            }}
+          >
+            Contact Us
+          </Typography>
         </Box>
       </Container>
     </Box>
@@ -134,6 +189,7 @@ function MapSection() {
 export default function ContactPage() {
   return (
     <Box sx={{ bgcolor:"#ffffff", minHeight:"100vh" }}>
+      <Navbar transparentHero={true} />
       <HeroSection />
       <ContactBody />
       <MapSection />

@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTheme } from "@mui/material/styles";
+import Navbar from "../../components/Navbar";
 
 const menuItems = ["Services","Products","Industries","About Us","Careers","Library"];
 
@@ -20,7 +21,7 @@ const blogs = [
 
 function HeroSection() {
   return (
-    <Box sx={{ position:"relative", width:"100%", height:{ xs:"280px", sm:"340px", md:"420px" }, overflow:"hidden" }}>
+    <Box sx={{ position:"relative", width:"100%", height:{ xs:"280px", sm:"340px", md:"420px" }, overflow:"hidden", marginTop: { xs: "-64px", md: "-72px" },}}>
       <Box component="img" src="https://coderize.in/wp-content/uploads/2024/09/blog-titlebanner.jpg" alt="Blogs Banner" loading="eager" sx={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
       <Box sx={{ position:"absolute", inset:0, background:"linear-gradient(90deg, rgba(0,10,20,0.75) 0%, rgba(0,15,30,0.55) 50%, rgba(0,15,30,0.2) 100%)" }} />
       <Container maxWidth="xl" sx={{ position:"relative", zIndex:2, height:"100%", display:"flex", alignItems:"center" }}>
@@ -61,6 +62,7 @@ function BlogCard({ blog }) {
 export default function BlogsPage() {
   return (
     <Box sx={{ bgcolor:"#f5f0eb", minHeight:"100vh" }}>
+      <Navbar transparentHero={true} />
       <HeroSection />
       <Box sx={{ py:{ xs:5, md:7 }, px:{ xs:2, sm:4, md:6 } }}>
         <Container maxWidth="xl" disableGutters>

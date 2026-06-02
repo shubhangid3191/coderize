@@ -19,6 +19,7 @@ import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
+import Navbar from "../components/Navbar";
 
 const menuItems = [
   "Services",
@@ -144,6 +145,7 @@ function HeroSection() {
           md: "420px",
         },
         overflow: "hidden",
+        marginTop: { xs: "-64px", md: "-72px" }, 
       }}
     >
       <Box
@@ -181,7 +183,7 @@ function HeroSection() {
           alignItems: "center",
         }}
       >
-        <Box sx={{ mt: { xs: 6, md: 7 } }}>
+        <Box sx={{ mt: { xs: 2, md: 2 } }}>
           <Typography
             sx={{
               color: "#ffffff",
@@ -330,6 +332,7 @@ export default function IndustriesPage() {
         minHeight: "100vh",
       }}
     >
+      <Navbar transparentHero={true} />
       <HeroSection />
       <IndustriesGrid />
     </Box>

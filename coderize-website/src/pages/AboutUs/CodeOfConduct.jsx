@@ -16,6 +16,7 @@ import {
 
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Navbar from "../../components/Navbar";
 
 export default function CodeOfConduct() {
     const mobile = useMediaQuery("(max-width:900px)");
@@ -28,63 +29,7 @@ export default function CodeOfConduct() {
 
     return (
         <>
-            {/* Navbar */}
-            <AppBar position="fixed" elevation={0}
-                sx={{
-                    background: "rgba(0,0,0,0.15)",
-                    backdropFilter: "blur(4px)",
-                    borderBottom: "1px solid rgba(255,255,255,0.15)",
-                }}
-            >
-                <Toolbar sx={{ maxWidth: "1400px", width: "100%", mx: "auto", py: 1, px: { xs: 2, sm: 3 } }}>
-                    <Box component="img"
-                        src="https://coderize.in/wp-content/uploads/2025/03/cropped-coderize-logo.png"
-                        alt="logo"
-                        sx={{ width: { xs: 110, md: 140 } }}
-                    />
-                    <Box sx={{ flexGrow: 1 }} />
-
-                    {mobile ? (
-                        <>
-                            <IconButton sx={{ color: "#fff" }} onClick={() => setOpen(true)}>
-                                <MenuIcon />
-                            </IconButton>
-                            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-                                <Box sx={{ width: 250 }}>
-                                    <List>
-                                        {menuItems.map((item) => (
-                                            <ListItem key={item}>
-                                                <ListItemText primary={item} />
-                                            </ListItem>
-                                        ))}
-                                    </List>
-                                </Box>
-                            </Drawer>
-                        </>
-                    ) : (
-                        <>
-                            <Box sx={{ display: "flex", gap: 3 }}>
-                                {menuItems.map((item) => (
-                                    <Button key={item} sx={{ color: "#fff", textTransform: "none", fontSize: "17px" }}>
-                                        {item}
-                                        <KeyboardArrowDownIcon sx={{ fontSize: 18, ml: 0.5 }} />
-                                    </Button>
-                                ))}
-                            </Box>
-                            <Button variant="contained"
-                                sx={{
-                                    ml: 4, bgcolor: "#ff661f", textTransform: "none",
-                                    px: 4, py: 1.4, borderRadius: "8px", fontSize: "17px",
-                                    "&:hover": { bgcolor: "#e75a1a" },
-                                }}
-                            >
-                                Contact Us
-                            </Button>
-                        </>
-                    )}
-                </Toolbar>
-            </AppBar>
-
+            <Navbar transparentHero={true} />
             {/* Hero Banner */}
             <Box
                 sx={{
@@ -95,9 +40,9 @@ export default function CodeOfConduct() {
                     position: "relative",
                 }}
             >
-                <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(0,25,55,0.75), rgba(0,25,55,0.75))" }} />
+                <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(0,25,55,0.75), rgba(0,25,55,0.75))" ,}} />
                 <Container maxWidth="lg"
-                    sx={{ position: "relative", zIndex: 2, color: "#fff", pt: { xs: 18, md: 28 }, px: { xs: 2, sm: 3, md: 4 } }}
+                    sx={{ position: "relative", zIndex: 2, color: "#fff", pt: { xs: 18, md: 28 }, px: { xs: 2, sm: 3, md: 4 } ,marginTop: { xs: "-64px", md: "-72px" },}}
                 >
                     <Typography sx={{ fontSize: { xs: "0.9rem", md: 18 }, mb: 2 }}>
                         Home » Code of Conduct

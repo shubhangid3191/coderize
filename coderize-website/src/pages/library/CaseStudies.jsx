@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTheme } from "@mui/material/styles";
+import Navbar from "../../components/Navbar";
 
 const menuItems = ["Services", "Products", "Industries", "About Us", "Careers", "Library"];
 
@@ -89,7 +90,7 @@ const caseStudies = [
 // ── EXACT SAME HeroSection structure ─────────────────────────────────────────
 function HeroSection() {
   return (
-    <Box sx={{ position: "relative", width: "100%", height: { xs: "280px", sm: "340px", md: "420px" }, overflow: "hidden" }}>
+    <Box sx={{ position: "relative", width: "100%", height: { xs: "280px", sm: "340px", md: "420px" }, overflow: "hidden" ,marginTop: { xs: "-64px", md: "-72px" },}}>
       <Box
         component="img"
         src="https://coderize.in/wp-content/uploads/2024/09/case-study-title.jpg"
@@ -255,6 +256,7 @@ function CaseStudyCard({ cs, index }) {
 export default function CaseStudiesPage() {
   return (
     <Box sx={{ bgcolor: "#fff", minHeight: "100vh" }}>
+      <Navbar transparentHero={true} />
       <HeroSection />
 
       {/* Case studies list */}
