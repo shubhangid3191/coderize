@@ -20,6 +20,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Navbar from "../../components/Navbar";
+import leaderbg from "../../assets/leaderbg.jpg";
 
 export default function Leadership() {
   const mobile = useMediaQuery("(max-width:900px)");
@@ -70,7 +71,7 @@ export default function Leadership() {
         sx={{
           height: { xs: 450, md: 470 },
           backgroundImage:
-            "url('https://coderize.in/wp-content/uploads/2024/09/leadership-title.jpg')",
+            `url(${leaderbg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",

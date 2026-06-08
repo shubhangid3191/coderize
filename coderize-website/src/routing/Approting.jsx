@@ -17,6 +17,7 @@ import Leadership from "../pages/AboutUs/Leadership";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsConditions from "../pages/TermsConditions";
 import AboutCompany from "../pages/AboutUs/AboutCompany";
+import GISDevelopment from "../pages/GISDevelopment";
 
 
 export default function AppRouter() {
@@ -42,6 +43,7 @@ export default function AppRouter() {
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy/>} />
         <Route path="/TermsConditions" element={<TermsConditions/>} />
         <Route path="/AboutCompany" element={<AboutCompany />} />
+        <Route path="/GISDevelopment" element={<GISDevelopment />} />
 
       </Routes>
     </BrowserRouter>

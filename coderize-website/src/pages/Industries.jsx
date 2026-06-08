@@ -20,6 +20,27 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../components/Navbar";
+import industriesbg from "../assets/industriesbg.jpg";
+import ind1 from "../assets/ind1.jpeg";
+import ind2 from "../assets/ind2.jpg";
+import ind3 from "../assets/ind3.jpeg";
+import ind4 from "../assets/ind4.jpeg";
+import ind5 from "../assets/ind5.jpeg";
+import ind6 from "../assets/ind6.jpeg";
+import ind7 from "../assets/ind7.jpeg";
+import ind8 from "../assets/ind8.jpeg";
+import ind9 from "../assets/ind9.jpeg";
+import ind10 from "../assets/ind10.jpeg";
+import ind11 from "../assets/ind11.jpeg";
+import ind12 from "../assets/ind12.jpeg";
+import ind13 from "../assets/ind13.jpeg";
+import ind14 from "../assets/ind14.jpeg";
+import ind15 from "../assets/ind15.jpeg";
+import ind16 from "../assets/ind16.jpeg";
+import ind17 from "../assets/ind17.jpeg";
+import ind18 from "../assets/ind18.jpeg";
+import ind19 from "../assets/ind19.jpeg";
+import ind20 from "../assets/ind20.jpeg";
 
 const menuItems = [
   "Services",
@@ -34,102 +55,102 @@ const industries = [
   {
     title: "Government",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/gov-public-administration.jpeg",
+      ind1,
   },
   {
     title: "Environment",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/environment-and-ecosystem-image.jpg",
+      ind2,
   },
   {
     title: "Real Estate",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/real-estate-img.jpeg",
+      ind3,
   },
   {
     title: "Financial Services",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/financial-and-services-image.jpeg",
+      ind4,
   },
   {
     title: "FMCG",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/retail.jpeg",
+      ind5,
   },
   {
     title: "Marketing",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/marketing-and-advertisement.jpeg",
+      ind6,
   },
   {
     title: "Utility",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/utility-image.jpeg",
+      ind7,
   },
   {
     title: "Transport",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/transport-image.jpeg",
+      ind8,
   },
   {
     title: "Health",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/health.jpeg",
+      ind9,
   },
   {
     title: "Logistics",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/logistics.jpeg",
+      ind10,
   },
   {
     title: "Entertainment",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/sport-and-entertainment.jpeg",
+      ind11,
   },
   {
     title: "Telecommunication",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/telecommunication-img.jpeg",
+      ind12,
   },
    {
     title: "Insurance",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/insurance-and-assessment.jpeg",
+      ind13,
   },
    {
     title: "Tourism",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/tourism-and-hospitality.jpeg",
+      ind14,
   },
    {
     title: "Education",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/education-and-academic-research.jpeg",
+      ind15,
   },
    {
     title: "Manifacturing",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/Manufacturing-and-trial-operations.jpeg",
+      ind16,
   },
     {
     title: "Enery",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/national-resources-and-energy.jpeg",
+      ind17,
   },
     {
     title: "National Agencies",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/Nationsl-goverment-or-agencies.jpeg",
+      ind18,
   },
     {
     title: "Public Saftey",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/public-safety.jpeg",
+      ind19,
   },
     {
     title: "Agriculture",
     image:
-      "https://coderize.in/wp-content/uploads/2024/09/Manufacturing-and-trial-operations.jpeg",
+      ind20,
   },
 ];
 
@@ -150,7 +171,7 @@ function HeroSection() {
     >
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/09/industries-title-banner.jpg"
+        src={industriesbg }
         alt="Industries Banner"
         loading="eager"
         sx={{

@@ -18,6 +18,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../../components/Navbar";
+import productbg from "../../assets/productbg.jpg";
+import geose1 from "../../assets/geose1.jpg";
+import geose2 from "../../assets/geose2.jpg";
+
+
 
 const menuItems = [
   "Services",
@@ -32,14 +37,14 @@ const products = [
   {
     title: "GeoSet Collector",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoset-collector.jpg",
+      geose1,
     description:
       "A data collection app for Mobile, makes it easy to capture accurate spatial data and send it to the office in real time...",
   },
   {
     title: "GeoSet Viewer",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoset-viewer-img.jpg",
+      geose2,
     description:
       "A Geo-Enabled web dashboard streamlines inter and intra-department workflows, facilitating real-time...",
   },
@@ -59,7 +64,7 @@ function HeroSection() {
       {/* BACKGROUND IMAGE */}
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/10/product-title-banner.jpg"
+        src={productbg}
         alt="GeoSet Banner"
         sx={{
           position: "absolute",

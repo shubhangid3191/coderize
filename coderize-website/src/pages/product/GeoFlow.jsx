@@ -18,6 +18,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../../components/Navbar";
+import productbg from "../../assets/productbg.jpg";
+import geof1 from "../../assets/geof1.jpg";
+import geof2 from "../../assets/geof2.jpg";
 
 const menuItems = [
   "Services",
@@ -32,14 +35,14 @@ const products = [
   {
     title: "GeoFlow Creator",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoflowcreater.jpg",
+      geof1,
     description:
       "A data creation mobile app which makes it easy to create accurate spatial data and send it to the office in real time...",
   },
   {
     title: "GeoFlow Auditor",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoflowauditor.jpg",
+      geof2,
     description:
       "GeoFlow Auditor is a Geo-enabled web dashboard that allows to audit tasks in real-time based...",
   },
@@ -59,7 +62,7 @@ function HeroSection() {
       {/* BACKGROUND IMAGE */}
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/10/product-title-banner.jpg"
+        src={productbg}
         alt="GeoFlow Banner"
         sx={{
           position: "absolute",

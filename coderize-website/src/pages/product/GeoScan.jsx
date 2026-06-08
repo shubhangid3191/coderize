@@ -18,6 +18,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../../components/Navbar";
+import productbg from "../../assets/productbg.jpg";
+import geosc1 from "../../assets/geosc1.jpg";
+import geosc2 from "../../assets/geosc2.jpg";
 
 const menuItems = [
   "Services",
@@ -32,14 +35,14 @@ const products = [
   {
     title: "GeoScanner",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoscan-mockup-img.jpg",
+      geosc1,
     description:
       "A data collection app for mobile, makes it easy to scan accurate spatial data and send it to the office in real time...",
   },
   {
     title: "GeoScan Reviewer",
     image:
-      "https://coderize.in/wp-content/uploads/2024/10/Geoflow-mockup-img.jpg",
+      geosc2,
     description:
       "A Geo-Enabled web dashboard , makes it easy for visualization and geo-analytics for a real-time operational view...",
   },
@@ -59,7 +62,7 @@ function HeroSection() {
       {/* BACKGROUND IMAGE */}
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/10/product-title-banner.jpg"
+        src={productbg}
         alt="GeoScan Banner"
         sx={{
           position: "absolute",

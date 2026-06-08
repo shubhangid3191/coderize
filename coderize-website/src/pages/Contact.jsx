@@ -13,6 +13,7 @@ import NearMeIcon from "@mui/icons-material/NearMe";
 import DownloadIcon from "@mui/icons-material/Download";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../components/Navbar";
+import contactbg from "../assets/contactbg.jpg";
 
 const menuItems = ["Services","Products","Industries","About Us","Careers","Library"];
 
@@ -33,7 +34,7 @@ function HeroSection() {
     >
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/09/contact-title.jpg"
+        src={contactbg}
         alt="Industries Banner"
         loading="eager"
         sx={{

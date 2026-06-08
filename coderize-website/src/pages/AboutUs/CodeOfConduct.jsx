@@ -17,6 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Navbar from "../../components/Navbar";
+import conductbg from "../../assets/conductbg.jpg";
 
 export default function CodeOfConduct() {
     const mobile = useMediaQuery("(max-width:900px)");
@@ -34,7 +35,7 @@ export default function CodeOfConduct() {
             <Box
                 sx={{
                     height: { xs: 350, md: 520 },
-                    backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1600')",
+                    backgroundImage:  `url(${conductbg})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     position: "relative",

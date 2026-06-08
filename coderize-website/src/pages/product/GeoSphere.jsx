@@ -18,6 +18,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../../components/Navbar";
+import productbg from "../../assets/productbg.jpg";
+import geosp1 from "../../assets/geosp1.jpeg";
 
 const menuItems = [
   "Services",
@@ -32,7 +34,7 @@ const products = [
   {
     title: "GeoSphere",
     image:
-      "https://coderize.in/wp-content/uploads/2026/01/geospace.jpeg",
+      geosp1,
     description:
       "GeoSphere is a secure, web-based geospatial platform that enables organizations to manage spatial data, create interactive maps, build dashboards, and collaborate securely all from a single, trusted system.",
   },
@@ -53,7 +55,7 @@ function HeroSection() {
       {/* BACKGROUND IMAGE */}
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/10/product-title-banner.jpg"
+        src={productbg}
         alt="GeoSphere Banner"
         sx={{
           position: "absolute",
@@ -268,10 +270,6 @@ export default function GeoSpherePage() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "1fr 1fr",
-              },
               gap: { xs: 2, md: 3 },
             }}
           >

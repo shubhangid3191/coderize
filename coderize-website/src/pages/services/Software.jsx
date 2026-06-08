@@ -4,6 +4,33 @@ import {
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import logo1 from "../../assets/logo-1.jpg";
+import logo2 from "../../assets/logo-2.jpg";
+import logo3 from "../../assets/logo-3.jpg";
+import logo4 from "../../assets/logo-4.jpg";
+import logo5 from "../../assets/logo-5.jpg";
+import logo6 from "../../assets/logo-6.jpg";
+import logo7 from "../../assets/logo-7.jpg";
+import logo8 from "../../assets/logo-8.jpg";
+import logo9 from "../../assets/logo-9.jpg";
+import logo10 from "../../assets/logo-10.jpg";
+import logo11 from "../../assets/logo-11.jpg";
+import logo12 from "../../assets/logo-12.jpg";
+import logo13 from "../../assets/logo-13.jpg";
+import goes2 from "../../assets/goes-2.jpg";
+import goesslide1 from "../../assets/goes-slide-1.jpg";
+import goesslide2 from "../../assets/goes-slide-2.jpg";
+import goesslide3 from "../../assets/goes-slide-3.jpg";
+import goesslide4 from "../../assets/goes-slide-4.webp";
+import goesslide5 from "../../assets/goes-slide-5.jpg";
+import goesslide6 from "../../assets/goes-slide-6.jpg";
+import goesslide7 from "../../assets/goes-slide-7.jpg";
+import goesslide8 from "../../assets/goes-slide-8.jpg";
+import goesslide9 from "../../assets/goes-slide-9.webp";
+import soft1 from "../../assets/soft1.webp";
+import soft2 from "../../assets/soft2.jpeg";
+import soft3 from "../../assets/soft3.webp";
+import soft4 from "../../assets/soft4.webp";
 
 const ACCENT = "#e8622a";
 const DARK = "#0d1b2a";
@@ -12,10 +39,10 @@ const BLUE = "#1a3c5e";
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 const solutionCards = [
-  { title: "Application Development", desc: "Our agile, cross-functional teams create scalable web and mobile applications that deliver...", img: "https://coderize.in/wp-content/uploads/2024/08/Geospatial-Application-Development.jpg" },
-  { title: "Azure Consulting", desc: "We provide expert Azure consulting and reengineering to drive scalable, innovative cloud solutions...", img: "https://coderize.in/wp-content/uploads/2024/08/Geospatial-Intelligence-and-Development.jpg" },
-  { title: "Advisory", desc: "We offer expert software advisory services to help businesses make informed technology decisions...", img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&q=80" },
-  { title: "Technical Support", desc: "We provide comprehensive software technical support to ensure seamless operation and quick resolution...", img: "https://coderize.in/wp-content/uploads/2024/08/support.jpg" },
+  { title: "Application Development", desc: "Our agile, cross-functional teams create scalable web and mobile applications that deliver...", img: soft1 },
+  { title: "Azure Consulting", desc: "We provide expert Azure consulting and reengineering to drive scalable, innovative cloud solutions...", img: soft2 },
+  { title: "Advisory", desc: "We offer expert software advisory services to help businesses make informed technology decisions...", img: soft3 },
+  { title: "Technical Support", desc: "We provide comprehensive software technical support to ensure seamless operation and quick resolution...", img: soft4 },
 ];
 
 const testimonials = [
@@ -26,19 +53,19 @@ const testimonials = [
 
 // ✅ CLIENT LOGOS — replace src values with your actual image URLs
 const clientLogos = [
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-01.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-02.jpg", },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-03.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-04.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-05.jpg"},
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-06.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-07.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-08.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-09.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-10.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-11.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-13.jpg",  },
-  { src: "https://coderize.in/wp-content/uploads/2024/08/client-logos-15.jpg",  },
+  { src: logo1,  },
+  { src: logo2,  },
+  { src: logo3,  },
+  { src: logo4,  },
+  { src: logo5   },
+  { src: logo6,  },
+  { src: logo7,  },
+  { src: logo8,  },
+  { src: logo9,  },
+  { src: logo10,  },
+  { src: logo11,  },
+  { src: logo12,  },
+  { src: logo13,  },
 ];
 
 // ─── HERO ─────────────────────────────────────────────────────────────────────
@@ -179,7 +206,7 @@ function ContactSection() {
       <Box sx={{ display: "flex", minHeight: { md: 600 }, flexDirection: { xs: "column", md: "row" } }}>
         <Box sx={{ flex: { md: "0 0 42%" }, maxWidth: { md: "42%" }, p: { xs: "24px", md: "48px" }, bgcolor: "#fff", borderRight: { md: "1px solid #eef1f4" }, borderBottom: { xs: "1px solid #eef1f4", md: "none" } }}>
           <Box sx={{ borderRadius: "10px", overflow: "hidden", mb: 3, bgcolor: "#0d1b2a", position: "relative", height: { xs: 280, md: 600 } }}>
-            <Box component="img" src="https://coderize.in/wp-content/uploads/2024/10/company-profile-768x768.jpg" alt="Company Profile" sx={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.65, display: "block" }} />
+            <Box component="img" src={goes2} alt="Company Profile" sx={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.65, display: "block" }} />
           </Box>
           <Button variant="contained" sx={{ bgcolor: ACCENT, color: "#fff", fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.95rem", textTransform: "none", borderRadius: "8px", px: 4, py: "10px", "&:hover": { bgcolor: "#d4541f" } }}>Download</Button>
         </Box>
@@ -217,15 +244,15 @@ function ContactSection() {
 // ─── ALL SERVICES DATA (8 total, 3 per page) ──────────────────────────────────
 
 const allServices = [
-  { title: "Location Intelligence", desc: "Empower decision-making with our cutting-edge geospatial intelligence solutions, offering superior analytics and actionable data.", img: "https://coderize.in/wp-content/uploads/2024/08/Geospatial-Intelligence-and-Development-768x384.jpg" },
-  { title: "Geospatial Advisory", desc: "Leverage our geospatial consultation to refine your strategy, maximize efficiency, and drive impactful decisions with precision insights.", img: "https://coderize.in/wp-content/uploads/2024/08/gis-developemt-768x384.jpg" },
-  { title: "Geospatial Technical Support", desc: "Overcome geospatial challenges with our expert support, ensuring seamless operations and enhanced efficiency.", img: "https://coderize.in/wp-content/uploads/2024/08/azure-768x384.jpg" },
-  { title: "GIS Development", desc: "We tailor geospatial applications with Esri and open-source technology to add measurable value to your business.", img: "https://coderize.in/wp-content/uploads/2024/08/support-768x384.webp" },
-  { title: "Remote Sensing", desc: "We leverage satellite imagery and aerial data to provide actionable geospatial insights for smarter decisions.", img: "https://coderize.in/wp-content/uploads/2024/08/drone-img-768x384.jpg" },
-  { title: "Spatial Data Management", desc: "Efficiently manage, store, and retrieve large-scale spatial datasets with our robust geospatial data solutions.", img: "https://coderize.in/wp-content/uploads/2024/10/software-advisory-768x555.jpg" },
-  { title: "Web GIS Solutions", desc: "Deploy interactive, browser-based mapping applications that make geospatial data accessible to all stakeholders.", img: "https://coderize.in/wp-content/uploads/2024/08/gis-developemt-768x384.jpg" },
-  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: "https://coderize.in/wp-content/uploads/2024/08/support-768x384.jpg" },
-  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: "https://coderize.in/wp-content/uploads/2024/08/Application-Development--768x384.webp" },
+  { title: "Location Intelligence", desc: "Empower decision-making with our cutting-edge geospatial intelligence solutions, offering superior analytics and actionable data.", img: goesslide1 },
+  { title: "Geospatial Advisory", desc: "Leverage our geospatial consultation to refine your strategy, maximize efficiency, and drive impactful decisions with precision insights.", img: goesslide2 },
+  { title: "Geospatial Technical Support", desc: "Overcome geospatial challenges with our expert support, ensuring seamless operations and enhanced efficiency.", img: goesslide3 },
+  { title: "GIS Development", desc: "We tailor geospatial applications with Esri and open-source technology to add measurable value to your business.", img: goesslide4 },
+  { title: "Remote Sensing", desc: "We leverage satellite imagery and aerial data to provide actionable geospatial insights for smarter decisions.", img: goesslide5 },
+  { title: "Spatial Data Management", desc: "Efficiently manage, store, and retrieve large-scale spatial datasets with our robust geospatial data solutions.", img: goesslide6 },
+  { title: "Web GIS Solutions", desc: "Deploy interactive, browser-based mapping applications that make geospatial data accessible to all stakeholders.", img: goesslide8 },
+  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide8 },
+  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide9 },
 ];
 
 const CARDS_PER_PAGE = 3;

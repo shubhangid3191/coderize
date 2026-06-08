@@ -9,6 +9,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTheme } from "@mui/material/styles";
 import Navbar from "../../components/Navbar";
+import casebg from "../../assets/casebg.jpg"
+import case1 from "../../assets/case1.jpg"
+import case2 from "../../assets/case2.jpg"
+import case3 from "../../assets/case3.jpeg"
+import case4 from "../../assets/case4.jpg"
+import case5 from "../../assets/case5.jpg"
+import case6 from "../../assets/case6.jpeg"
+import case7 from "../../assets/case7.jpg"
+import case8 from "../../assets/case8.jpg"
 
 const menuItems = ["Services", "Products", "Industries", "About Us", "Careers", "Library"];
 
@@ -18,7 +27,7 @@ const caseStudies = [
     tags: "Geospatial, Public Sector, Agriculture, India",
     client: "Agriculture Department, MH",
     title: "GeoSets Collector for Post-Monsoon Crop Damage Assessment in Maharashtra",
-    image: "https://coderize.in/wp-content/uploads/2024/08/agriculture-peek-panchanama.jpg",
+    image: case1,
     fallback: "https://picsum.photos/seed/agri1/800/600",
     slug: "#",
   },
@@ -27,7 +36,7 @@ const caseStudies = [
     tags: "Geospatial, Public Sector, Utility, India",
     client: "Soil & Water Conservation Dept., MH",
     title: "GIS-Driven Dashboard for Asset Optimization and Cost Reduction in Water Conservation",
-    image: "https://coderize.in/wp-content/uploads/2024/08/soil-and-water-feature.jpg",
+    image: case2,
     fallback: "https://picsum.photos/seed/soil2/800/600",
     slug: "#",
   },
@@ -36,7 +45,7 @@ const caseStudies = [
     tags: "Geospatial, Public Sector, Agriculture, India",
     client: "Agriculture Department, MH",
     title: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management",
-    image: "https://coderize.in/wp-content/uploads/2024/08/Agriculture-shetishala.jpeg",
+    image: case3,
     fallback: "https://picsum.photos/seed/agri3/800/600",
     slug: "#",
   },
@@ -45,7 +54,7 @@ const caseStudies = [
     tags: "Geospatial, Public Sector, Forestry, India",
     client: "Thane Forest Dept., MH",
     title: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management",
-    image: "https://coderize.in/wp-content/uploads/2024/08/thane-forest-feature.jpg",
+    image: case4,
     fallback: "https://picsum.photos/seed/forest4/800/600",
     slug: "#",
   },
@@ -54,7 +63,7 @@ const caseStudies = [
     tags: "Geospatial, Public Sector, Education, India",
     client: "Maharashtra Knowledge Corporation Limited",
     title: "WMS Service Development for Forest Encroachment Detection and Monitoring",
-    image: "https://coderize.in/wp-content/uploads/2024/08/mkcl.jpg",
+    image: case5,
     fallback: "https://picsum.photos/seed/mkcl5/800/600",
     slug: "#",
   },
@@ -63,7 +72,7 @@ const caseStudies = [
     tags: "ERP, Private Sector, Retail, India",
     client: "Retail Chain Client",
     title: "ERP Integration for Multi-Location Retail Chain with Geospatial Analytics",
-    image: "https://coderize.in/wp-content/uploads/2024/08/jalshakti-feature.jpeg",
+    image: case6,
     fallback: "https://picsum.photos/seed/retail6/800/600",
     slug: "#",
   },
@@ -72,7 +81,7 @@ const caseStudies = [
     tags: "ERP, Private Sector, Retail, India",
     client: "Retail Chain Client",
     title: "ERP Integration for Multi-Location Retail Chain with Geospatial Analytics",
-    image: "https://coderize.in/wp-content/uploads/2024/08/smc-featute.jpg",
+    image: case7,
     fallback: "https://picsum.photos/seed/retail6/800/600",
     slug: "#",
   },
@@ -81,7 +90,7 @@ const caseStudies = [
     tags: "ERP, Private Sector, Retail, India",
     client: "Retail Chain Client",
     title: "ERP Integration for Multi-Location Retail Chain with Geospatial Analytics",
-    image: "https://coderize.in/wp-content/uploads/2024/08/synlog-feature.jpg",
+    image: case8,
     fallback: "https://picsum.photos/seed/retail6/800/600",
     slug: "#",
   },
@@ -93,7 +102,7 @@ function HeroSection() {
     <Box sx={{ position: "relative", width: "100%", height: { xs: "280px", sm: "340px", md: "420px" }, overflow: "hidden" ,marginTop: { xs: "-64px", md: "-72px" },}}>
       <Box
         component="img"
-        src="https://coderize.in/wp-content/uploads/2024/09/case-study-title.jpg"
+        src={casebg}
         alt="Case Studies Banner"
         loading="eager"
         sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
