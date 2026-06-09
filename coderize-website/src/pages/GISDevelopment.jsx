@@ -8,6 +8,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import GISbg from "../assets/GISbg.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -637,11 +638,11 @@ export default function GISDevelopment() {
 
         {/* ── CTA ── */}
         <Box sx={{
-          position: "relative", minHeight: { xs: 280, md: 580 },
+          position: "relative", minHeight: { xs: 280, md: 600 },
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1440&q=80"
+            src={GISbg}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -721,25 +722,40 @@ export default function GISDevelopment() {
                 transform: `translateX(calc(-${caseSlide * (50 + 1.04)}%))`,
               }}>
                 {caseStudies.map((cs, i) => (
-                  <Box key={i} sx={{
-                    minWidth: { xs: "100%", md: "calc(50% - 10px)" },
-                    flexShrink: 0,
-                    display: "flex",
-                    bgcolor: "#f5f5f5",
-                    overflow: "hidden",
-                    borderRadius: 0,
-                    height: { xs: "auto", md: 300 },
-                    flexDirection: { xs: "column", sm: "row" },
-                  }}>
-                    <Box component="img" src={cs.image} alt={cs.title}
+                  <Box
+                    key={i}
+                    sx={{
+                      minWidth: { xs: "100%", lg: "calc(50% - 10px)" },
+                      flexShrink: 0,
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      overflow: "hidden",
+                      bgcolor: "#f5f5f5",
+                      height: { xs: "auto", md: 500 }, // match screenshot
+                    }}
+>
+                    <Box
+                      component="img"
+                      src={cs.image}
+                      alt={cs.title}
                       sx={{
-                        width: { xs: "100%", sm: "42%" }, height: { xs: 220, sm: "100%" },
-                        objectFit: "cover", flexShrink: 0, display: "block"
-                      }} />
-                    <Box sx={{
-                      p: { xs: 3, md: 4 }, display: "flex", flexDirection: "column",
-                      justifyContent: "center", flex: 1, bgcolor: "#f5f5f5"
-                    }}>
+                        width: { xs: "100%", md: "50%" },
+                        height: { xs: 250, md: "100%" },
+                        objectFit: "cover",
+                        display: "block",
+                        flexShrink: 0,
+                      }}
+                    />
+                      <Box
+                            sx={{
+                              width: { xs: "100%", md: "50%" },
+                              p: { xs: 3, md: 5 },
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              bgcolor: "#f5f5f5",
+                            }}
+                          >
                       <Stack direction="row" flexWrap="wrap" sx={{ mb: 1.5 }}>
                         {cs.tags.map((tag, ti) => (
                           <Typography key={tag} variant="caption"
@@ -748,13 +764,31 @@ export default function GISDevelopment() {
                           </Typography>
                         ))}
                       </Stack>
-                      <Typography sx={{
-                        fontWeight: 700, color: "#1a2b3c",
-                        fontSize: { xs: "1rem", md: "1.15rem" }, mb: 1.5, lineHeight: 1.3
-                      }}>
+                                            <Typography
+                        sx={{
+                          fontWeight: 700,
+                          color: "#1a2b3c",
+                          fontSize: {
+                            xs: "1.4rem",
+                            md: "2rem",
+                          },
+                          lineHeight: 1.25,
+                          mb: 2,
+                        }}
+                      >
                         {cs.title}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: "#4a5568", lineHeight: 1.75, mb: 3, fontSize: "0.9rem" }}>
+                      <Typography
+                        sx={{
+                          color: "#4a5568",
+                          lineHeight: 1.8,
+                          fontSize: {
+                            xs: "1rem",
+                            md: "1.15rem",
+                          },
+                          mb: 5,
+                        }}
+                      >
                         {cs.description}
                       </Typography>
                       <Box sx={{
