@@ -6,14 +6,23 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import MapIcon from "@mui/icons-material/Map";
+import SearchIcon from "@mui/icons-material/Search";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
+import HubIcon from "@mui/icons-material/Hub";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import SpeedIcon from "@mui/icons-material/Speed";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import StorageIcon from "@mui/icons-material/Storage";
-import AnalyticsIcon from "@mui/icons-material/Analytics";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
+import GroupsIcon from "@mui/icons-material/Groups";
+import LockIcon from "@mui/icons-material/Lock";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import locationIntro from "../assets/location-intelligence-1.jpg";
+import advisoryintro from "../assets/advisoryintro.jpg";
+import AdvisoryScheduleCall from "../assets/AdvisoryScheduleCall.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -33,9 +42,7 @@ import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg"
 import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
-import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
-
-
+import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -184,37 +191,83 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
 
 // Page data 
 const stats = [
-  { value: "3000K+", label: "Properties Digitized" },
-  { value: "500K+", label: "Water Conservation Assets Plotted" },
-  { value: "100K+", label: "Acres Area Digitized" },
-  { value: "2.5K+", label: "Sq.Kms Mapped" },
-  { value: "500+", label: "Rasters Processed" },
+  { value: "20+", label: "Clients Served" },
+  { value: "20+", label: "Projects Completed" },
+  { value: "10K+", label: "Hours Logged" },
 ];
 
 const services = [
   {
-    icon: <MapIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "Digital Mapping",
-    description: "Capture accurate spatial data from satellite or drone images, LIDAR Surveys, 2D & 3D data models.",
-    bullets: ["Capture Real-Time Data", "Cartographic Services", "Thematic Maps"],
+    icon: <SearchIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Gap Analysis",
+    description: "Capture precise data of geographical features from satellite or drone images, LiDAR surveys, georeferencing, and 2D & 3D data models.",
+    bullets: ["Needs Assessment", "Comparison with Industry Standards", "Recommendations for Improvement"],
+  },
+  {
+    icon: <DesignServicesIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "UI/UX Design",
+    description: "Develop user-centric design strategies to enhance usability and user satisfaction.",
+    bullets: ["Custom Interface Design", "Usability Testing", "Visualization Enhancements"],
+  },
+  {
+    icon: <AccountTreeIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Architecture Design",
+    description: "Create robust architectural frameworks that align with business goals and technological advancements.",
+    bullets: ["Cloud Infrastructure Design", "Data Flow Design", "Integration with Existing IT Infrastructure"],
+  },
+  {
+    icon: <SettingsSuggestIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Technology Selection & Implementation",
+    description: "We offer ongoing support to keep your technology infrastructure robust and up-to-date.",
+    bullets: ["Vendor Analysis & Comparison", "Cloud & On-Premise Solutions", "Implementation Planning"],
+  },
+  {
+    icon: <HubIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Integration Strategies",
+    description: "Design and execute integration plans to ensure smooth interoperability between systems and applications.",
+    bullets: ["Multi-System Integration", "API & Web Services Integration", "Real-Time Data Integration"],
+  },
+  {
+    icon: <SupportAgentIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Support Planning",
+    description: "Develop comprehensive support plans to maintain system reliability and performance post-deployment.",
+    bullets: ["Ongoing Technical Support", "Training", "Managed Support Services"],
+  },
+  {
+    icon: <AssignmentIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Project Management and Planning",
+    description: "Offer strategic project management guidance to ensure timely and cost-effective delivery of projects.",
+    bullets: ["Project Scoping & Timeline", "Risk Management Planning", "Implement Methodologies"],
+  },
+  {
+    icon: <SpeedIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Performance Optimization",
+    description: "Analyze and optimize system performance to achieve peak efficiency and effectiveness.",
+    bullets: ["System Performance Tuning", "Scalability Solutions", "GIS Software Optimization"],
+  },
+  {
+    icon: <AutoFixHighIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Business Process Automation",
+    description: "Implement automation solutions to streamline operations and improve productivity.",
+    bullets: ["Automated Geospatial Workflows", "Integration with BPM Systems", "Automated Reporting & Alerts"],
   },
   {
     icon: <StorageIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "Geodata Management",
-    description: "Streamline geographic data management with a robust spatial database for efficient storage, organization, and integration.",
-    bullets: ["Geospatial Database Design", "Data Migration & Integration", "Metadata Management"],
+    title: "Data Governance & Migration",
+    description: "Establish data governance for compliance, integrity, and manage secure, accurate data migration.",
+    bullets: ["Data Management & Governance", "Data Migration & Conversion", "Data Quality Assurance"],
   },
   {
-    icon: <AnalyticsIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "GIS Analysis",
-    description: "Generate accurate custom reports from analyzing location data & understand what is working & what is not.",
-    bullets: ["Spatial Data Analysis", "Network Analysis", "Hotspot Analysis"],
+    icon: <GroupsIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Change Management and Adoption",
+    description: "Develop change management strategies to facilitate smooth adoption of new systems and processes.",
+    bullets: ["User Adoption Strategies", "Change Communication", "Support for Transition Periods"],
   },
   {
-    icon: <ViewInArIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "3D GIS & BIM",
-    description: "We deliver expert 3D GIS and BIM services with cutting-edge spatial visualization and modeling.",
-    bullets: ["3D Building Modelling", "3D Spatial Analysis", "3D Data Integration"],
+    icon: <LockIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Security and Privacy Consulting",
+    description: "Provide expert advice on security measures and privacy practices to protect sensitive information.",
+    bullets: ["Data Security Measures", "Compliance with Data Protection Regulations", "Security Audits & Vulnerability Assessments"],
   },
 ];
 
@@ -363,44 +416,34 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
-  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
-  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-  { image: locationintelligencecase4, tags: ["Environment", "ERP", "India", "Private Sector"], title: "Unity Green Solutions", description: "Customized Waste Management Platform for Streamlined Business Operations" },
-  { image: locationintelligencecase5, tags: ["ERP", "Healthcare", "India", "Private Sector"], title: "Mylab Discovery Solutions Pvt. Ltd.", description: "Event Management System Implementation Using Odoo ERP for Process Optimization" },
-  { image: locationintelligencecase6, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
-];
+    { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
+    { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
+    { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
+    { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
+    { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
+    { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
+  
+  ];
 
 
-
-const CASE_GAP = 20;
 
 export default function Advisory() {
-  const [caseSlide, setCaseSlide] = useState(0);
-  const viewportRef = useRef(null);
-  const [carousel, setCarousel] = useState({ cardWidth: 0, slideStep: 0, maxSlide: caseStudies.length - 2 });
-
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-
-    const update = () => {
-      const w = el.getBoundingClientRect().width;
-      const twoUp = w >= 900;
-      const cardWidth = twoUp ? (w - CASE_GAP) / 2 : w;
-      const slideStep = cardWidth + CASE_GAP;
-      const maxSlide = twoUp ? caseStudies.length - 2 : caseStudies.length - 1;
-      setCarousel({ cardWidth, slideStep, maxSlide, twoUp });
-      setCaseSlide((prev) => Math.min(prev, maxSlide));
-    };
-
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const { cardWidth, slideStep, maxSlide, twoUp = true } = carousel;
+  const {
+    CASE_GAP,
+    loopedItems,
+    activeDot,
+    transitioning,
+    viewportRef,
+    cardWidth,
+    slideStep,
+    twoUp,
+    count,
+    caseSlide,
+    handleTransitionEnd,
+    goNext,
+    goPrev,
+    goTo,
+  } = useCaseStudyCarousel(caseStudies);
 
   return (
     <ThemeProvider theme={theme}>
@@ -423,7 +466,7 @@ export default function Advisory() {
           <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
             <Box component="img"
               src="https://coderize.in/wp-content/uploads/2024/09/geospatial-service-title.jpg"
-              alt="Location Intelligence"
+              alt="Advisory"
               sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(10,25,41,0.85), rgba(10,25,41,0.85))" }} />
           </Box>
@@ -435,7 +478,7 @@ export default function Advisory() {
             pb: { xs: 2, md: 4 },
           }}>
             <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: "rgba(255,255,255,0.45)" }} />} sx={{ mb: 2.5 }}>
-              {["Home", "Services", "Geospatial", "Location Intelligence"].map((c, i, arr) => (
+              {["Home", "Services", "Geospatial", "Advisory"].map((c, i, arr) => (
                 <Typography key={c} variant="body2" sx={{
                   color: i === arr.length - 1 ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)",
                   fontWeight: i === arr.length - 1 ? 600 : 400, fontSize: "0.85rem",
@@ -447,7 +490,7 @@ export default function Advisory() {
               color: "#fff", fontWeight: 400, maxWidth: 560,
               lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" },
             }}>
-              Reveal spatial patterns to guide decisions
+              Partner for spatial advisory
             </Typography>
           </Container>
         </Box>
@@ -476,8 +519,8 @@ export default function Advisory() {
                 >
                   <Box
                     component="img"
-                    src={locationIntro}
-                    alt="Location Intelligence"
+                    src={advisoryintro}
+                    alt="Advisory"
                     sx={{
                       width: "100%",
                       height: {xs: 280, md: 400, lg: 480},
@@ -506,7 +549,7 @@ export default function Advisory() {
                     lineHeight: 1.25,
                     mb: { xs: 2.5, md: 3.5 },
                   }}>
-                    Innovative Spatio-Intelligent Solutions for a Changing World
+                    Elevating Business Value with Our GIS Advisory Services
                   </Typography>
                   <Typography sx={{
                     fontFamily: '"Sora", sans-serif',
@@ -515,9 +558,8 @@ export default function Advisory() {
                     lineHeight: 1.75,
                     fontWeight: 400,
                   }}>
-                    Our geospatial intelligence uses advanced analytics for actionable insights,
-                    including GIS mapping, digitization, and data conversion, to enhance
-                    decision-making and efficiency.
+                    Our expert consultancy services offer strategic guidance on geospatial technology
+                    implementation, ensuring optimal use of resources and maximum impact on business outcomes.
                   </Typography>
                 </Box>
               </Box>
@@ -666,7 +708,7 @@ export default function Advisory() {
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src={LocationIntelligenceScheduleCall}
+            src={AdvisoryScheduleCall}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -685,7 +727,7 @@ export default function Advisory() {
               fontSize: { xs: "1.5rem", md: "2.2rem" },
               textShadow: "0 2px 20px rgba(0,0,0,0.5)",
             }}>
-              Share Your Business Goals With Us
+              Book a complimentary consultation
             </Typography>
             <Button
               component={Link}
@@ -784,14 +826,16 @@ export default function Advisory() {
             </Box>
 
             <Box ref={viewportRef} sx={{ overflow: "hidden", width: "100%" }}>
-              <Box sx={{
+              <Box
+                onTransitionEnd={handleTransitionEnd}
+                sx={{
                 display: "flex",
                 gap: `${CASE_GAP}px`,
-                transition: "transform 0.5s cubic-bezier(.4,0,.2,1)",
+                transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
                 transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
               }}>
-                {caseStudies.map((cs, i) => (
-                  <Box key={i} sx={{
+                {loopedItems.map((cs, i) => (
+                  <Box key={`${cs.title}-${i}`} sx={{
                     flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`,
                     width: cardWidth || `calc(50% - ${CASE_GAP / 2}px)`,
                     flexShrink: 0,
@@ -867,11 +911,10 @@ export default function Advisory() {
 
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, mt: 4 }}>
               <IconButton
-                onClick={() => setCaseSlide((p) => Math.max(0, p - 1))}
-                disabled={caseSlide === 0}
+                onClick={goPrev}
                 sx={{
-                  bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === 0 ? "#aaa" : "#fff",
+                  bgcolor: "#1A3A5C",
+                  color: "#fff",
                   width: 36,
                   height: 36,
                   "&:hover": { bgcolor: ACCENT },
@@ -879,26 +922,25 @@ export default function Advisory() {
               >
                 <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
               </IconButton>
-              {Array.from({ length: maxSlide + 1 }).map((_, i) => (
+              {Array.from({ length: count }).map((_, i) => (
                 <Box
                   key={i}
-                  onClick={() => setCaseSlide(i)}
+                  onClick={() => goTo(i)}
                   sx={{
-                    width: i === caseSlide ? 28 : 10,
+                    width: i === activeDot ? 28 : 10,
                     height: 10,
                     borderRadius: 5,
-                    bgcolor: i === caseSlide ? ACCENT : "#ddd",
+                    bgcolor: i === activeDot ? ACCENT : "#ddd",
                     cursor: "pointer",
                     transition: "all 0.3s",
                   }}
                 />
               ))}
               <IconButton
-                onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))}
-                disabled={caseSlide === maxSlide}
+                onClick={goNext}
                 sx={{
-                  bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === maxSlide ? "#aaa" : "#fff",
+                  bgcolor: "#1A3A5C",
+                  color: "#fff",
                   width: 36,
                   height: 36,
                   "&:hover": { bgcolor: ACCENT },

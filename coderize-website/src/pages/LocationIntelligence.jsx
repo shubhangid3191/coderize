@@ -34,8 +34,7 @@ import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg"
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
 import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
-
-
+import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -366,41 +365,31 @@ const caseStudies = [
   { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
   { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
   { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-  { image: locationintelligencecase4, tags: ["Environment", "ERP", "India", "Private Sector"], title: "Unity Green Solutions", description: "Customized Waste Management Platform for Streamlined Business Operations" },
-  { image: locationintelligencecase5, tags: ["ERP", "Healthcare", "India", "Private Sector"], title: "Mylab Discovery Solutions Pvt. Ltd.", description: "Event Management System Implementation Using Odoo ERP for Process Optimization" },
-  { image: locationintelligencecase6, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
+
 ];
 
 
 
-const CASE_GAP = 20;
-
 export default function LocationIntelligence() {
-  const [caseSlide, setCaseSlide] = useState(0);
-  const viewportRef = useRef(null);
-  const [carousel, setCarousel] = useState({ cardWidth: 0, slideStep: 0, maxSlide: caseStudies.length - 2 });
-
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-
-    const update = () => {
-      const w = el.getBoundingClientRect().width;
-      const twoUp = w >= 900;
-      const cardWidth = twoUp ? (w - CASE_GAP) / 2 : w;
-      const slideStep = cardWidth + CASE_GAP;
-      const maxSlide = twoUp ? caseStudies.length - 2 : caseStudies.length - 1;
-      setCarousel({ cardWidth, slideStep, maxSlide, twoUp });
-      setCaseSlide((prev) => Math.min(prev, maxSlide));
-    };
-
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const { cardWidth, slideStep, maxSlide, twoUp = true } = carousel;
+  const {
+    CASE_GAP,
+    loopedItems,
+    activeDot,
+    transitioning,
+    viewportRef,
+    cardWidth,
+    slideStep,
+    twoUp,
+    count,
+    caseSlide,
+    handleTransitionEnd,
+    goNext,
+    goPrev,
+    goTo,
+  } = useCaseStudyCarousel(caseStudies);
 
   return (
     <ThemeProvider theme={theme}>
@@ -784,14 +773,16 @@ export default function LocationIntelligence() {
             </Box>
 
             <Box ref={viewportRef} sx={{ overflow: "hidden", width: "100%" }}>
-              <Box sx={{
+              <Box
+                onTransitionEnd={handleTransitionEnd}
+                sx={{
                 display: "flex",
                 gap: `${CASE_GAP}px`,
-                transition: "transform 0.5s cubic-bezier(.4,0,.2,1)",
+                transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
                 transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
               }}>
-                {caseStudies.map((cs, i) => (
-                  <Box key={i} sx={{
+                {loopedItems.map((cs, i) => (
+                  <Box key={`${cs.title}-${i}`} sx={{
                     flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`,
                     width: cardWidth || `calc(50% - ${CASE_GAP / 2}px)`,
                     flexShrink: 0,
@@ -867,11 +858,10 @@ export default function LocationIntelligence() {
 
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, mt: 4 }}>
               <IconButton
-                onClick={() => setCaseSlide((p) => Math.max(0, p - 1))}
-                disabled={caseSlide === 0}
+                onClick={goPrev}
                 sx={{
-                  bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === 0 ? "#aaa" : "#fff",
+                  bgcolor: "#1A3A5C",
+                  color: "#fff",
                   width: 36,
                   height: 36,
                   "&:hover": { bgcolor: ACCENT },
@@ -879,26 +869,25 @@ export default function LocationIntelligence() {
               >
                 <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
               </IconButton>
-              {Array.from({ length: maxSlide + 1 }).map((_, i) => (
+              {Array.from({ length: count }).map((_, i) => (
                 <Box
                   key={i}
-                  onClick={() => setCaseSlide(i)}
+                  onClick={() => goTo(i)}
                   sx={{
-                    width: i === caseSlide ? 28 : 10,
+                    width: i === activeDot ? 28 : 10,
                     height: 10,
                     borderRadius: 5,
-                    bgcolor: i === caseSlide ? ACCENT : "#ddd",
+                    bgcolor: i === activeDot ? ACCENT : "#ddd",
                     cursor: "pointer",
                     transition: "all 0.3s",
                   }}
                 />
               ))}
               <IconButton
-                onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))}
-                disabled={caseSlide === maxSlide}
+                onClick={goNext}
                 sx={{
-                  bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === maxSlide ? "#aaa" : "#fff",
+                  bgcolor: "#1A3A5C",
+                  color: "#fff",
                   width: 36,
                   height: 36,
                   "&:hover": { bgcolor: ACCENT },
