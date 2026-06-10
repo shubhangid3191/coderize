@@ -35,7 +35,7 @@ const CoderizeLogoSVG = () => (
 
 const geospatialLinks = [
   { label: 'GIS Development', href: '/GISDevelopment' },
-  { label: 'Location Intelligence', href: '#' },
+  { label: 'Location Intelligence', href: '/LocationIntelligence' },
   { label: 'Advisory', href: '#' },
   { label: 'Technical Support', href: '#' },
   { label: 'Drone Services', href: '#' },

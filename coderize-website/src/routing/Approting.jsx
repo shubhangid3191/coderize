@@ -18,6 +18,7 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsConditions from "../pages/TermsConditions";
 import AboutCompany from "../pages/AboutUs/AboutCompany";
 import GISDevelopment from "../pages/GISDevelopment";
+import LocationIntelligence from "../pages/LocationIntelligence";
 
 
 
@@ -46,6 +47,7 @@ export default function AppRouter() {
         <Route path="/TermsConditions" element={<TermsConditions/>} />
         <Route path="/AboutCompany" element={<AboutCompany />} />
         <Route path="/GISDevelopment" element={<GISDevelopment />} />
+        <Route path="/LocationIntelligence" element={<LocationIntelligence />} />
         
       </Routes>
     </BrowserRouter>
