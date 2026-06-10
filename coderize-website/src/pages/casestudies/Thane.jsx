@@ -5,9 +5,9 @@ import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 import casestudiesbg from "../../assets/casestudiesbg.png";
-import synlog1 from "../../assets/synlog1.jpg";
+import than from "../../assets/than.jpg";
 
-const MAP_IMAGE = synlog1;
+const MAP_IMAGE = than;
 
 const sections = [
   {
@@ -15,10 +15,10 @@ const sections = [
     label: "Problem",
     icon: <EmojiObjectsOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Time-consuming, tedious, and manual procedures in obtaining satellite images",
-      "Cloud cover hinders periodic monitoring of crop health",
-      "Increased frequency of field visits and manual crop health inspections",
-      "Lack of a crop health monitoring platform",
+      "Identify the encroachment areas spread over thousands of acres in fragments.",
+      "Data available in paper maps.",
+      "Documents stored at different geographic locations.",
+      "No uniformity /consistency in data.",
     ],
   },
   {
@@ -26,11 +26,10 @@ const sections = [
     label: "Solution",
     icon: <SettingsSuggestOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Developed an Automated Monitoring System",
-      "Automated Image downloading",
-      "Enhancement of Satellite Images (Cloud Cover removal)",
-      "Calculating NDVI (Crop health)",
-      "Integrating Image Service into Live Web Application",
+      "Forest stocks digitization using Geo-spatial techniques.",
+      "Effective Geo-spatial visualization platform.",
+      "Dynamic data made available.",
+      "Layout maps created for distribution to field officers",
     ],
   },
   {
@@ -38,15 +37,16 @@ const sections = [
     label: "Impact",
     icon: <TrackChangesOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Saved thousands of man hours",
-      "Enhanced operational efficiency",
-      "Regular updates about Crop Health",
-      "Reduced costs",
+      "Reduced Manual efforts",
+      "Huge cost savings",
+      "Increased Accuracy",
+      "Quantifiable data available at single click",
+      "Data-accessibility for hard-to-reach forest regions.",
     ],
   },
 ];
 
-export default function Synlog() {
+export default function Thane() {
   return (
     <Box sx={{ background: "#fff", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -97,8 +97,7 @@ export default function Synlog() {
                   mb: 3,
                 }}
               >
-                Elevating Palm Tree Estate Management With Automated Satellite
-                Processing For Accurate And Efficient Monitoring
+               Digitizing Forest Stock Using Traditional Handwritten Maps for Enhanced Data Management
               </Typography>
               <Typography
                 sx={{
@@ -107,15 +106,7 @@ export default function Synlog() {
                   lineHeight: 1.85,
                 }}
               >
-                To improve the monitoring of Palm Tree Estates for a client
-                specializing in crop management and health monitoring, we developed
-                a robust geospatial solution. This solution tackles inefficiencies
-                in satellite image processing and crop health assessment, enabling
-                precise and timely analysis. By integrating advanced geospatial
-                tools and workflows, it streamlines the processing of satellite
-                imagery, ensuring accurate crop health insights. This comprehensive
-                approach enhances decision-making, optimizes resource allocation,
-                and supports sustainable estate management.
+              One of the prime authorities related to forest conservation is the Forest Department, Government of Maharashtra. The Department works towards sustainable development and conservation of forest assets. With the growing urbanization, the department undertook the mammoth task of digitization of Forest stock using the traditional handwritten maps. Coderizers have digitized 2000+ handwritten stock maps using Remote Sensing & Image Interpretation techniques.
               </Typography>
             </Box>
           </Box>

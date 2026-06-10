@@ -5,9 +5,9 @@ import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 import casestudiesbg from "../../assets/casestudiesbg.png";
-import synlog1 from "../../assets/synlog1.jpg";
+import maha from "../../assets/maha.jpg";
 
-const MAP_IMAGE = synlog1;
+const MAP_IMAGE = maha;
 
 const sections = [
   {
@@ -15,10 +15,9 @@ const sections = [
     label: "Problem",
     icon: <EmojiObjectsOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Time-consuming, tedious, and manual procedures in obtaining satellite images",
-      "Cloud cover hinders periodic monitoring of crop health",
-      "Increased frequency of field visits and manual crop health inspections",
-      "Lack of a crop health monitoring platform",
+    "Seamless map creation out of satellite images",
+    "Creating best rendering web service",
+    "Visualizing encroachment into forest land cover via web app",
     ],
   },
   {
@@ -26,11 +25,9 @@ const sections = [
     label: "Solution",
     icon: <SettingsSuggestOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Developed an Automated Monitoring System",
-      "Automated Image downloading",
-      "Enhancement of Satellite Images (Cloud Cover removal)",
-      "Calculating NDVI (Crop health)",
-      "Integrating Image Service into Live Web Application",
+    "Composite image made available via data pre-processing and mosaicking of fragmented rasters",
+    "WMS service creation and publication for better rendering performance",
+    "Web service URL integration into existing web application",
     ],
   },
   {
@@ -38,15 +35,15 @@ const sections = [
     label: "Impact",
     icon: <TrackChangesOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Saved thousands of man hours",
-      "Enhanced operational efficiency",
-      "Regular updates about Crop Health",
-      "Reduced costs",
+      "Data processing leads to improved data quality.",
+      "Seamless visualization of data with Integrating service URL results in encroachment change detection on a single click",
+      "Visualization via web saves cost, time and efforts.",
+
     ],
   },
 ];
 
-export default function Synlog() {
+export default function Maharashtra() {
   return (
     <Box sx={{ background: "#fff", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -97,8 +94,7 @@ export default function Synlog() {
                   mb: 3,
                 }}
               >
-                Elevating Palm Tree Estate Management With Automated Satellite
-                Processing For Accurate And Efficient Monitoring
+                Creation and Publishing of WMS Services for Temporal Encroachment Monitoring
               </Typography>
               <Typography
                 sx={{
@@ -107,15 +103,7 @@ export default function Synlog() {
                   lineHeight: 1.85,
                 }}
               >
-                To improve the monitoring of Palm Tree Estates for a client
-                specializing in crop management and health monitoring, we developed
-                a robust geospatial solution. This solution tackles inefficiencies
-                in satellite image processing and crop health assessment, enabling
-                precise and timely analysis. By integrating advanced geospatial
-                tools and workflows, it streamlines the processing of satellite
-                imagery, ensuring accurate crop health insights. This comprehensive
-                approach enhances decision-making, optimizes resource allocation,
-                and supports sustainable estate management.
+                MKCL, a government-promoted authority for higher and technical education, has launched a project focused on change detection in the forested areas of Madhya Pradesh. They have already developed an application to detect encroachment within forest regions CodeRizers have provided the technical resources in remote sensing domain and assisted in creating WMS services along with the systematic approach to handling huge satellite data.
               </Typography>
             </Box>
           </Box>

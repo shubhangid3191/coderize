@@ -5,9 +5,9 @@ import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 import casestudiesbg from "../../assets/casestudiesbg.png";
-import synlog1 from "../../assets/synlog1.jpg";
+import Mini from "../../assets/Mini.jpg";
 
-const MAP_IMAGE = synlog1;
+const MAP_IMAGE = Mini;
 
 const sections = [
   {
@@ -15,10 +15,10 @@ const sections = [
     label: "Problem",
     icon: <EmojiObjectsOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Time-consuming, tedious, and manual procedures in obtaining satellite images",
-      "Cloud cover hinders periodic monitoring of crop health",
-      "Increased frequency of field visits and manual crop health inspections",
-      "Lack of a crop health monitoring platform",
+      "Lack of a dedicated platform",
+      "Water quality data lacks comprehensive visualization",
+      "Limited ability to target interventions and optimize resources",
+      "No real-time data integration and visualization",
     ],
   },
   {
@@ -26,11 +26,8 @@ const sections = [
     label: "Solution",
     icon: <SettingsSuggestOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Developed an Automated Monitoring System",
-      "Automated Image downloading",
-      "Enhancement of Satellite Images (Cloud Cover removal)",
-      "Calculating NDVI (Crop health)",
-      "Integrating Image Service into Live Web Application",
+      "Developed of a cutting-edge Geoportal for monitoring Jal Jeevan mission progress",
+      "Provided comprehensive data visualization through color coded data and graphs, charts, accurate statistics.",
     ],
   },
   {
@@ -38,15 +35,16 @@ const sections = [
     label: "Impact",
     icon: <TrackChangesOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Saved thousands of man hours",
-      "Enhanced operational efficiency",
-      "Regular updates about Crop Health",
-      "Reduced costs",
+      "Real-time visualization of survey data",
+      "Significant enhancement in monitoring of Jal Jeevan Mission’s progress",
+      "Accelerated collaboration, transparency, and accountability among stakeholders",
+      "Accessibility to real-time data increases ability to make targeted interventions and resource optimization",
+      "Enhanced decision making",
     ],
   },
 ];
 
-export default function Synlog() {
+export default function Ministry() {
   return (
     <Box sx={{ background: "#fff", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -97,8 +95,7 @@ export default function Synlog() {
                   mb: 3,
                 }}
               >
-                Elevating Palm Tree Estate Management With Automated Satellite
-                Processing For Accurate And Efficient Monitoring
+                Innovative Geoportal for Real-Time Water Resource Management and Visualization
               </Typography>
               <Typography
                 sx={{
@@ -107,15 +104,7 @@ export default function Synlog() {
                   lineHeight: 1.85,
                 }}
               >
-                To improve the monitoring of Palm Tree Estates for a client
-                specializing in crop management and health monitoring, we developed
-                a robust geospatial solution. This solution tackles inefficiencies
-                in satellite image processing and crop health assessment, enabling
-                precise and timely analysis. By integrating advanced geospatial
-                tools and workflows, it streamlines the processing of satellite
-                imagery, ensuring accurate crop health insights. This comprehensive
-                approach enhances decision-making, optimizes resource allocation,
-                and supports sustainable estate management.
+             The Jal Jeevan Mission, a flagship initiative of the Government of India, aims to provide safe and reliable tap water to every rural household by 2024. The mission emphasizes the sustainability of water resources, community participation, and the implementation of effective water management practices. However, The initiative has faced challenges in monitoring and evaluating progress. This is due to the lack of advanced data visualization tools and an integrated monitoring platform. These limitations have hindered the ability to track key metrics and ensure real-time oversight of the mission’s outcomes.
               </Typography>
             </Box>
           </Box>

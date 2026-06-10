@@ -5,9 +5,9 @@ import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 import casestudiesbg from "../../assets/casestudiesbg.png";
-import synlog1 from "../../assets/synlog1.jpg";
+import agri from "../../assets/agri.jpg";
 
-const MAP_IMAGE = synlog1;
+const MAP_IMAGE = agri;
 
 const sections = [
   {
@@ -15,10 +15,11 @@ const sections = [
     label: "Problem",
     icon: <EmojiObjectsOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Time-consuming, tedious, and manual procedures in obtaining satellite images",
-      "Cloud cover hinders periodic monitoring of crop health",
-      "Increased frequency of field visits and manual crop health inspections",
-      "Lack of a crop health monitoring platform",
+      "Authentication of training performed.",
+      "Human intervention and dependencies.",
+      "Inefficient system to check outcomes of program.",
+      "Utilization of resources yet no desired results.",
+      "Unavailability of Program Planning application.",
     ],
   },
   {
@@ -26,11 +27,12 @@ const sections = [
     label: "Solution",
     icon: <SettingsSuggestOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Developed an Automated Monitoring System",
-      "Automated Image downloading",
-      "Enhancement of Satellite Images (Cloud Cover removal)",
-      "Calculating NDVI (Crop health)",
-      "Integrating Image Service into Live Web Application",
+      "Location tracking and geo-tagging",
+      "Authenticity using real-time photos (time-stamped)",
+      "Strong user management module",
+      "Report generation with advanced filters via web",
+      "User’s feedback recorded via mobile app",
+      "Efficient monitoring system",
     ],
   },
   {
@@ -38,15 +40,16 @@ const sections = [
     label: "Impact",
     icon: <TrackChangesOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Saved thousands of man hours",
-      "Enhanced operational efficiency",
-      "Regular updates about Crop Health",
-      "Reduced costs",
+      "Easy assessment",
+      "Reduce cost and effort",
+      "Efficient claim handling",
+      "Accelerate the process of crop damage assessment",
+      "Informed and actionable decision making",
     ],
   },
 ];
 
-export default function Synlog() {
+export default function Agriculture() {
   return (
     <Box sx={{ background: "#fff", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -97,8 +100,7 @@ export default function Synlog() {
                   mb: 3,
                 }}
               >
-                Elevating Palm Tree Estate Management With Automated Satellite
-                Processing For Accurate And Efficient Monitoring
+                GIS-Powered Solutions: Mobile & Web Platform for Scalable Agricultural Training and Management
               </Typography>
               <Typography
                 sx={{
@@ -107,14 +109,7 @@ export default function Synlog() {
                   lineHeight: 1.85,
                 }}
               >
-                To improve the monitoring of Palm Tree Estates for a client
-                specializing in crop management and health monitoring, we developed
-                a robust geospatial solution. This solution tackles inefficiencies
-                in satellite image processing and crop health assessment, enabling
-                precise and timely analysis. By integrating advanced geospatial
-                tools and workflows, it streamlines the processing of satellite
-                imagery, ensuring accurate crop health insights. This comprehensive
-                approach enhances decision-making, optimizes resource allocation,
+                TAgriculture department of Maharashtra implements different agriculture schemes using the latest technologies and trends. One of such ambitious projects of the department called ‘Shetkari Shetishala’ made use of Geospatial technology to provide advanced ways of monitoring the training & getting feedback from farmers. Coderizer’s developed a mobile application to collect the training information from the department officials at various places all over the state. A web based platform for government authorities was also developed to monitor the activities and generate reports as per requirements.
                 and supports sustainable estate management.
               </Typography>
             </Box>

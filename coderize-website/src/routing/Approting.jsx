@@ -22,6 +22,14 @@ import GISDevelopment from "../pages/GISDevelopment";
 import LocationIntelligence from "../pages/LocationIntelligence";
 
 import Advisory from "../pages/Advisory";
+import Synlog from "../pages/casestudies/Synlog";
+import Solapur from "../pages/casestudies/Solapur";
+import Ministry from "../pages/casestudies/Ministry";
+import Maharashtra from "../pages/casestudies/Maharashtra";
+import Thane from "../pages/casestudies/Thane";
+import Agriculture from "../pages/casestudies/Agriculture";
+
+
 
 
 
@@ -50,8 +58,16 @@ export default function AppRouter() {
         <Route path="/TermsConditions" element={<TermsConditions/>} />
         <Route path="/AboutCompany" element={<AboutCompany />} />
         <Route path="/GISDevelopment" element={<GISDevelopment />} />
+        
         <Route path="/LocationIntelligence" element={<LocationIntelligence />} />
         <Route path="/Advisory" element={<Advisory />} />
+        <Route path="/Synlog" element={<Synlog />} />
+        <Route path="/Solapur" element={<Solapur />} />
+        <Route path="/Ministry" element={<Ministry />} />
+        <Route path="/Maharashtra" element={<Maharashtra />} />
+        <Route path="/Thane" element={<Thane />} />
+        <Route path="/Agriculture" element={<Agriculture />} />
+        
         
       </Routes>
     </BrowserRouter>

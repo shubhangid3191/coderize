@@ -5,9 +5,9 @@ import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 import casestudiesbg from "../../assets/casestudiesbg.png";
-import synlog1 from "../../assets/synlog1.jpg";
+import Solhapur from "../../assets/Solhapur.jpg";
 
-const MAP_IMAGE = synlog1;
+const MAP_IMAGE = Solhapur;
 
 const sections = [
   {
@@ -15,10 +15,10 @@ const sections = [
     label: "Problem",
     icon: <EmojiObjectsOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Time-consuming, tedious, and manual procedures in obtaining satellite images",
-      "Cloud cover hinders periodic monitoring of crop health",
-      "Increased frequency of field visits and manual crop health inspections",
-      "Lack of a crop health monitoring platform",
+      "Absence of a comprehensive water tap connection survey system",
+      "Inability to analyze property usage variations and identify properties without connections.",
+      "Excessive survey expenditures",
+      "Inadequate resource management",
     ],
   },
   {
@@ -26,11 +26,8 @@ const sections = [
     label: "Solution",
     icon: <SettingsSuggestOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Developed an Automated Monitoring System",
-      "Automated Image downloading",
-      "Enhancement of Satellite Images (Cloud Cover removal)",
-      "Calculating NDVI (Crop health)",
-      "Integrating Image Service into Live Web Application",
+      "Customized GeoSet Collector for efficient data collection with geo-coordinates and photos.",
+      "Developed GeoSet Viewer for real-time data approval and report generation.",
     ],
   },
   {
@@ -38,15 +35,17 @@ const sections = [
     label: "Impact",
     icon: <TrackChangesOutlinedIcon sx={{ fontSize: 44, color: "#E8531E" }} />,
     points: [
-      "Saved thousands of man hours",
-      "Enhanced operational efficiency",
-      "Regular updates about Crop Health",
-      "Reduced costs",
+      "Comprehensive data visualization monitoring",
+      "Actionable insights",
+      "Streamlined planning of periodic surveys",
+      "Rapid survey execution",
+      "Substantial cost savings",
+      "Informed decision-making and resource optimization."
     ],
   },
 ];
 
-export default function Synlog() {
+export default function Solapur() {
   return (
     <Box sx={{ background: "#fff", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -97,8 +96,7 @@ export default function Synlog() {
                   mb: 3,
                 }}
               >
-                Elevating Palm Tree Estate Management With Automated Satellite
-                Processing For Accurate And Efficient Monitoring
+                Optimizing Water Billing through Customized Survey Solutions
               </Typography>
               <Typography
                 sx={{
@@ -107,15 +105,7 @@ export default function Synlog() {
                   lineHeight: 1.85,
                 }}
               >
-                To improve the monitoring of Palm Tree Estates for a client
-                specializing in crop management and health monitoring, we developed
-                a robust geospatial solution. This solution tackles inefficiencies
-                in satellite image processing and crop health assessment, enabling
-                precise and timely analysis. By integrating advanced geospatial
-                tools and workflows, it streamlines the processing of satellite
-                imagery, ensuring accurate crop health insights. This comprehensive
-                approach enhances decision-making, optimizes resource allocation,
-                and supports sustainable estate management.
+                The Solapur Municipal Corporation (SMC) manages infrastructure and public utilities in Solapur, Maharashtra. It faces challenges in accurately assessing and billing water connections. The absence of an efficient water tap connection survey system has hindered the identification of unassessed properties and analysis of land use patterns. This has led to inefficiencies in water billing, poor resource allocation, and difficulties in revenue generation and water resource management.
               </Typography>
             </Box>
           </Box>
