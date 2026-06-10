@@ -14,7 +14,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import locationIntro from "../assets/location-intelligence-1.jpg";
-import GISbg from "../assets/GISbg.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -34,6 +33,7 @@ import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg"
 import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
+import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
 
 
 const ACCENT = "#E8581A";
@@ -53,28 +53,47 @@ const theme = createTheme({
   },
 });
 
+function parseStatValue(value) {
+  const match = value.match(/^([\d.]+)(.*)$/);
+  if (!match) return { number: 0, suffix: value, decimals: 0 };
+  const number = parseFloat(match[1]);
+  const suffix = match[2];
+  const decimals = match[1].includes(".") ? match[1].split(".")[1].length : 0;
+  return { number, suffix, decimals };
+}
+
 // Animated counter
 function useCountUp(target, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
+  const { number, decimals } = parseStatValue(target);
+
   useEffect(() => {
     if (!start) return;
     let startTime = null;
-    const numeric = parseInt(target.replace(/\D/g, ""));
     const step = (ts) => {
       if (!startTime) startTime = ts;
       const p = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(p * numeric));
+      const raw = p * number;
+      const next = decimals > 0
+        ? Math.floor(raw * 10 ** decimals) / 10 ** decimals
+        : Math.floor(raw);
+      setCount(next);
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, [start]);
+  }, [start, target, duration, number, decimals]);
+
   return count;
+}
+
+function formatCount(count, decimals) {
+  return decimals > 0 ? count.toFixed(decimals) : String(count);
 }
 
 function StatItem({ value, label, showDivider }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
-  const suffix = value.replace(/[0-9]/g, "");
+  const { suffix, decimals } = parseStatValue(value);
   const count = useCountUp(value, 2000, visible);
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -99,8 +118,8 @@ function StatItem({ value, label, showDivider }) {
         />
       )}
       <Box ref={ref} sx={{ textAlign: "center", px: { xs: 1, md: 1.5, lg: 2 }, flex: 1, py: { xs: 2, md: 0 } }}>
-        <Typography sx={{ fontWeight: 800, color: NAVY, fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem", lg: "2.4rem" }, lineHeight: 1 }}>
-          {visible ? count : 0}{suffix}
+        <Typography sx={{ fontWeight: 300, color: NAVY, fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem", lg: "2.4rem" }, lineHeight: 1 }}>
+          {visible ? formatCount(count, decimals) : formatCount(0, decimals)}{suffix}
         </Typography>
         <Typography sx={{ color: "#4a6070", mt: 1, fontSize: { xs: "0.78rem", md: "0.85rem" }, lineHeight: 1.4 }}>
           {label}
@@ -168,7 +187,7 @@ const stats = [
   { value: "3000K+", label: "Properties Digitized" },
   { value: "500K+", label: "Water Conservation Assets Plotted" },
   { value: "100K+", label: "Acres Area Digitized" },
-  { value: "2K+", label: "Sq.Kms Mapped" },
+  { value: "2.5K+", label: "Sq.Kms Mapped" },
   { value: "500+", label: "Rasters Processed" },
 ];
 
@@ -423,11 +442,9 @@ export default function LocationIntelligence() {
                 }}>{c}</Typography>
               ))}
             </Breadcrumbs>
-            <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.7)", mb: 1, fontSize: "0.9rem" }}>
-              Geospatial intelligence
-            </Typography>
+            
             <Typography variant="h3" sx={{
-              color: "#fff", fontWeight: 800, maxWidth: 560,
+              color: "#fff", fontWeight: 400, maxWidth: 560,
               lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" },
             }}>
               Reveal spatial patterns to guide decisions
@@ -442,7 +459,7 @@ export default function LocationIntelligence() {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
-              gap: { xs: 4, md: 6, lg: 10 },
+              gap: { xs: 2, md: 2, lg: 2 },
             }}>
               <Box sx={{
                 width: { xs: "100%", md: "50%" },
@@ -450,17 +467,24 @@ export default function LocationIntelligence() {
                 px: { xs: 1, md: 2, lg: 3 },
               }}>
                 <Box
-                  component="img"
-                  src={locationIntro}
-                  alt="Location Intelligence"
                   sx={{
                     width: "100%",
-                    height: { xs: 280, md: 400, lg: 460 },
-                    objectFit: "cover",
-                    display: "block",
-                    borderRadius: { xs: "3px", md: "5px" },
+                    borderRadius: { xs: 1, md: 1.25 },
+                    overflow: "hidden",
+                    lineHeight: 0,
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src={locationIntro}
+                    alt="Location Intelligence"
+                    sx={{
+                      width: "100%",
+                      height: {xs: 280, md: 400, lg: 480},
+                      display: "block",
+                    }}
+                  />
+                </Box>
               </Box>
 
               <Box sx={{
@@ -468,17 +492,17 @@ export default function LocationIntelligence() {
                 display: "flex",
                 alignItems: "center",
                 py: { xs: 2, md: 4 },
-                px: { xs: 2, md: 4, lg: 8 },
+                px: { xs: 2, md: 2, lg: 3 },
                 position: "relative",
                 minHeight: { md: 400 },
                 
               }}>
-                <Box sx={{ position: "relative", zIndex: 1, maxWidth: 520 }}>
+                <Box sx={{ position: "relative", zIndex: 1, maxWidth: 650 }}>
                   <Typography sx={{
                     fontFamily: '"Sora", sans-serif',
                     fontSize: { xs: "1.5rem", sm: "1.7rem", md: "2rem", lg: "2.2rem" },
                     color: NAVY,
-                    fontWeight: 600,
+                    fontWeight: 400,
                     lineHeight: 1.25,
                     mb: { xs: 2.5, md: 3.5 },
                   }}>
@@ -642,7 +666,7 @@ export default function LocationIntelligence() {
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src={GISbg}
+            src={LocationIntelligenceScheduleCall}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -650,13 +674,13 @@ export default function LocationIntelligence() {
             }} />
           <Box sx={{
             position: "absolute", inset: 0,
-            background: "linear-gradient(135deg, rgba(5,13,24,0.78) 0%, rgba(10,30,53,0.72) 50%, rgba(6,15,28,0.8) 100%)"
+            background: "linear-gradient(135deg, rgba(5,13,24,0.5) 0%, rgba(10,30,53,0.45) 50%, rgba(6,15,28,0.5) 100%)"
           }} />
           <Box sx={{ position: "relative", zIndex: 1, textAlign: "center", px: { xs: 3, md: 6 } }}>
             <Typography sx={{
               fontFamily: '"Sora", sans-serif',
               color: "#fff",
-              fontWeight: 700,
+              fontWeight: 500,
               mb: 4,
               fontSize: { xs: "1.5rem", md: "2.2rem" },
               textShadow: "0 2px 20px rgba(0,0,0,0.5)",
