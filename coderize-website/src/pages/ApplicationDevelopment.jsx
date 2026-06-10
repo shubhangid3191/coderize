@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Box, Container, Typography, Button, Breadcrumbs,
-  Divider, IconButton,
+  IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -12,7 +11,7 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import gisIntro from "../assets/gis-developement.jpg";
+import locationIntro from "../assets/location-intelligence-1.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -34,7 +33,6 @@ import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg"
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
 import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
-
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -52,81 +50,7 @@ const theme = createTheme({
   },
 });
 
-function parseStatValue(value) {
-  const match = value.match(/^([\d.]+)(.*)$/);
-  if (!match) return { number: 0, suffix: value, decimals: 0 };
-  const number = parseFloat(match[1]);
-  const suffix = match[2];
-  const decimals = match[1].includes(".") ? match[1].split(".")[1].length : 0;
-  return { number, suffix, decimals };
-}
-
-function useCountUp(target, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
-  const { number, decimals } = parseStatValue(target);
-
-  useEffect(() => {
-    if (!start) return;
-    let startTime = null;
-    const step = (ts) => {
-      if (!startTime) startTime = ts;
-      const p = Math.min((ts - startTime) / duration, 1);
-      const raw = p * number;
-      const next = decimals > 0
-        ? Math.floor(raw * 10 ** decimals) / 10 ** decimals
-        : Math.floor(raw);
-      setCount(next);
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [start, target, duration, number, decimals]);
-
-  return count;
-}
-
-function formatCount(count, decimals) {
-  return decimals > 0 ? count.toFixed(decimals) : String(count);
-}
-
-function StatItem({ value, label, showDivider }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  const { suffix, decimals } = parseStatValue(value);
-  const count = useCountUp(value, 2000, visible);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-  return (
-    <Box sx={{ display: "flex", alignItems: "stretch", flex: 1, minWidth: 0 }}>
-      {showDivider && (
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{
-            display: { xs: "none", md: "block" },
-            borderColor: "#c8d4de",
-            mx: { md: 1, lg: 2 },
-            alignSelf: "stretch",
-          }}
-        />
-      )}
-      <Box ref={ref} sx={{ textAlign: "center", px: { xs: 1, md: 1.5, lg: 2 }, flex: 1, py: { xs: 2, md: 0 } }}>
-        <Typography sx={{ fontWeight: 300, color: NAVY, fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem", lg: "2.4rem" }, lineHeight: 1 }}>
-          {visible ? formatCount(count, decimals) : formatCount(0, decimals)}{suffix}
-        </Typography>
-        <Typography sx={{ color: "#4a6070", mt: 1, fontSize: { xs: "0.78rem", md: "0.85rem" }, lineHeight: 1.4 }}>
-          {label}
-        </Typography>
-      </Box>
-    </Box>
-  );
-}
-
+// Tech marquee row
 function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   const animName = direction === "left" ? "marqueeLeft" : "marqueeRight";
   return (
@@ -177,30 +101,25 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   );
 }
 
-const stats = [
-  { value: "10+", label: "Applications Developed" },
-  { value: "50+", label: "Resources Involved" },
-  { value: "10K+", label: "Hrs Spent" },
-  { value: "100K+", label: "Active Application Users" },
-];
 
+// Page data
 const services = [
   {
     icon: <PhoneAndroidIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "GIS Mobile Application Development",
-    description: "We provide GIS mobile apps that enhance field operations, offering seamless mapping, real-time data updates, and precise geotagging to improve efficiency and accuracy in the field.",
+    title: "Mobile Application Development",
+    description: "CodeRize Technologies offers cutting-edge mobile app development services, creating intuitive and high-performance applications tailored to your business needs and user expectations.",
     bullets: ["User Centric design", "Platform Compatibility", "Offline Mode"],
   },
   {
     icon: <LanguageIcon sx={{ fontSize: 56, color: ACCENT }} />,
-    title: "GIS Web Application Development",
-    description: "We deliver Geospatial web apps for data visualization, real-time monitoring, and spatial analysis, featuring robust reporting and a seamless user experience.",
-    bullets: ["Responsive Design", "Scalable Architecture", "Data Visualization"],
+    title: "Web Application Development",
+    description: "We specialize in developing robust and scalable web applications, delivering seamless user experiences and advanced functionalities that drive engagement and efficiency.",
+    bullets: ["Responsive Design", "Scalable Architecture", "Cross-Platform Compatibility"],
   },
   {
     icon: <DesktopWindowsIcon sx={{ fontSize: 56, color: ACCENT }} />,
     title: "Desktop Customization",
-    description: "We develop user-friendly GIS plugins, tools, and extensions to enhance solutions and optimize spatial data analysis and integration.",
+    description: "We create intuitive tools, browser extensions, and add-ins that integrate seamlessly with your existing workflows, enhancing functionality and productivity. Our solutions are crafted to be user-friendly and highly customizable for optimal performance.",
     bullets: ["Tool Development", "Extension Development", "Add In Development"],
   },
 ];
@@ -356,9 +275,12 @@ const caseStudies = [
   { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
   { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
   { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
+
 ];
 
-export default function GISDevelopment() {
+
+
+export default function ApplicationDevelopment() {
   const {
     CASE_GAP,
     loopedItems,
@@ -397,7 +319,7 @@ export default function GISDevelopment() {
           <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
             <Box component="img"
               src="https://coderize.in/wp-content/uploads/2024/09/geospatial-service-title.jpg"
-              alt="GIS Development"
+              alt="Application Development"
               sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(10,25,41,0.85), rgba(10,25,41,0.85))" }} />
           </Box>
@@ -409,19 +331,29 @@ export default function GISDevelopment() {
             pb: { xs: 2, md: 4 },
           }}>
             <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: "rgba(255,255,255,0.45)" }} />} sx={{ mb: 2.5 }}>
-              {["Home", "Services", "Geospatial", "GIS Development"].map((c, i, arr) => (
+              {["Home", "Services", "Software", "Application Development"].map((c, i, arr) => (
                 <Typography key={c} variant="body2" sx={{
                   color: i === arr.length - 1 ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)",
                   fontWeight: i === arr.length - 1 ? 600 : 400, fontSize: "0.85rem",
                 }}>{c}</Typography>
               ))}
             </Breadcrumbs>
-
+            
+            <Typography sx={{
+              color: "rgba(255,255,255,0.75)",
+              fontSize: { xs: "0.85rem", md: "0.95rem" },
+              fontWeight: 500,
+              mb: 1,
+              letterSpacing: 0.5,
+            }}>
+              Application development
+            </Typography>
+            
             <Typography variant="h3" sx={{
               color: "#fff", fontWeight: 400, maxWidth: 560,
               lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" },
             }}>
-              Turn your vision into reality with our innovative GIS solutions.
+              Tech-driven efficiency for modern needs
             </Typography>
           </Container>
         </Box>
@@ -450,11 +382,11 @@ export default function GISDevelopment() {
                 >
                   <Box
                     component="img"
-                    src={gisIntro}
-                    alt="GIS Development"
+                    src={locationIntro}
+                    alt="Application Development"
                     sx={{
                       width: "100%",
-                      height: { xs: 280, md: 400, lg: 480 },
+                      height: {xs: 280, md: 400, lg: 480},
                       display: "block",
                     }}
                   />
@@ -469,6 +401,7 @@ export default function GISDevelopment() {
                 px: { xs: 2, md: 2, lg: 3 },
                 position: "relative",
                 minHeight: { md: 400 },
+                
               }}>
                 <Box sx={{ position: "relative", zIndex: 1, maxWidth: 650 }}>
                   <Typography sx={{
@@ -479,7 +412,7 @@ export default function GISDevelopment() {
                     lineHeight: 1.25,
                     mb: { xs: 2.5, md: 3.5 },
                   }}>
-                    Navigate Your Future with our tailored Geospatial Apps
+                    Building Applications That Impress
                   </Typography>
                   <Typography sx={{
                     fontFamily: '"Sora", sans-serif',
@@ -488,9 +421,7 @@ export default function GISDevelopment() {
                     lineHeight: 1.75,
                     fontWeight: 400,
                   }}>
-                    We develop custom geospatial applications to meet specific business needs,
-                    leveraging the latest ESRI and open-source technologies to deliver innovative
-                    and efficient solutions.
+                    Our agile, cross-functional teams create scalable web and mobile applications that deliver rapid feature updates and exceptional user experiences.
                   </Typography>
                 </Box>
               </Box>
@@ -498,23 +429,7 @@ export default function GISDevelopment() {
           </Container>
         </Box>
 
-        {/* STATS */}
-        <Box sx={{ py: { xs: 5, md: 8 }, bgcolor: "#fff" }}>
-          <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
-            <Box sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "stretch",
-              flexWrap: { xs: "wrap", md: "nowrap" },
-            }}>
-              {stats.map((item, index) => (
-                <StatItem key={item.label} value={item.value} label={item.label} showDivider={index !== 0} />
-              ))}
-            </Box>
-          </Container>
-        </Box>
-
-        {/* WHAT DO WE DO */}
+        {/* ── WHAT DO WE DO ── */}
         <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: "#f8f9fa" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Typography sx={{
@@ -570,7 +485,7 @@ export default function GISDevelopment() {
           </Container>
         </Box>
 
-        {/* CLIENTS MARQUEE */}
+        {/* ── CLIENTS MARQUEE (layout: coderize.in location-intelligence) ── */}
         <Box sx={{ py: { xs: 8, md: "72px" }, bgcolor: "#fff", overflow: "hidden" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -633,7 +548,7 @@ export default function GISDevelopment() {
           </Box>
         </Box>
 
-        {/* CTA */}
+        {/* ── CTA ── */}
         <Box sx={{
           position: "relative", minHeight: { xs: 280, md: 600 },
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
@@ -658,7 +573,7 @@ export default function GISDevelopment() {
               fontSize: { xs: "1.5rem", md: "2.2rem" },
               textShadow: "0 2px 20px rgba(0,0,0,0.5)",
             }}>
-              Let&apos;s discuss your requirements
+              Partner with us for cutting-edge app development
             </Typography>
             <Button
               component={Link}
@@ -685,7 +600,7 @@ export default function GISDevelopment() {
         </Box>
 
         <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
-          {/* TECH STACK */}
+          {/* ── TECH STACK ── */}
           <Box sx={{
             display: "flex",
             flexDirection: { xs: "column", lg: "row" },
@@ -721,7 +636,7 @@ export default function GISDevelopment() {
           </Box>
         </Container>
 
-        {/* CASE STUDIES */}
+        {/* ── CASE STUDIES ── */}
         <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: "#fff" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -760,11 +675,11 @@ export default function GISDevelopment() {
               <Box
                 onTransitionEnd={handleTransitionEnd}
                 sx={{
-                  display: "flex",
-                  gap: `${CASE_GAP}px`,
-                  transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
-                  transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
-                }}>
+                display: "flex",
+                gap: `${CASE_GAP}px`,
+                transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
+                transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
+              }}>
                 {loopedItems.map((cs, i) => (
                   <Box key={`${cs.title}-${i}`} sx={{
                     flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`,

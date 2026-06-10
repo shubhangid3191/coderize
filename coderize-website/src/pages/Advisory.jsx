@@ -21,7 +21,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import advisoryintro from "../assets/advisoryintro.jpg";
+import advisoryIntro from "../assets/advisoryintro.jpg";
 import AdvisoryScheduleCall from "../assets/AdvisoryScheduleCall.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
@@ -43,6 +43,7 @@ import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg"
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
+
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -69,7 +70,6 @@ function parseStatValue(value) {
   return { number, suffix, decimals };
 }
 
-// Animated counter
 function useCountUp(target, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
   const { number, decimals } = parseStatValue(target);
@@ -136,8 +136,6 @@ function StatItem({ value, label, showDivider }) {
   );
 }
 
-
-// Tech marquee row
 function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   const animName = direction === "left" ? "marqueeLeft" : "marqueeRight";
   return (
@@ -188,12 +186,10 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   );
 }
 
-
-// Page data 
 const stats = [
-  { value: "20+", label: "Clients Served" },
-  { value: "20+", label: "Projects Completed" },
-  { value: "10K+", label: "Hours Logged" },
+  { value: "200+", label: "Clients Served" },
+  { value: "500+", label: "Projects Completed" },
+  { value: "100K+", label: "Hours Logged" },
 ];
 
 const services = [
@@ -416,16 +412,15 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-    { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
-    { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
-    { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-    { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
-    { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
-    { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
-  
-  ];
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
+];
 
-
+const serviceFlex = { xs: "1 1 100%", sm: "1 1 calc(50% - 12px)", lg: "1 1 calc(25% - 18px)" };
 
 export default function Advisory() {
   const {
@@ -485,7 +480,17 @@ export default function Advisory() {
                 }}>{c}</Typography>
               ))}
             </Breadcrumbs>
-            
+
+            <Typography sx={{
+              color: "rgba(255,255,255,0.75)",
+              fontSize: { xs: "0.85rem", md: "0.95rem" },
+              fontWeight: 500,
+              mb: 1,
+              letterSpacing: 0.5,
+            }}>
+              Consultancy
+            </Typography>
+
             <Typography variant="h3" sx={{
               color: "#fff", fontWeight: 400, maxWidth: 560,
               lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" },
@@ -519,11 +524,11 @@ export default function Advisory() {
                 >
                   <Box
                     component="img"
-                    src={advisoryintro}
-                    alt="Advisory"
+                    src={advisoryIntro}
+                    alt="GIS Advisory Services"
                     sx={{
                       width: "100%",
-                      height: {xs: 280, md: 400, lg: 480},
+                      height: { xs: 280, md: 400, lg: 480 },
                       display: "block",
                     }}
                   />
@@ -538,7 +543,6 @@ export default function Advisory() {
                 px: { xs: 2, md: 2, lg: 3 },
                 position: "relative",
                 minHeight: { md: 400 },
-                
               }}>
                 <Box sx={{ position: "relative", zIndex: 1, maxWidth: 650 }}>
                   <Typography sx={{
@@ -567,7 +571,7 @@ export default function Advisory() {
           </Container>
         </Box>
 
-        {/* ── STATS  ── */}
+        {/* STATS */}
         <Box sx={{ py: { xs: 5, md: 8 }, bgcolor: "#fff" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -583,7 +587,7 @@ export default function Advisory() {
           </Container>
         </Box>
 
-        {/* ── WHAT DO WE DO ── */}
+        {/* WHAT DO WE DO */}
         <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: "#f8f9fa" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Typography sx={{
@@ -599,7 +603,7 @@ export default function Advisory() {
             <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
               {services.map((s) => (
                 <Box key={s.title} sx={{
-                  flex: { xs: "1 1 100%", sm: "1 1 calc(50% - 12px)", lg: "1 1 calc(25% - 18px)" },
+                  flex: serviceFlex,
                   minWidth: 0, height: { xs: 320, md: 380 }, perspective: "1000px",
                   "& .flip-inner": { transition: "transform 0.55s cubic-bezier(.4,0,.2,1)" },
                   "&:hover .flip-inner": { transform: "rotateY(180deg)" },
@@ -639,7 +643,7 @@ export default function Advisory() {
           </Container>
         </Box>
 
-        {/* ── CLIENTS MARQUEE (layout: coderize.in location-intelligence) ── */}
+        {/* CLIENTS MARQUEE */}
         <Box sx={{ py: { xs: 8, md: "72px" }, bgcolor: "#fff", overflow: "hidden" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -702,7 +706,7 @@ export default function Advisory() {
           </Box>
         </Box>
 
-        {/* ── CTA ── */}
+        {/* CTA */}
         <Box sx={{
           position: "relative", minHeight: { xs: 280, md: 600 },
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
@@ -754,7 +758,7 @@ export default function Advisory() {
         </Box>
 
         <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
-          {/* ── TECH STACK ── */}
+          {/* TECH STACK */}
           <Box sx={{
             display: "flex",
             flexDirection: { xs: "column", lg: "row" },
@@ -790,7 +794,7 @@ export default function Advisory() {
           </Box>
         </Container>
 
-        {/* ── CASE STUDIES ── */}
+        {/* CASE STUDIES */}
         <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: "#fff" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -829,11 +833,11 @@ export default function Advisory() {
               <Box
                 onTransitionEnd={handleTransitionEnd}
                 sx={{
-                display: "flex",
-                gap: `${CASE_GAP}px`,
-                transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
-                transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
-              }}>
+                  display: "flex",
+                  gap: `${CASE_GAP}px`,
+                  transition: transitioning ? "transform 0.5s cubic-bezier(.4,0,.2,1)" : "none",
+                  transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
+                }}>
                 {loopedItems.map((cs, i) => (
                   <Box key={`${cs.title}-${i}`} sx={{
                     flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`,
