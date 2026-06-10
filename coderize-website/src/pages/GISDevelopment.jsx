@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
-  Box, Container, Typography, Grid, Card, CardContent,
-  Button, Breadcrumbs, Divider, Stack, IconButton,
+  Box, Container, Typography, Button, Breadcrumbs, IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import MapIcon from "@mui/icons-material/Map";
+import StorageIcon from "@mui/icons-material/Storage";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Navbar from "../components/Navbar";
 import GISbg from "../assets/GISbg.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
@@ -22,18 +26,29 @@ import logo10 from "../assets/logo-10.jpg";
 import logo11 from "../assets/logo-11.jpg";
 import logo12 from "../assets/logo-12.jpg";
 import logo13 from "../assets/logo-13.jpg";
+import gisdevelopment from "../assets/gis-developement.jpg";
+import locationintelligencecase1 from "../assets/locationintelligencecase1.jpeg";
+import locationintelligencecase2 from "../assets/locationintelligencecase2.jpeg";
+import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg";
+import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
+import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
+import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
+
+const ACCENT = "#E8581A";
+const NAVY = "#002B55";
+const DARK = "#1a2b3c";
+const CASE_GAP = 20;
 
 const theme = createTheme({
   palette: {
-    primary: { main: "#E8581A" },
+    primary: { main: ACCENT },
     secondary: { main: "#1A3A5C" },
     background: { default: "#fff" },
-    text: { primary: "#1a2b3c", secondary: "#4a5568" },
+    text: { primary: DARK, secondary: "#4a5568" },
   },
   typography: { fontFamily: "'Poppins', 'Segoe UI', sans-serif" },
   components: {
     MuiButton: { styleOverrides: { root: { textTransform: "none", borderRadius: 4, fontWeight: 600 } } },
-    MuiCard: { styleOverrides: { root: { borderRadius: 8 } } },
   },
 });
 
@@ -54,7 +69,7 @@ function useCountUp(target, duration = 2000, start = false) {
   return count;
 }
 
-function StatItem({ value, label }) {
+function StatItem({ value, label, colIndex }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const suffix = value.replace(/[0-9]/g, "");
@@ -67,107 +82,67 @@ function StatItem({ value, label }) {
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
+
   return (
-    <Box ref={ref} sx={{ textAlign: "center", px: 2 }}>
-      <Typography sx={{ fontWeight: 800, color: "text.primary", fontSize: { xs: "2rem", md: "2.6rem" }, lineHeight: 1 }}>
+    <Box
+      ref={ref}
+      sx={{
+        textAlign: "center",
+        py: { xs: 3, md: 4 },
+        px: { xs: 1, md: 2, lg: 3 },
+        position: "relative",
+        // Mobile (2-col grid): orange right border on left-column items
+        borderRight: {
+          xs: colIndex % 2 === 0 ? `2px solid ${ACCENT}` : "none",
+          md: "none",
+        },
+        // Mobile: subtle bottom separator between rows
+        borderBottom: {
+          xs: "1px solid #eee",
+          md: "none",
+        },
+        // Desktop (5-col row): orange left border on all except first
+        borderLeft: {
+          xs: "none",
+          md: colIndex === 0 ? "none" : `2px solid ${ACCENT}`,
+        },
+      }}
+    >
+      <Typography sx={{
+        fontWeight: 800,
+        color: NAVY,
+        fontSize: { xs: "1.7rem", sm: "2rem", md: "2rem", lg: "2.3rem" },
+        lineHeight: 1,
+      }}>
         {visible ? count : 0}{suffix}
       </Typography>
-      <Typography sx={{ color: "text.secondary", mt: 1, fontSize: "0.9rem" }}>{label}</Typography>
+      <Typography sx={{
+        color: "#4a6070",
+        mt: 1,
+        fontSize: { xs: "0.78rem", sm: "0.82rem", md: "0.85rem" },
+        lineHeight: 1.4,
+        px: { xs: 0.5, md: 0 },
+      }}>
+        {label}
+      </Typography>
     </Box>
   );
 }
 
-// ── SVG Icons ─────────────────────────────────────────────────────────────
-const MobileIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <rect x="18" y="4" width="22" height="38" rx="3" stroke="#E8581A" strokeWidth="2.2" fill="none" />
-    <rect x="22" y="10" width="14" height="22" rx="1.5" stroke="#E8581A" strokeWidth="1.8" fill="none" />
-    <line x1="26" y1="38" x2="38" y2="38" stroke="#E8581A" strokeWidth="2.2" strokeLinecap="round" />
-    <rect x="6" y="16" width="8" height="10" rx="1" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <line x1="6" y1="19" x2="14" y2="19" stroke="#E8581A" strokeWidth="1.2" />
-    <line x1="6" y1="22" x2="14" y2="22" stroke="#E8581A" strokeWidth="1.2" />
-    <rect x="46" y="16" width="12" height="10" rx="1" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <line x1="48" y1="19" x2="56" y2="19" stroke="#E8581A" strokeWidth="1.2" />
-    <line x1="48" y1="22" x2="56" y2="22" stroke="#E8581A" strokeWidth="1.2" />
-    <line x1="40" y1="18" x2="46" y2="18" stroke="#E8581A" strokeWidth="1.6" strokeLinecap="round" />
-    <line x1="14" y1="21" x2="18" y2="21" stroke="#E8581A" strokeWidth="1.6" strokeLinecap="round" />
-    <circle cx="29" cy="32" r="2" stroke="#E8581A" strokeWidth="1.4" fill="none" />
-    <path d="M29 30 L29 22 M31 24 L29 22 L27 24" stroke="#E8581A" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const WebIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <rect x="4" y="10" width="56" height="36" rx="3" stroke="#E8581A" strokeWidth="2.2" fill="none" />
-    <line x1="4" y1="20" x2="60" y2="20" stroke="#E8581A" strokeWidth="1.8" />
-    <circle cx="11" cy="15" r="2" fill="#E8581A" />
-    <circle cx="18" cy="15" r="2" fill="#E8581A" />
-    <circle cx="25" cy="15" r="2" fill="#E8581A" />
-    <rect x="10" y="25" width="12" height="16" rx="1.5" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <rect x="26" y="25" width="28" height="7" rx="1.5" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <rect x="26" y="34" width="28" height="7" rx="1.5" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <line x1="24" y1="46" x2="40" y2="46" stroke="#E8581A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="32" y1="46" x2="32" y2="52" stroke="#E8581A" strokeWidth="2.2" />
-    <line x1="22" y1="52" x2="42" y2="52" stroke="#E8581A" strokeWidth="2.2" strokeLinecap="round" />
-  </svg>
-);
-
-const DesktopIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <circle cx="32" cy="30" r="20" stroke="#E8581A" strokeWidth="2.2" fill="none" />
-    <ellipse cx="32" cy="30" rx="20" ry="8" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <path d="M32 10 Q38 20 32 30 Q26 40 32 50" stroke="#E8581A" strokeWidth="1.6" fill="none" />
-    <line x1="12" y1="30" x2="52" y2="30" stroke="#E8581A" strokeWidth="1.6" />
-    <line x1="32" y1="10" x2="32" y2="50" stroke="#E8581A" strokeWidth="1.6" />
-    <circle cx="32" cy="30" r="3.5" stroke="#E8581A" strokeWidth="1.8" fill="none" />
-    <circle cx="46" cy="18" r="5" stroke="#E8581A" strokeWidth="1.8" fill="none" />
-    <path d="M44 18 L46 20 L49 16" stroke="#E8581A" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-// ── TechStack Marquee Row ─────────────────────────────────────────────────
 function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   const animName = direction === "left" ? "marqueeLeft" : "marqueeRight";
   return (
     <Box sx={{ overflow: "hidden", mb: 3 }}>
-      <Box
-        className={`tech-marquee-${direction}`}
-        sx={{
-          display: "flex",
-          width: "max-content",
-          animation: `${animName} ${speed}s linear infinite`,
-          "&:hover": { animationPlayState: "paused" },
-        }}
-      >
+      <Box sx={{ display: "flex", width: "max-content", animation: `${animName} ${speed}s linear infinite`, "&:hover": { animationPlayState: "paused" } }}>
         {[...items, ...items].map((item, i) => (
-          <Box
-            key={i}
-            sx={{
-              flexShrink: 0,
-              mx: { xs: 2.5, md: 4 },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minWidth: { xs: 80, md: 110 },
-            }}
-          >
+          <Box key={i} sx={{ flexShrink: 0, mx: { xs: 2.5, md: 4 }, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minWidth: { xs: 80, md: 110 } }}>
             {item.img ? (
-              <Box
-                component="img"
-                src={item.img}
-                alt={item.label}
-                sx={{ height: { xs: 36, md: 48 }, width: "auto", objectFit: "contain", display: "block" }}
-              />
+              <Box component="img" src={item.img} alt={item.label} sx={{ height: { xs: 36, md: 48 }, width: "auto", objectFit: "contain", display: "block" }} />
             ) : (
-              <Box sx={{ height: { xs: 36, md: 48 }, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {item.custom}
-              </Box>
+              <Box sx={{ height: { xs: 36, md: 48 }, display: "flex", alignItems: "center", justifyContent: "center" }}>{item.custom}</Box>
             )}
             {item.showLabel && (
-              <Typography sx={{ fontSize: "0.75rem", fontWeight: 600, color: item.labelColor || "#555", mt: 0.5 }}>
-                {item.label}
-              </Typography>
+              <Typography sx={{ fontSize: "0.75rem", fontWeight: 600, color: item.labelColor || "#555", mt: 0.5 }}>{item.label}</Typography>
             )}
           </Box>
         ))}
@@ -176,421 +151,200 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
   );
 }
 
+const stats = [
+  { value: "10+", label: "Applications Developed" },
+  { value: "50+",  label: "Resources Involved" },
+  { value: "10K+",  label: "Hrs Spent" },
+  { value: "100K+",    label: "Active Application Users" },
+];
+
+const services = [
+  {
+    icon: <MapIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "GIS Mobile Application Development",
+    description: "We provide GIS mobile apps that enhance field operations, offering seamless mapping, real-time data updates, and precise geotagging to improve efficiency and accuracy in the field.",
+    bullets: ["User Centric design", "Platform Compatibility", "Offline Mode"],
+  },
+  {
+    icon: <StorageIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "GIS Web Application Development",
+    description: "We deliver Geospatial web apps for data visualization, real-time monitoring, and spatial analysis, featuring robust reporting and a seamless user experience.",
+    bullets: ["Responsive Design", "Scalable Architecture", "Data Visualization"],
+  },
+  {
+    icon: <AnalyticsIcon sx={{ fontSize: 56, color: ACCENT }} />,
+    title: "Desktop Customization",
+    description: "We develop user-friendly GIS plugins, tools, and extensions to enhance solutions and optimize spatial data analysis and integration.",
+    bullets: ["Tool Development", "Extension Development", "Add In Development"],
+  },
+];
+
+const clientLogos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10, logo11, logo12, logo13];
+
+const techRow1 = [
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg", label: "Python" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original-wordmark.svg", label: ".NET" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg", label: "PostgreSQL" },
+  { label: "PHP", custom: <Box component="img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" sx={{ height: 48, width: "auto" }} /> },
+  { label: "PostGIS", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><ellipse cx="18" cy="9" rx="14" ry="6" fill="none" stroke="#336791" strokeWidth="2" /><path d="M4,9 L4,27 Q4,33 18,33 Q32,33 32,27 L32,9" stroke="#336791" strokeWidth="2" fill="none" /><path d="M4,18 Q4,24 18,24 Q32,24 32,18" stroke="#336791" strokeWidth="1.5" fill="none" /><ellipse cx="18" cy="9" rx="14" ry="6" fill="rgba(51,103,145,0.1)" /></svg><Typography sx={{ fontWeight: 700, color: "#336791", fontSize: "0.85rem" }}>PostGIS</Typography></Box> },
+  { label: "SQL", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><ellipse cx="16" cy="8" rx="12" ry="5" fill="none" stroke="#C97B22" strokeWidth="2" /><path d="M4,8 L4,24 Q4,29 16,29 Q28,29 28,24 L28,8" stroke="#C97B22" strokeWidth="2" fill="none" /><path d="M4,16 Q4,21 16,21 Q28,21 28,16" stroke="#C97B22" strokeWidth="1.5" fill="none" /></svg><Typography sx={{ fontWeight: 700, color: "#C97B22", fontSize: "0.85rem" }}>SQL</Typography></Box> },
+  { label: "ORACLE", custom: <Box sx={{ border: "2.5px solid #E8001A", borderRadius: "50px", px: 2, py: 0.5, display: "inline-block" }}><Typography sx={{ fontWeight: 800, color: "#E8001A", fontSize: "1rem", letterSpacing: 1 }}>ORACLE</Typography></Box> },
+];
+
+const techRow2 = [
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg", label: "Node.js" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original-wordmark.svg", label: "AngularJS" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original-wordmark.svg", label: "Android" },
+  { label: "iOS", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><Box component="img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="iOS" sx={{ height: 38, width: "auto", filter: "brightness(0)" }} /><Typography sx={{ fontWeight: 700, color: "#000", fontSize: "1.1rem", letterSpacing: 1 }}>iOS</Typography></Box> },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg", label: "React" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", label: "Flutter", showLabel: true, labelColor: "#027DFD" },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original-wordmark.svg", label: "Vue.js" },
+];
+
+const techRow3 = [
+  { label: "GeoPandas", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16,2 L30,8 L30,24 L16,30 L2,24 L2,8 Z" fill="rgba(19,156,70,0.12)" stroke="#139C46" strokeWidth="1.8" /><circle cx="16" cy="16" r="5" fill="#139C46" opacity="0.3" /><circle cx="16" cy="16" r="2" fill="#139C46" /></svg><Typography sx={{ fontWeight: 700, color: "#139C46", fontSize: "0.9rem" }}>GeoPandas</Typography></Box> },
+  { label: "Leaflet", custom: <Box component="img" src="https://leafletjs.com/docs/images/logo.png" alt="Leaflet" sx={{ height: 44, width: "auto", objectFit: "contain" }} /> },
+  { label: "OpenLayers", custom: <Box component="img" src="https://openlayers.org/theme/img/logo-dark.svg" alt="OpenLayers" sx={{ height: 44, width: "auto", objectFit: "contain" }} /> },
+  { label: "ArcGIS", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="15" fill="none" stroke="#0077C8" strokeWidth="2" /><path d="M18,3 Q23,10 18,18 Q13,26 18,33" stroke="#0077C8" strokeWidth="1.5" fill="none" /><ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="#0077C8" strokeWidth="1.5" /><line x1="3" y1="18" x2="33" y2="18" stroke="#0077C8" strokeWidth="1.5" /></svg><Typography sx={{ fontWeight: 700, color: "#0077C8", fontSize: "0.9rem" }}>ArcGIS</Typography></Box> },
+  { label: "QGIS", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="15" fill="rgba(88,150,50,0.1)" stroke="#589632" strokeWidth="2" /><path d="M6,18 Q11,10 18,14 Q25,18 30,10" stroke="#589632" strokeWidth="2" fill="none" strokeLinecap="round" /><circle cx="12" cy="22" r="3" fill="#589632" opacity="0.45" /><circle cx="23" cy="15" r="2.5" fill="#589632" opacity="0.65" /></svg><Typography sx={{ fontWeight: 700, color: "#589632", fontSize: "0.9rem" }}>QGIS</Typography></Box> },
+  { label: "esri", custom: <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="14" fill="none" stroke="#0079C1" strokeWidth="2" /><ellipse cx="18" cy="18" rx="14" ry="5" fill="none" stroke="#0079C1" strokeWidth="1.5" /><path d="M18,4 Q23,11 18,18 Q13,25 18,32" stroke="#0079C1" strokeWidth="1.5" fill="none" /><line x1="4" y1="18" x2="32" y2="18" stroke="#0079C1" strokeWidth="1.5" /></svg><Typography sx={{ fontWeight: 700, color: "#0079C1", fontSize: "0.9rem" }}>esri</Typography></Box> },
+  { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg", label: "Docker" },
+];
+
+const caseStudies = [
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
+  { image: locationintelligencecase4, tags: ["Environment", "ERP", "India", "Private Sector"], title: "Unity Green Solutions", description: "Customized Waste Management Platform for Streamlined Business Operations" },
+  { image: locationintelligencecase5, tags: ["ERP", "Healthcare", "India", "Private Sector"], title: "Mylab Discovery Solutions Pvt. Ltd.", description: "Event Management System Implementation Using Odoo ERP for Process Optimization" },
+  { image: locationintelligencecase6, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
+];
+
 export default function GISDevelopment() {
   const [caseSlide, setCaseSlide] = useState(0);
+  const viewportRef = useRef(null);
+  const [carousel, setCarousel] = useState({ cardWidth: 0, slideStep: 0, maxSlide: caseStudies.length - 2, twoUp: true });
 
-  const services = [
-    {
-      icon: <MobileIcon />,
-      title: "GIS Mobile Application Development",
-      description: "We provide GIS mobile apps that enhance field operations, offering seamless mapping, real-time data updates, and precise geotagging.",
-      bullets: ["Offline Map Support", "Real-time GPS Tracking", "Field Data Collection", "Cross-platform iOS & Android", "ESRI & OpenSource Stack"],
-    },
-    {
-      icon: <WebIcon />,
-      title: "GIS Web Application Development",
-      description: "We deliver geospatial web apps for data visualization, real-time monitoring, and spatial analysis.",
-      bullets: ["Responsive Design", "Scalable Architecture", "Data Visualization", "Real-time Monitoring Dashboard", "Spatial Query & Reporting"],
-    },
-    {
-      icon: <DesktopIcon />,
-      title: "Desktop Customization",
-      description: "We develop user-friendly GIS plugins, tools, and extensions to enhance solutions and optimize spatial data analysis.",
-      bullets: ["Custom ArcGIS Plugins", "QGIS Extension Development", "Spatial Data Integration", "Workflow Automation Tools", "Legacy GIS Migration"],
-    },
-  ];
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      const twoUp = w >= 900;
+      const cardWidth = twoUp ? (w - CASE_GAP) / 2 : w;
+      const slideStep = cardWidth + CASE_GAP;
+      const maxSlide = twoUp ? caseStudies.length - 2 : caseStudies.length - 1;
+      setCarousel({ cardWidth, slideStep, maxSlide, twoUp });
+      setCaseSlide((prev) => Math.min(prev, maxSlide));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
-  const caseStudies = [
-    {
-      image: "https://images.unsplash.com/photo-1569025743873-ea3a9ade89f9?w=600&q=80",
-      tags: ["Geospatial", "India", "Public Sector", "Utility"],
-      title: "Solapur Municipal Corporation",
-      description: "Customized Survey Solutions for Optimizing Water Billing Operations",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80",
-      tags: ["Geospatial", "India", "Public Sector", "Utility"],
-      title: "Ministry of Jalshakti, India",
-      description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-      tags: ["Agriculture", "Geospatial", "India", "Public Sector"],
-      title: "Agriculture Dept., Maharashtra",
-      description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80",
-      tags: ["Geospatial", "India", "Public Sector"],
-      title: "Jai Jeevan Mission",
-      description: "Real-time GIS tracking and monitoring for water supply management across Maharashtra.",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
-      tags: ["Geospatial", "India", "Government"],
-      title: "Forest Department Maharashtra",
-      description: "Satellite-based forest monitoring and management system for conservation efforts.",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80",
-      tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"],
-      title: "Synlog",
-      description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management",
-    },
-  ];
-
-  const stats = [
-    { value: "10+", label: "Applications Developed" },
-    { value: "50+", label: "Resources Involved" },
-    { value: "10K+", label: "Hrs Spent" },
-    { value: "100K+", label: "Active Application Users" },
-  ];
-
-  const clientLogos = [
-    <img src={logo1} alt="Client 1" />,
-    <img src={logo2} alt="Client 2" />,
-    <img src={logo3} alt="Client 3"/>,
-    <img src={logo4} alt="Client 4" />,
-    <img src={logo5} alt="Client 5" />,
-    <img src={logo6} alt="Client 6"/>,
-    <img src={logo7} alt="Client 7" />,
-    <img src={logo8} alt="Client 8" />,
-    <img src={logo9} alt="Client 9" />,
-    <img src={logo10} alt="Client 10" />,
-    <img src={logo11} alt="Client 11" />,
-    <img src={logo12} alt="Client 12" />,
-    <img src={logo13} alt="Client 13" />,
-  ];
-
-  const techRow1 = [
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg", label: "Python" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original-wordmark.svg", label: ".NET" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg", label: "PostgreSQL" },
-    {
-      label: "PHP",
-      custom: (
-        <Box component="img"
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-          alt="PHP" sx={{ height: 48, width: "auto" }} />
-      ),
-    },
-    {
-      label: "PostGIS",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <ellipse cx="18" cy="9" rx="14" ry="6" fill="none" stroke="#336791" strokeWidth="2" />
-            <path d="M4,9 L4,27 Q4,33 18,33 Q32,33 32,27 L32,9" stroke="#336791" strokeWidth="2" fill="none" />
-            <path d="M4,18 Q4,24 18,24 Q32,24 32,18" stroke="#336791" strokeWidth="1.5" fill="none" />
-            <ellipse cx="18" cy="9" rx="14" ry="6" fill="rgba(51,103,145,0.1)" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#336791", fontSize: "0.85rem" }}>PostGIS</Typography>
-        </Box>
-      ),
-    },
-    {
-      label: "SQL",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <ellipse cx="16" cy="8" rx="12" ry="5" fill="none" stroke="#C97B22" strokeWidth="2" />
-            <path d="M4,8 L4,24 Q4,29 16,29 Q28,29 28,24 L28,8" stroke="#C97B22" strokeWidth="2" fill="none" />
-            <path d="M4,16 Q4,21 16,21 Q28,21 28,16" stroke="#C97B22" strokeWidth="1.5" fill="none" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#C97B22", fontSize: "0.85rem" }}>SQL</Typography>
-        </Box>
-      ),
-    },
-    {
-      label: "ORACLE",
-      custom: (
-        <Box sx={{ border: "2.5px solid #E8001A", borderRadius: "50px", px: 2, py: 0.5, display: "inline-block" }}>
-          <Typography sx={{ fontWeight: 800, color: "#E8001A", fontSize: "1rem", letterSpacing: 1 }}>ORACLE</Typography>
-        </Box>
-      ),
-    },
-  ];
-
-  const techRow2 = [
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg", label: "Node.js" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original-wordmark.svg", label: "AngularJS" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original-wordmark.svg", label: "Android" },
-    {
-      label: "iOS",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Box component="img"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
-            alt="iOS" sx={{ height: 38, width: "auto", filter: "brightness(0)" }} />
-          <Typography sx={{ fontWeight: 700, color: "#000", fontSize: "1.1rem", letterSpacing: 1 }}>iOS</Typography>
-        </Box>
-      ),
-    },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg", label: "React" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", label: "Flutter", showLabel: true, labelColor: "#027DFD" },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original-wordmark.svg", label: "Vue.js" },
-  ];
-
-  const techRow3 = [
-    {
-      label: "GeoPandas",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16,2 L30,8 L30,24 L16,30 L2,24 L2,8 Z" fill="rgba(19,156,70,0.12)" stroke="#139C46" strokeWidth="1.8" />
-            <circle cx="16" cy="16" r="5" fill="#139C46" opacity="0.3" />
-            <circle cx="16" cy="16" r="2" fill="#139C46" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#139C46", fontSize: "0.9rem" }}>GeoPandas</Typography>
-        </Box>
-      ),
-    },
-    {
-      label: "Leaflet",
-      custom: (
-        <Box component="img" src="https://leafletjs.com/docs/images/logo.png" alt="Leaflet"
-          sx={{ height: 44, width: "auto", objectFit: "contain" }} />
-      ),
-    },
-    {
-      label: "OpenLayers",
-      custom: (
-        <Box component="img" src="https://openlayers.org/theme/img/logo-dark.svg" alt="OpenLayers"
-          sx={{ height: 44, width: "auto", objectFit: "contain" }} />
-      ),
-    },
-    {
-      label: "ArcGIS",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="15" fill="none" stroke="#0077C8" strokeWidth="2" />
-            <path d="M18,3 Q23,10 18,18 Q13,26 18,33" stroke="#0077C8" strokeWidth="1.5" fill="none" />
-            <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="#0077C8" strokeWidth="1.5" />
-            <line x1="3" y1="18" x2="33" y2="18" stroke="#0077C8" strokeWidth="1.5" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#0077C8", fontSize: "0.9rem" }}>ArcGIS</Typography>
-        </Box>
-      ),
-    },
-    {
-      label: "QGIS",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="15" fill="rgba(88,150,50,0.1)" stroke="#589632" strokeWidth="2" />
-            <path d="M6,18 Q11,10 18,14 Q25,18 30,10" stroke="#589632" strokeWidth="2" fill="none" strokeLinecap="round" />
-            <circle cx="12" cy="22" r="3" fill="#589632" opacity="0.45" />
-            <circle cx="23" cy="15" r="2.5" fill="#589632" opacity="0.65" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#589632", fontSize: "0.9rem" }}>QGIS</Typography>
-        </Box>
-      ),
-    },
-    {
-      label: "esri",
-      custom: (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="14" fill="none" stroke="#0079C1" strokeWidth="2" />
-            <ellipse cx="18" cy="18" rx="14" ry="5" fill="none" stroke="#0079C1" strokeWidth="1.5" />
-            <path d="M18,4 Q23,11 18,18 Q13,25 18,32" stroke="#0079C1" strokeWidth="1.5" fill="none" />
-            <line x1="4" y1="18" x2="32" y2="18" stroke="#0079C1" strokeWidth="1.5" />
-          </svg>
-          <Typography sx={{ fontWeight: 700, color: "#0079C1", fontSize: "0.9rem" }}>esri</Typography>
-        </Box>
-      ),
-    },
-    { img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg", label: "Docker" },
-  ];
-
-  const maxSlide = caseStudies.length - 2;
+  const { cardWidth, slideStep, maxSlide, twoUp = true } = carousel;
 
   return (
+    
     <ThemeProvider theme={theme}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .marquee-track {
-          display: flex;
-          width: max-content;
-          animation: marqueeScroll 28s linear infinite;
-        }
-        .marquee-track:hover { animation-play-state: paused; }
-        @keyframes marqueeLeft {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marqueeRight {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .hero-text { animation: fadeUp 0.8s ease forwards; }
-        .hero-breadcrumb { animation: fadeUp 0.6s ease forwards; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+        @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marqueeLeft  { 0% { transform: translateX(0); }    100% { transform: translateX(-50%); } }
+        @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
       `}</style>
 
-      <Box sx={{ fontFamily: "'Poppins', sans-serif", bgcolor: "#fff", overflow: "hidden" }}>
-
-        {/* ── HERO ── */}
-        <Box sx={{
-          position: "relative", minHeight: { xs: 300, md: 380 },
-          display: "flex", flexDirection: "column", justifyContent: "flex-end",
-          overflow: "hidden", pb: { xs: 6, md: 8 }
-        }}>
+      <Box sx={{ bgcolor: "#fff", overflow: "hidden", fontFamily: "'Poppins', sans-serif" }}>
+        {/* HERO */}
+        <Box sx={{ position: "relative", minHeight: { xs: 300, md: 380 }, display: "flex", flexDirection: "column", justifyContent: "flex-end", overflow: "hidden", pb: { xs: 6, md: 8 } }}>
           <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
-            <Box component="img"
-              src="https://coderize.in/wp-content/uploads/2024/09/geospatial-service-title.jpg"
-              alt="GIS Background"
+            <Box component="img" src="https://coderize.in/wp-content/uploads/2024/09/geospatial-service-title.jpg" alt="GIS Development"
               sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-            <Box sx={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(rgba(10,25,41,0.85), rgba(10,25,41,0.85))"
-            }} />
+            <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(10,25,41,0.85), rgba(10,25,41,0.85))" }} />
           </Box>
-          <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, pt: { xs: 10, md: 12 } }}>
-            <Breadcrumbs className="hero-breadcrumb"
-              separator={<NavigateNextIcon fontSize="small" sx={{ color: "rgba(255,255,255,0.45)" }} />}
-              sx={{ mb: 2.5 }}>
+          <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, pt: { xs: 10, md: 12 }, px: { xs: 3, sm: 4, md: 6, lg: 8 }, pb: { xs: 2, md: 4 } }}>
+            <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: "rgba(255,255,255,0.45)" }} />} sx={{ mb: 2.5 }}>
               {["Home", "Services", "Geospatial", "GIS Development"].map((c, i, arr) => (
-                <Typography key={c} variant="body2" sx={{
-                  color: i === arr.length - 1 ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)",
-                  fontWeight: i === arr.length - 1 ? 600 : 400, fontSize: "0.85rem"
-                }}>
-                  {c}
-                </Typography>
+                <Typography key={c} variant="body2" sx={{ color: i === arr.length - 1 ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontWeight: i === arr.length - 1 ? 600 : 400, fontSize: "0.85rem" }}>{c}</Typography>
               ))}
             </Breadcrumbs>
-            <Typography className="hero-text" variant="h3" sx={{
-              color: "#fff", fontWeight: 800, maxWidth: { xs: "100%", md: 420 },
-              lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" }
-            }}>
-              Turn Your Vision Into Reality With Our Innovative GIS Solutions.
+            <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.7)", mb: 1, fontSize: "0.9rem" }}>Geospatial intelligence</Typography>
+            <Typography variant="h3" sx={{ color: "#fff", fontWeight: 800, maxWidth: 560, lineHeight: 1.22, fontSize: { xs: "1.7rem", sm: "2rem", md: "2.6rem" } }}>
+              Reveal spatial patterns to guide decisions
             </Typography>
           </Container>
         </Box>
 
-        {/* ── NAVIGATE FUTURE ── */}
-        <Box sx={{
-          display: "flex", flexDirection: { xs: "column", md: "row" },
-          background: "#f7f7f7", borderRadius: "4px", overflow: "hidden"
-        }}>
-          <Box sx={{ width: { xs: "100%", md: "48%" }, flexShrink: 0 }}>
-            <Box component="img"
-              src="https://coderize.in/wp-content/uploads/2024/09/gis-developement.jpg"
-              alt="GIS"
-              sx={{ width: "100%", height: { xs: 300, md: 500 }, objectFit: "cover", display: "block" }} />
-          </Box>
-          <Box sx={{
-            width: { xs: "100%", md: "52%" }, display: "flex", alignItems: "center",
-            px: { xs: 4, md: 6 }, py: { xs: 4, md: 0 }
-          }}>
-            <Box>
-              <Typography sx={{
-                fontSize: { xs: "2rem", md: "3rem" }, color: "#002B55",
-                fontWeight: 500, lineHeight: 1.2, mb: 3
-              }}>
-                Navigate Your Future with our tailored Geospatial Apps
-              </Typography>
-              <Typography sx={{ color: "#002B55", fontSize: "1.2rem", lineHeight: 1.7 }}>
-                We develop custom geospatial applications to meet specific business needs,
-                leveraging the latest ESRI and open-source technologies to deliver innovative
-                and efficient solutions.
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-
-        {/* ── STATS ── */}
-        <Box sx={{ py: 8, background: "#fff" }}>
-          <Container maxWidth="xl">
-            <Box sx={{
-              display: "flex", justifyContent: "space-between", alignItems: "center",
-              flexWrap: { xs: "wrap", md: "nowrap" }, gap: { xs: 4, md: 0 }
-            }}>
-              {stats.map((item, index) => (
-                <Box key={item.label} sx={{
-                  flex: 1, textAlign: "center", position: "relative",
-                  minWidth: { xs: "45%", md: "auto" }
-                }}>
-                  {index !== 0 && (
-                    <Box sx={{
-                      position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)",
-                      width: "1px", height: "120px", bgcolor: "#F26522",
-                      display: { xs: "none", md: "block" }
-                    }} />
-                  )}
-                  <Typography sx={{
-                    fontSize: { xs: "2.2rem", md: "4rem" }, fontWeight: 600,
-                    color: "#002B55", lineHeight: 1, mb: 2
-                  }}>
-                    {item.value}
+        {/* INTRO */}
+        <Box sx={{ bgcolor: "#fff", py: { xs: 5, md: 10 }, px: { xs: 2, sm: 3, md: 4 } }}>
+          <Container maxWidth="xl" disableGutters>
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "center", gap: { xs: 4, md: 6, lg: 10 } }}>
+              <Box sx={{ width: { xs: "100%", md: "50%" }, flexShrink: 0, px: { xs: 1, md: 2, lg: 3 } }}>
+                <Box component="img" src={gisdevelopment} alt="GIS Development"
+                  sx={{ width: "100%", height: { xs: 280, md: 400, lg: 520 }, objectFit: "cover", display: "block", borderRadius: { xs: "3px", md: "5px" } }} />
+              </Box>
+              <Box sx={{ width: { xs: "100%", md: "50%" }, display: "flex", alignItems: "center", py: { xs: 2, md: 4 }, px: { xs: 2, md: 4, lg: 8 }, position: "relative", minHeight: { md: 400 } }}>
+                <Box sx={{ position: "relative", zIndex: 1, maxWidth: 520 }}>
+                  <Typography sx={{ fontFamily: '"Sora", sans-serif', fontSize: { xs: "1.5rem", sm: "1.7rem", md: "2rem", lg: "2.2rem" }, color: NAVY, fontWeight: 600, lineHeight: 1.25, mb: { xs: 2.5, md: 3.5 } }}>
+                    Navigate Your Future with our tailored Geospatial Apps
                   </Typography>
-                  <Typography sx={{ fontSize: { xs: "0.95rem", md: "1.3rem" }, color: "#002B55" }}>
-                    {item.label}
+                  <Typography sx={{ fontFamily: '"Sora", sans-serif', color: "#3d5a73", fontSize: { xs: "1rem", md: "1.125rem" }, lineHeight: 1.75, fontWeight: 400 }}>
+                    We develop custom geospatial applications to meet specific business needs, leveraging the latest ESRI and open-source technologies to deliver innovative and efficient solutions.
                   </Typography>
                 </Box>
+              </Box>
+            </Box>
+          </Container>
+        </Box>
+
+        {/* STATS — responsive 2-col mobile / 5-col desktop, orange dividers */}
+        <Box sx={{ py: { xs: 4, md: 8 }, bgcolor: "#fff" }}>
+          <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4, md: 6, lg: 8 } }}>
+            <Box sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(4, 1fr)" },
+              borderLeft: { md: "2px solid #ff6b35" },
+              borderRight: { md: "2px solid #ff6b35" },
+              "& > :last-child": {
+                gridColumn: { xs: "1 / -1", md: "auto" },
+                borderRight: { xs: "none !important" },
+                borderBottom: { xs: "none !important" },
+              },
+            }}>
+              {stats.map((item, index) => (
+                <StatItem key={item.label} value={item.value} label={item.label} colIndex={index} />
               ))}
             </Box>
           </Container>
         </Box>
 
-        {/* ── WHAT DO WE DO (FLIP CARDS) ── */}
+        {/* WHAT DO WE DO */}
         <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: "#f8f9fa" }}>
-          <Container maxWidth="xl">
-            <Typography variant="h4" sx={{
-              fontWeight: 800, mb: 0.5, color: "#1a2b3c",
-              fontSize: { xs: "1.6rem", md: "2rem" }
-            }}>
-              What do we do?
-            </Typography>
-            <Divider sx={{ mb: 5, borderColor: "#ddd", mt: 1.5 }} />
-            <Box sx={{ display: "flex", gap: 3, flexDirection: { xs: "column", md: "row" } }}>
+          <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
+            <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 700, mb: 0.5, color: NAVY, fontSize: { xs: "1.5rem", md: "2rem" } }}>What do we do?</Typography>
+            <Box sx={{ height: "1px", bgcolor: "#dde5ec", mb: 5, mt: 1.5 }} />
+            <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
               {services.map((s) => (
                 <Box key={s.title} sx={{
-                  flex: 1, minWidth: 0, height: { xs: 320, sm: 340, md: 380, lg: 400 }, perspective: "1000px",
+                  flex: { xs: "1 1 100%", sm: "1 1 calc(50% - 12px)", lg: "1 1 calc(33.33% - 16px)" },
+                  minWidth: 0, height: { xs: 320, md: 380 }, perspective: "1000px",
                   "& .flip-inner": { transition: "transform 0.55s cubic-bezier(.4,0,.2,1)" },
-                  "&:hover .flip-inner": { transform: "rotateY(180deg)" }
+                  "&:hover .flip-inner": { transform: "rotateY(180deg)" },
                 }}>
-                  <Box className="flip-inner" sx={{
-                    width: "100%", height: "100%",
-                    position: "relative", transformStyle: "preserve-3d"
-                  }}>
-                    <Box sx={{
-                      position: "absolute", inset: 0, backfaceVisibility: "hidden",
-                      borderRadius: 2, p: 4.5, border: "1px solid #e8edf2", bgcolor: "#fff"
-                    }}>
+                  <Box className="flip-inner" sx={{ width: "100%", height: "100%", position: "relative", transformStyle: "preserve-3d" }}>
+                    <Box sx={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", borderRadius: 2, p: 4, border: "1px solid #e8edf2", bgcolor: "#fff" }}>
                       <Box sx={{ mb: 3 }}>{s.icon}</Box>
-                      <Typography sx={{ fontWeight: 700, color: "#1A3A5C", mb: 1.5, fontSize: "1.05rem", lineHeight: 1.35 }}>
-                        {s.title}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#4a5568", lineHeight: 1.85, fontSize: "0.9rem" }}>
-                        {s.description}
-                      </Typography>
+                      <Typography sx={{ fontWeight: 700, color: "#1A3A5C", mb: 1.5, fontSize: "1.05rem" }}>{s.title}</Typography>
+                      <Typography variant="body2" sx={{ color: "#4a5568", lineHeight: 1.85, fontSize: "0.9rem" }}>{s.description}</Typography>
                     </Box>
-                    <Box sx={{
-                      position: "absolute", inset: 0, backfaceVisibility: "hidden",
-                      borderRadius: 2, p: 4.5, bgcolor: "#0D2B45", transform: "rotateY(180deg)",
-                      display: "flex", flexDirection: "column", justifyContent: "center"
-                    }}>
-                      <Typography sx={{ fontWeight: 700, color: "#E8581A", mb: 2.5, fontSize: "1.1rem", lineHeight: 1.3 }}>
-                        {s.title}
-                      </Typography>
+                    <Box sx={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", borderRadius: 2, p: 4, bgcolor: "#0D2B45", transform: "rotateY(180deg)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                      <Typography sx={{ fontWeight: 700, color: ACCENT, mb: 2.5, fontSize: "1.1rem" }}>{s.title}</Typography>
                       <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                         {s.bullets.map((b) => (
-                          <Box component="li" key={b} sx={{
-                            color: "rgba(255,255,255,0.88)", fontSize: "0.9rem",
-                            py: 0.9, borderBottom: "1px solid rgba(255,255,255,0.1)",
-                            display: "flex", alignItems: "center", gap: 1.2
-                          }}>
-                            <Box sx={{ width: 6, height: 6, borderRadius: "50%", bgcolor: "#E8581A", flexShrink: 0 }} />
-                            {b}
+                          <Box component="li" key={b} sx={{ color: "rgba(255,255,255,0.88)", fontSize: "0.9rem", py: 0.9, borderBottom: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", gap: 1.2 }}>
+                            <Box sx={{ width: 6, height: 6, borderRadius: "50%", bgcolor: ACCENT, flexShrink: 0 }} />{b}
                           </Box>
                         ))}
                       </Box>
@@ -602,202 +356,78 @@ export default function GISDevelopment() {
           </Container>
         </Box>
 
-        {/* ── CLIENTS MARQUEE ── */}
-        <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: "#fff", overflow: "hidden" }}>
-          <Container maxWidth="xl">
-            <Grid container spacing={4} alignItems="flex-start">
-              <Grid item xs={12} md={4}>
-                <Typography variant="h4" sx={{
-                  fontWeight: 800, mb: 1, color: "#1a2b3c",
-                  fontSize: { xs: "1.6rem", md: "2rem" }
-                }}>
-                  Our Esteemed Clients
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={8}>
-                <Typography sx={{ color: "#4a5568", lineHeight: 1.8 }}>
-                  Serving global clients across industries with tailored solutions, driving innovation and excellence in every project.
-                </Typography>
-              </Grid>
-            </Grid>
-            <Divider sx={{ my: 4, borderColor: "#ddd" }} />
+        {/* CLIENTS MARQUEE */}
+        <Box sx={{ py: { xs: 8, md: "72px" }, bgcolor: "#fff", overflow: "hidden" }}>
+          <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
+            <Box sx={{ display: "flex", alignItems: "flex-start", flexDirection: { xs: "column", md: "row" }, gap: { xs: 2, md: 6, lg: 10 }, mb: 1 }}>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 700, fontSize: { xs: "1.5rem", md: "2rem" }, color: NAVY, flexShrink: 0, width: { md: "34%" } }}>Our Esteemed Clients</Typography>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', color: "#4a6070", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, pt: { md: "6px" }, flex: 1, maxWidth: { md: "66%" } }}>
+                Serving global clients across industries with tailored solutions, driving innovation and excellence in every project.
+              </Typography>
+            </Box>
+            <Box sx={{ height: "1px", bgcolor: "#dde5ec", my: { xs: 3, md: 5 } }} />
           </Container>
-          <Box sx={{ overflow: "hidden" }}>
-            <Box className="marquee-track" sx={{ display: "flex", gap: 0 }}>
-              {[...clientLogos, ...clientLogos].map((client, i) => (
-                <Box key={i} sx={{
-                  flexShrink: 0, px: 5.5, display: "flex", flexDirection: "column",
-                  alignItems: "center", justifyContent: "center", minWidth: 160
-                }}>
-                  {client}
-                </Box>
+          <Box sx={{ overflow: "hidden", width: "100%" }}>
+            <Box sx={{ display: "flex", alignItems: "center", width: "max-content", animation: "marqueeScroll 28s linear infinite", "&:hover": { animationPlayState: "paused" } }}>
+              {[...clientLogos, ...clientLogos].map((src, i) => (
+                <Box key={i} component="img" src={src} alt={`Client ${i + 1}`}
+                  sx={{ flexShrink: 0, height: { xs: 94, md: 200 }, maxWidth: 160, mx: { xs: 4, md: 5.5 }, objectFit: "contain", transition: "opacity 0.3s ease", "&:hover": { opacity: 1 } }} />
               ))}
             </Box>
           </Box>
         </Box>
 
-        {/* ── CTA ── */}
-        <Box sx={{
-          position: "relative", minHeight: { xs: 280, md: 600 },
-          display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
-        }}>
-          <Box component="img"
-            src={GISbg}
-            alt="CTA background"
-            sx={{
-              position: "absolute", inset: 0, width: "100%", height: "100%",
-              objectFit: "cover", objectPosition: "center"
-            }} />
-          <Box sx={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(135deg, rgba(5,13,24,0.78) 0%, rgba(10,30,53,0.72) 50%, rgba(6,15,28,0.8) 100%)"
-          }} />
-          <Box sx={{ position: "relative", zIndex: 1, textAlign: "center", px: 2 }}>
-            <Typography variant="h4" sx={{
-              color: "#fff", fontWeight: 700, mb: 4,
-              fontSize: { xs: "1.5rem", md: "2.2rem" }, textShadow: "0 2px 20px rgba(0,0,0,0.5)"
-            }}>
-              Let's Discuss Your Requirements
+        {/* CTA */}
+        <Box sx={{ position: "relative", minHeight: { xs: 280, md: 600 }, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+          <Box component="img" src={GISbg} alt="CTA background" sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+          <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(5,13,24,0.6) 0%, rgba(10,30,53,0.45) 50%, rgba(6,15,28,0.8) 100%)" }} />
+          <Box sx={{ position: "relative", zIndex: 1, textAlign: "center", px: { xs: 3, md: 6 } }}>
+            <Typography sx={{ fontFamily: '"Sora", sans-serif', color: "#fff", fontWeight: 700, mb: 4, fontSize: { xs: "1.5rem", md: "2.2rem" }, textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>
+              Share Your Business Goals With Us
             </Typography>
-            <Button variant="contained" size="large" sx={{
-              bgcolor: "#E8581A", color: "#fff", px: 6, py: 1.8, fontSize: "1.05rem",
-              fontWeight: 700, borderRadius: 1,
-              "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" },
-              boxShadow: "0 6px 28px rgba(232,88,26,0.5)", transition: "all 0.2s"
-            }}>
+            <Button component={Link} to="/Contact" variant="contained" size="large"
+              sx={{ fontFamily: '"Sora", sans-serif', bgcolor: ACCENT, color: "#fff", px: 6, py: 1.8, fontSize: "1.05rem", fontWeight: 700, borderRadius: 1, "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" }, boxShadow: "0 6px 28px rgba(232,88,26,0.5)", transition: "all 0.2s" }}>
               Schedule a call
             </Button>
           </Box>
         </Box>
 
-        {/* ── TECH STACK ── */}
-        <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: "#f8f9fa", overflow: "hidden" }}>
-          <Container maxWidth="xl" sx={{ mb: 4 }}>
-            <Grid container spacing={4} alignItems="flex-start">
-              <Grid item xs={12} md={4}>
-                <Typography variant="h4" sx={{
-                  fontWeight: 800, mb: 2, color: "#1a2b3c",
-                  fontSize: { xs: "1.6rem", md: "2rem" }
-                }}>TechStack</Typography>
-                <Typography sx={{ color: "#4a5568", lineHeight: 1.85 }}>
-                  Our 25+ in house tech team are skilled in 20+ top technologies that
-                  help us deliver smart solutions to your needs.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Container>
-          {/* Row 1 → left */}
-          <TechMarqueeRow items={techRow1} direction="left" speed={30} />
-          {/* Row 2 → right */}
-          <TechMarqueeRow items={techRow2} direction="right" speed={28} />
-          {/* Row 3 → left */}
-          <TechMarqueeRow items={techRow3} direction="left" speed={32} />
-        </Box>
+        {/* TECH STACK */}
+        <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", lg: "row" }, gap: { xs: 4, lg: 8 }, alignItems: { xs: "flex-start", lg: "center" }, py: { xs: 8, md: 12 } }}>
+            <Box sx={{ width: { xs: "100%", lg: "40%" }, pr: { lg: 4 } }}>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 700, mb: 2, color: NAVY, fontSize: { xs: "1.5rem", md: "2rem" } }}>TechStack</Typography>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', color: "#4a6070", lineHeight: 1.85, fontSize: { xs: "0.95rem", md: "1rem" } }}>
+                Our 25+ in house tech team are skilled in 20+ top technologies that help us deliver smart solutions to your needs.
+              </Typography>
+            </Box>
+            <Box sx={{ width: { xs: "100%", lg: "60%" }, overflow: "hidden" }}>
+              <TechMarqueeRow items={techRow1} direction="left"  speed={30} />
+              <TechMarqueeRow items={techRow2} direction="right" speed={28} />
+              <TechMarqueeRow items={techRow3} direction="left"  speed={32} />
+            </Box>
+          </Box>
+        </Container>
 
-        {/* ── CASE STUDIES ── */}
-        <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: "#fff" }}>
-          <Container maxWidth="xl">
-            <Grid container spacing={4} alignItems="flex-start" sx={{ mb: 5 }}>
-              <Grid item xs={12} md={4}>
-                <Typography variant="h4" sx={{
-                  fontWeight: 800, color: "#1a2b3c",
-                  fontSize: { xs: "1.6rem", md: "2rem" }
-                }}>
-                  Case Studies
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={8}>
-                <Typography sx={{ color: "#4a5568", lineHeight: 1.8 }}>
-                  Explore our case studies to see how we've successfully addressed complex
-                  challenges with innovative solutions.
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <Box sx={{ overflow: "hidden" }}>
-              <Box sx={{
-                display: "flex",
-                gap: "20px",
-                transition: "transform 0.5s cubic-bezier(.4,0,.2,1)",
-                transform: `translateX(calc(-${caseSlide * (50 + 1.04)}%))`,
-              }}>
+        {/* CASE STUDIES */}
+        <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: "#fff" }}>
+          <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
+            <Box sx={{ display: "flex", alignItems: "flex-start", flexDirection: { xs: "column", md: "row" }, gap: { xs: 2, md: 4, lg: 8 }, mb: { xs: 4, md: 6 } }}>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 700, fontSize: { xs: "1.5rem", md: "2rem" }, color: NAVY, flexShrink: 0, width: { md: "40%" } }}>Case Studies</Typography>
+              <Typography sx={{ fontFamily: '"Sora", sans-serif', color: "#4a6070", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, pt: { md: "6px" }, flex: 1, maxWidth: { md: "60%" } }}>
+                Explore our case studies to see how we&apos;ve successfully addressed complex challenges with innovative solutions. Discover the impact of our projects on client outcomes and industry advancements.
+              </Typography>
+            </Box>
+            <Box ref={viewportRef} sx={{ overflow: "hidden", width: "100%" }}>
+              <Box sx={{ display: "flex", gap: `${CASE_GAP}px`, transition: "transform 0.5s cubic-bezier(.4,0,.2,1)", transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none" }}>
                 {caseStudies.map((cs, i) => (
-                  <Box
-                    key={i}
-                    sx={{
-                      minWidth: { xs: "100%", lg: "calc(50% - 10px)" },
-                      flexShrink: 0,
-                      display: "flex",
-                      flexDirection: { xs: "column", md: "row" },
-                      overflow: "hidden",
-                      bgcolor: "#f5f5f5",
-                      height: { xs: "auto", md: 500 }, // match screenshot
-                    }}
->
-                    <Box
-                      component="img"
-                      src={cs.image}
-                      alt={cs.title}
-                      sx={{
-                        width: { xs: "100%", md: "50%" },
-                        height: { xs: 250, md: "100%" },
-                        objectFit: "cover",
-                        display: "block",
-                        flexShrink: 0,
-                      }}
-                    />
-                      <Box
-                            sx={{
-                              width: { xs: "100%", md: "50%" },
-                              p: { xs: 3, md: 5 },
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "center",
-                              bgcolor: "#f5f5f5",
-                            }}
-                          >
-                      <Stack direction="row" flexWrap="wrap" sx={{ mb: 1.5 }}>
-                        {cs.tags.map((tag, ti) => (
-                          <Typography key={tag} variant="caption"
-                            sx={{ color: "#E8581A", fontWeight: 600, fontSize: "0.78rem" }}>
-                            {tag}{ti < cs.tags.length - 1 ? ",\u00a0" : ""}
-                          </Typography>
-                        ))}
-                      </Stack>
-                                            <Typography
-                        sx={{
-                          fontWeight: 700,
-                          color: "#1a2b3c",
-                          fontSize: {
-                            xs: "1.4rem",
-                            md: "2rem",
-                          },
-                          lineHeight: 1.25,
-                          mb: 2,
-                        }}
-                      >
-                        {cs.title}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: "#4a5568",
-                          lineHeight: 1.8,
-                          fontSize: {
-                            xs: "1rem",
-                            md: "1.15rem",
-                          },
-                          mb: 5,
-                        }}
-                      >
-                        {cs.description}
-                      </Typography>
-                      <Box sx={{
-                        display: "inline-flex", alignItems: "center", gap: 0.5, color: "#1a2b3c",
-                        fontWeight: 600, fontSize: "0.9rem", cursor: "pointer",
-                        borderBottom: "1.5px solid #1a2b3c", pb: 0.4, width: "fit-content",
-                        "&:hover": { color: "#E8581A", borderColor: "#E8581A" },
-                        transition: "color 0.2s, border-color 0.2s"
-                      }}>
+                  <Box key={i} sx={{ flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`, width: cardWidth || `calc(50% - ${CASE_GAP / 2}px)`, flexShrink: 0, display: "flex", flexDirection: { xs: "column", sm: "row" }, bgcolor: "#f5f5f5", height: { xs: "auto", sm: 480 }, overflow: "hidden" }}>
+                    <Box component="img" src={cs.image} alt={cs.title} sx={{ width: { xs: "100%", sm: "50%" }, height: { xs: 220, sm: "100%" }, objectFit: "cover", flexShrink: 0 }} />
+                    <Box sx={{ width: { xs: "100%", sm: "50%" }, bgcolor: "#f5f5f5", p: { xs: 3, sm: 4, md: 5 }, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                      <Typography sx={{ color: ACCENT, fontWeight: 600, fontSize: "0.78rem", mb: 1.5, lineHeight: 1.5 }}>{cs.tags.join(", ")}</Typography>
+                      <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: { xs: "1.25rem", sm: twoUp ? "1.35rem" : "1.6rem", md: twoUp ? "1.5rem" : "1.75rem" }, lineHeight: 1.25, mb: 2 }}>{cs.title}</Typography>
+                      <Typography sx={{ color: "#4a5568", lineHeight: 1.7, fontSize: { xs: "0.9rem", sm: "0.95rem" }, mb: 3 }}>{cs.description}</Typography>
+                      <Box component={Link} to="/CaseStudies" sx={{ display: "inline-flex", alignItems: "center", gap: 0.5, color: DARK, fontWeight: 600, fontSize: "0.88rem", textDecoration: "none", borderBottom: `1.5px solid ${DARK}`, pb: 0.4, width: "fit-content", "&:hover": { color: ACCENT, borderColor: ACCENT } }}>
                         Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
                       </Box>
                     </Box>
@@ -805,30 +435,16 @@ export default function GISDevelopment() {
                 ))}
               </Box>
             </Box>
-
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, mt: 4 }}>
               <IconButton onClick={() => setCaseSlide((p) => Math.max(0, p - 1))} disabled={caseSlide === 0}
-                sx={{
-                  bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === 0 ? "#aaa" : "#fff",
-                  "&:hover": { bgcolor: "#E8581A" }, width: 36, height: 36
-                }}>
+                sx={{ bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C", color: caseSlide === 0 ? "#aaa" : "#fff", width: 36, height: 36, "&:hover": { bgcolor: ACCENT } }}>
                 <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
               </IconButton>
-              {Array.from({ length: caseStudies.length - 1 }).map((_, i) => (
-                <Box key={i} onClick={() => setCaseSlide(i)}
-                  sx={{
-                    width: i === caseSlide ? 28 : 10, height: 10, borderRadius: 5,
-                    bgcolor: i === caseSlide ? "#E8581A" : "#ddd", cursor: "pointer", transition: "all 0.3s"
-                  }} />
+              {Array.from({ length: maxSlide + 1 }).map((_, i) => (
+                <Box key={i} onClick={() => setCaseSlide(i)} sx={{ width: i === caseSlide ? 28 : 10, height: 10, borderRadius: 5, bgcolor: i === caseSlide ? ACCENT : "#ddd", cursor: "pointer", transition: "all 0.3s" }} />
               ))}
-              <IconButton onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))}
-                disabled={caseSlide === maxSlide}
-                sx={{
-                  bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C",
-                  color: caseSlide === maxSlide ? "#aaa" : "#fff",
-                  "&:hover": { bgcolor: "#E8581A" }, width: 36, height: 36
-                }}>
+              <IconButton onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))} disabled={caseSlide === maxSlide}
+                sx={{ bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C", color: caseSlide === maxSlide ? "#aaa" : "#fff", width: 36, height: 36, "&:hover": { bgcolor: ACCENT } }}>
                 <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
               </IconButton>
             </Box>
