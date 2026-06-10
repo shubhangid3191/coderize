@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
-  Box, Container, Typography, Grid, Button, Breadcrumbs,
-  Divider, Stack, IconButton,
+  Box, Container, Typography, Button, Breadcrumbs,
+  Divider, IconButton,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -71,7 +71,7 @@ function useCountUp(target, duration = 2000, start = false) {
   return count;
 }
 
-function StatItem({ value, label }) {
+function StatItem({ value, label, showDivider }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const suffix = value.replace(/[0-9]/g, "");
@@ -85,11 +85,27 @@ function StatItem({ value, label }) {
     return () => obs.disconnect();
   }, []);
   return (
-    <Box ref={ref} sx={{ textAlign: "center", px: 2 }}>
-      <Typography sx={{ fontWeight: 800, color: "text.primary", fontSize: { xs: "2rem", md: "2.6rem" }, lineHeight: 1 }}>
-        {visible ? count : 0}{suffix}
-      </Typography>
-      <Typography sx={{ color: "text.secondary", mt: 1, fontSize: "0.9rem" }}>{label}</Typography>
+    <Box sx={{ display: "flex", alignItems: "stretch", flex: 1, minWidth: 0 }}>
+      {showDivider && (
+        <Divider
+          orientation="vertical"
+          flexItem
+          sx={{
+            display: { xs: "none", md: "block" },
+            borderColor: "#c8d4de",
+            mx: { md: 1, lg: 2 },
+            alignSelf: "stretch",
+          }}
+        />
+      )}
+      <Box ref={ref} sx={{ textAlign: "center", px: { xs: 1, md: 1.5, lg: 2 }, flex: 1, py: { xs: 2, md: 0 } }}>
+        <Typography sx={{ fontWeight: 800, color: NAVY, fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem", lg: "2.4rem" }, lineHeight: 1 }}>
+          {visible ? count : 0}{suffix}
+        </Typography>
+        <Typography sx={{ color: "#4a6070", mt: 1, fontSize: { xs: "0.78rem", md: "0.85rem" }, lineHeight: 1.4 }}>
+          {label}
+        </Typography>
+      </Box>
     </Box>
   );
 }
@@ -149,11 +165,11 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
 
 // Page data 
 const stats = [
-  { value: "10K+", label: "Properties Digitized" },
-  { value: "50K+", label: "Water Conservation Assets Plotted" },
-  { value: "10K+", label: "Acres Area Digitized" },
-  { value: "50K+", label: "Sq.Kms Mapped" },
-  { value: "100+", label: "Rasters Processed" },
+  { value: "3000K+", label: "Properties Digitized" },
+  { value: "500K+", label: "Water Conservation Assets Plotted" },
+  { value: "100K+", label: "Acres Area Digitized" },
+  { value: "2K+", label: "Sq.Kms Mapped" },
+  { value: "500+", label: "Rasters Processed" },
 ];
 
 const services = [
@@ -338,9 +354,34 @@ const caseStudies = [
 
 
 
+const CASE_GAP = 20;
+
 export default function LocationIntelligence() {
   const [caseSlide, setCaseSlide] = useState(0);
-  const maxSlide = caseStudies.length - 2;
+  const viewportRef = useRef(null);
+  const [carousel, setCarousel] = useState({ cardWidth: 0, slideStep: 0, maxSlide: caseStudies.length - 2 });
+
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      const twoUp = w >= 900;
+      const cardWidth = twoUp ? (w - CASE_GAP) / 2 : w;
+      const slideStep = cardWidth + CASE_GAP;
+      const maxSlide = twoUp ? caseStudies.length - 2 : caseStudies.length - 1;
+      setCarousel({ cardWidth, slideStep, maxSlide, twoUp });
+      setCaseSlide((prev) => Math.min(prev, maxSlide));
+    };
+
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const { cardWidth, slideStep, maxSlide, twoUp = true } = carousel;
 
   return (
     <ThemeProvider theme={theme}>
@@ -461,11 +502,13 @@ export default function LocationIntelligence() {
         </Box>
 
         {/* ── STATS  ── */}
-        <Box sx={{ py: 8, bgcolor: "#fff" }}>
+        <Box sx={{ py: { xs: 5, md: 8 }, bgcolor: "#fff" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
-              display: "flex", justifyContent: "space-between", alignItems: "center",
-              flexWrap: "wrap", gap: { xs: 4, md: 0 },
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "stretch",
+              flexWrap: { xs: "wrap", md: "nowrap" },
             }}>
               {stats.map((item, index) => (
                 <StatItem key={item.label} value={item.value} label={item.label} showDivider={index !== 0} />
@@ -546,7 +589,7 @@ export default function LocationIntelligence() {
                 fontSize: { xs: "1.5rem", md: "2rem" },
                 color: NAVY,
                 flexShrink: 0,
-                width: { md: "34%" },
+                width: { md: "40%" },
               }}>
                 Our Esteemed Clients
               </Typography>
@@ -557,7 +600,7 @@ export default function LocationIntelligence() {
                 lineHeight: 1.8,
                 pt: { md: "6px" },
                 flex: 1,
-                maxWidth: { md: "66%" },
+                maxWidth: { md: "60%" },
               }}>
                 Serving global clients across industries with tailored solutions, driving innovation and excellence in every project.
               </Typography>
@@ -681,7 +724,7 @@ export default function LocationIntelligence() {
           </Box>
         </Container>
 
-        {/* ── CASE STUDIES (layout: coderize.in location-intelligence) ── */}
+        {/* ── CASE STUDIES ── */}
         <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: "#fff" }}>
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 } }}>
             <Box sx={{
@@ -697,7 +740,7 @@ export default function LocationIntelligence() {
                 fontSize: { xs: "1.5rem", md: "2rem" },
                 color: NAVY,
                 flexShrink: 0,
-                width: { md: "34%" },
+                width: { md: "40%" },
               }}>
                 Case Studies
               </Typography>
@@ -708,7 +751,7 @@ export default function LocationIntelligence() {
                 lineHeight: 1.8,
                 pt: { md: "6px" },
                 flex: 1,
-                maxWidth: { md: "66%" },
+                maxWidth: { md: "60%" },
               }}>
                 Explore our case studies to see how we&apos;ve successfully addressed complex
                 challenges with innovative solutions. Discover the impact of our projects on
@@ -716,44 +759,80 @@ export default function LocationIntelligence() {
               </Typography>
             </Box>
 
-            <Box sx={{ overflow: "hidden" }}>
+            <Box ref={viewportRef} sx={{ overflow: "hidden", width: "100%" }}>
               <Box sx={{
-                display: "flex", gap: "20px",
+                display: "flex",
+                gap: `${CASE_GAP}px`,
                 transition: "transform 0.5s cubic-bezier(.4,0,.2,1)",
-                transform: `translateX(calc(-${caseSlide * (50 + 1.04)}%))`,
+                transform: slideStep ? `translateX(-${caseSlide * slideStep}px)` : "none",
               }}>
                 {caseStudies.map((cs, i) => (
                   <Box key={i} sx={{
-                    minWidth: { xs: "100%", lg: "calc(50% - 10px)" }, flexShrink: 0,
-                    display: "flex", flexDirection: { xs: "column", md: "row" },
-                    bgcolor: "#f5f5f5", height: { xs: "auto", md: 500 }, overflow: "hidden",
+                    flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc(50% - ${CASE_GAP / 2}px)`,
+                    width: cardWidth || `calc(50% - ${CASE_GAP / 2}px)`,
+                    flexShrink: 0,
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "row" },
+                    bgcolor: "#f5f5f5",
+                    height: { xs: "auto", sm: 480 },
+                    overflow: "hidden",
                   }}>
-                    <Box component="img" src={cs.image} alt={cs.title}
-                      sx={{ width: { xs: "100%", md: "50%" }, height: { xs: 250, md: "100%" }, objectFit: "cover", flexShrink: 0 }} />
+                    <Box
+                      component="img"
+                      src={cs.image}
+                      alt={cs.title}
+                      sx={{
+                        width: { xs: "100%", sm: "50%" },
+                        height: { xs: 220, sm: "100%" },
+                        objectFit: "cover",
+                        flexShrink: 0,
+                      }}
+                    />
                     <Box sx={{
-                      width: { xs: "100%", md: "50%" },
-                      p: { xs: 4, md: 6, lg: 7 },
-                      display: "flex", flexDirection: "column", justifyContent: "center",
+                      width: { xs: "100%", sm: "50%" },
+                      bgcolor: "#f5f5f5",
+                      p: { xs: 3, sm: 4, md: 5 },
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
                     }}>
-                      <Stack direction="row" flexWrap="wrap" sx={{ mb: 1.5 }}>
-                        {cs.tags.map((tag, ti) => (
-                          <Typography key={tag} variant="caption" sx={{ color: ACCENT, fontWeight: 600, fontSize: "0.78rem" }}>
-                            {tag}{ti < cs.tags.length - 1 ? ",\u00a0" : ""}
-                          </Typography>
-                        ))}
-                      </Stack>
-                      <Typography sx={{ fontWeight: 700, color: DARK, fontSize: { xs: "1.4rem", md: "2rem" }, lineHeight: 1.25, mb: 2 }}>
+                      <Typography sx={{ color: ACCENT, fontWeight: 600, fontSize: "0.78rem", mb: 1.5, lineHeight: 1.5 }}>
+                        {cs.tags.join(", ")}
+                      </Typography>
+                      <Typography sx={{
+                        fontWeight: 700,
+                        color: NAVY,
+                        fontSize: { xs: "1.25rem", sm: twoUp ? "1.35rem" : "1.6rem", md: twoUp ? "1.5rem" : "1.75rem" },
+                        lineHeight: 1.25,
+                        mb: 2,
+                      }}>
                         {cs.title}
                       </Typography>
-                      <Typography sx={{ color: "#4a5568", lineHeight: 1.8, fontSize: { xs: "1rem", md: "1.15rem" }, mb: 5 }}>
+                      <Typography sx={{
+                        color: "#4a5568",
+                        lineHeight: 1.7,
+                        fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                        mb: 3,
+                      }}>
                         {cs.description}
                       </Typography>
-                      <Box component={Link} to="/CaseStudies" sx={{
-                        display: "inline-flex", alignItems: "center", gap: 0.5, color: DARK,
-                        fontWeight: 600, fontSize: "0.9rem", textDecoration: "none",
-                        borderBottom: `1.5px solid ${DARK}`, pb: 0.4, width: "fit-content",
-                        "&:hover": { color: ACCENT, borderColor: ACCENT },
-                      }}>
+                      <Box
+                        component={Link}
+                        to="/CaseStudies"
+                        sx={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 0.5,
+                          color: DARK,
+                          fontWeight: 600,
+                          fontSize: "0.88rem",
+                          textDecoration: "none",
+                          borderBottom: `1.5px solid ${DARK}`,
+                          pb: 0.4,
+                          width: "fit-content",
+                          "&:hover": { color: ACCENT, borderColor: ACCENT },
+                        }}
+                      >
                         Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
                       </Box>
                     </Box>
@@ -763,16 +842,44 @@ export default function LocationIntelligence() {
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, mt: 4 }}>
-              <IconButton onClick={() => setCaseSlide((p) => Math.max(0, p - 1))} disabled={caseSlide === 0}
-                sx={{ bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C", color: caseSlide === 0 ? "#aaa" : "#fff", width: 36, height: 36, "&:hover": { bgcolor: ACCENT } }}>
+              <IconButton
+                onClick={() => setCaseSlide((p) => Math.max(0, p - 1))}
+                disabled={caseSlide === 0}
+                sx={{
+                  bgcolor: caseSlide === 0 ? "#f0f0f0" : "#1A3A5C",
+                  color: caseSlide === 0 ? "#aaa" : "#fff",
+                  width: 36,
+                  height: 36,
+                  "&:hover": { bgcolor: ACCENT },
+                }}
+              >
                 <ArrowBackIosNewIcon sx={{ fontSize: 14 }} />
               </IconButton>
-              {Array.from({ length: caseStudies.length - 1 }).map((_, i) => (
-                <Box key={i} onClick={() => setCaseSlide(i)}
-                  sx={{ width: i === caseSlide ? 28 : 10, height: 10, borderRadius: 5, bgcolor: i === caseSlide ? ACCENT : "#ddd", cursor: "pointer", transition: "all 0.3s" }} />
+              {Array.from({ length: maxSlide + 1 }).map((_, i) => (
+                <Box
+                  key={i}
+                  onClick={() => setCaseSlide(i)}
+                  sx={{
+                    width: i === caseSlide ? 28 : 10,
+                    height: 10,
+                    borderRadius: 5,
+                    bgcolor: i === caseSlide ? ACCENT : "#ddd",
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                  }}
+                />
               ))}
-              <IconButton onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))} disabled={caseSlide === maxSlide}
-                sx={{ bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C", color: caseSlide === maxSlide ? "#aaa" : "#fff", width: 36, height: 36, "&:hover": { bgcolor: ACCENT } }}>
+              <IconButton
+                onClick={() => setCaseSlide((p) => Math.min(maxSlide, p + 1))}
+                disabled={caseSlide === maxSlide}
+                sx={{
+                  bgcolor: caseSlide === maxSlide ? "#f0f0f0" : "#1A3A5C",
+                  color: caseSlide === maxSlide ? "#aaa" : "#fff",
+                  width: 36,
+                  height: 36,
+                  "&:hover": { bgcolor: ACCENT },
+                }}
+              >
                 <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
               </IconButton>
             </Box>
