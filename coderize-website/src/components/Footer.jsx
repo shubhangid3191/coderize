@@ -37,15 +37,15 @@ const geospatialLinks = [
   { label: 'GIS Development', href: '/GISDevelopment' },
   { label: 'Location Intelligence', href: '/LocationIntelligence' },
   { label: 'Advisory', href: '/Advisory' },
-  { label: 'Technical Support', href: '#' },
-  { label: 'Drone Services', href: '#' },
+  { label: 'Technical Support', href: '/GeospatialTechnicalSupport' },
+  { label: 'Drone Services', href: '/DroneServices' },
 ];
 
 const softwareLinks = [
-  { label: 'Application Development', href: '#' },
-  { label: 'Azure Consulting', href: '#' },
-  { label: 'Advisory', href: '#' },
-  { label: 'Technical Support', href: '#' },
+  { label: 'Application Development', href: '/ApplicationDevelopment' },
+  { label: 'Azure Consulting', href: '/AzureConsulting' },
+  { label: 'Advisory', href: '/SoftwareAdvisory' },
+  { label: 'Technical Support', href: '/SoftwareTechnicalSupport' },
 ];
 
 const quickLinks = [

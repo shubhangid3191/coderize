@@ -29,6 +29,13 @@ import Maharashtra from "../pages/casestudies/Maharashtra";
 import Thane from "../pages/casestudies/Thane";
 import Agriculture from "../pages/casestudies/Agriculture";
 
+import ApplicationDevelopment from "../pages/ApplicationDevelopment";
+import GeospatialTechnicalSupport from "../pages/GeospatialTechnicalSupport";
+import SoftwareTechnicalSupport from "../pages/SoftwareTechnicalSupport";
+import AzureConsulting from "../pages/AzureConsulting";
+import SoftwareAdvisory from "../pages/SoftwareAdvisory";
+import DroneServices from "../pages/DroneServices";
+
 
 
 
@@ -67,6 +74,15 @@ export default function AppRouter() {
         <Route path="/Maharashtra" element={<Maharashtra />} />
         <Route path="/Thane" element={<Thane />} />
         <Route path="/Agriculture" element={<Agriculture />} />
+
+        <Route path="/ApplicationDevelopment" element={<ApplicationDevelopment />} />
+        <Route path="/GeospatialTechnicalSupport" element={<GeospatialTechnicalSupport />} />
+        <Route path="/SoftwareTechnicalSupport" element={<SoftwareTechnicalSupport />} />
+        <Route path="/AzureConsulting" element={<AzureConsulting />} />
+        <Route path="/SoftwareAdvisory" element={<SoftwareAdvisory />} />
+        <Route path="/DroneServices" element={<DroneServices />} />
+        
+        
         
         
       </Routes>
