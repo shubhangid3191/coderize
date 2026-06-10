@@ -20,6 +20,8 @@ import AboutCompany from "../pages/AboutUs/AboutCompany";
 import GISDevelopment from "../pages/GISDevelopment";
 
 
+
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -44,7 +46,7 @@ export default function AppRouter() {
         <Route path="/TermsConditions" element={<TermsConditions/>} />
         <Route path="/AboutCompany" element={<AboutCompany />} />
         <Route path="/GISDevelopment" element={<GISDevelopment />} />
-
+        
       </Routes>
     </BrowserRouter>
   );
