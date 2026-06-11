@@ -125,6 +125,7 @@ const CTAButton = ({ children, href }) => (
 );
 
 export default function Footer() {
+  
   return (
     <Box sx={{ bgcolor: DARK_BG, color: 'white' }}>
       <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>

@@ -36,6 +36,7 @@ import AzureConsulting from "../pages/AzureConsulting";
 import SoftwareAdvisory from "../pages/SoftwareAdvisory";
 import DroneServices from "../pages/DroneServices";
 import JobDetailPage from "../pages/JobDetailPage";
+import GeoSphereValueProposition from "../pages/product/GeoSp";
 
 
 
@@ -83,7 +84,7 @@ export default function AppRouter() {
         <Route path="/SoftwareAdvisory" element={<SoftwareAdvisory />} />
         <Route path="/DroneServices" element={<DroneServices />} />
         <Route path="/JobDetailPage" element={<JobDetailPage />} />
-        
+        <Route path="/GeoSp" element={<GeoSphereValueProposition />} />
         
         
         

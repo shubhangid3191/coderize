@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -118,6 +119,7 @@ function HeroSection() {
 }
 
 function FlipCard({ product }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -228,6 +230,7 @@ function FlipCard({ product }) {
 
             <Button
               variant="contained"
+              onClick={() => navigate("/GeoSp")}
               sx={{
                 bgcolor: "#ff6b1a",
                 textTransform: "none",
@@ -253,6 +256,7 @@ function FlipCard({ product }) {
 }
 
 export default function GeoSpherePage() {
+  
   return (
     <Box sx={{ bgcolor: "#fff", minHeight: "100vh" }}>
       <Navbar transparentHero={true} />
