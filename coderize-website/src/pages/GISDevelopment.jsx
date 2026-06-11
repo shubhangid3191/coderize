@@ -12,6 +12,7 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ScheduleForm from "./ScheduleForm";
 import gisIntro from "../assets/gis-developement.jpg";
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
@@ -34,6 +35,7 @@ import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg"
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
 import GISDevelopmentScheduleCall from "../assets/GISDevelopmentScheduleCall.jpg";
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
+
 
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
@@ -350,12 +352,12 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management", path:"/synlog", },
-  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" , path:"/Solapur" },
-  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" , path:"/Ministry" },
-  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" , path:"/Maharashtra" },
-  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" , path:"/Thane" },
-  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" , path:"/Agriculture" },
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management", path: "/synlog", },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations", path: "/Solapur" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization", path: "/Ministry" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring", path: "/Maharashtra" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management", path: "/Thane" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management", path: "/Agriculture" },
 ];
 
 export default function GISDevelopment() {
@@ -376,6 +378,7 @@ export default function GISDevelopment() {
     goTo,
   } = useCaseStudyCarousel(caseStudies);
 
+  const [scheduleOpen, setScheduleOpen] = useState(false);
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -661,8 +664,8 @@ export default function GISDevelopment() {
               Let&apos;s discuss your requirements
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
+              variant="contained"
               variant="contained"
               size="large"
               sx={{
@@ -884,6 +887,10 @@ export default function GISDevelopment() {
         </Box>
 
       </Box>
+      <ScheduleForm
+        open={scheduleOpen}
+        onClose={() => setScheduleOpen(false)}
+      />
     </ThemeProvider>
   );
 }

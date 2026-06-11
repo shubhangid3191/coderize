@@ -4,6 +4,7 @@ import {
   Box, Container, Typography, Button, Breadcrumbs,
   Divider, IconButton,
 } from "@mui/material";
+import ScheduleForm from "./ScheduleForm";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SearchIcon from "@mui/icons-material/Search";
@@ -444,7 +445,7 @@ export default function SoftwareAdvisory() {
     goPrev,
     goTo,
   } = useCaseStudyCarousel(caseStudies);
-
+  const [scheduleOpen, setScheduleOpen] = useState(false); 
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -739,8 +740,7 @@ export default function SoftwareAdvisory() {
               Get tailored guidance for your business
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
               variant="contained"
               size="large"
               sx={{
@@ -962,6 +962,10 @@ export default function SoftwareAdvisory() {
         </Box>
 
       </Box>
+      <ScheduleForm
+              open={scheduleOpen}
+              onClose={() => setScheduleOpen(false)}
+            />
     </ThemeProvider>
   );
 }

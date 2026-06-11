@@ -4,6 +4,7 @@ import {
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "react-router-dom";
 import logo1 from "../../assets/logo-1.jpg";
 import logo2 from "../../assets/logo-2.jpg";
 import logo3 from "../../assets/logo-3.jpg";
@@ -39,10 +40,10 @@ const BLUE = "#1a3c5e";
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 const solutionCards = [
-  { title: "Application Development", desc: "Our agile, cross-functional teams create scalable web and mobile applications that deliver...", img: soft1 },
-  { title: "Azure Consulting", desc: "We provide expert Azure consulting and reengineering to drive scalable, innovative cloud solutions...", img: soft2 },
-  { title: "Advisory", desc: "We offer expert software advisory services to help businesses make informed technology decisions...", img: soft3 },
-  { title: "Technical Support", desc: "We provide comprehensive software technical support to ensure seamless operation and quick resolution...", img: soft4 },
+  { title: "Application Development", desc: "Our agile, cross-functional teams create scalable web and mobile applications that deliver...", img: soft1 ,path:"/ApplicationDevelopment"},
+  { title: "Azure Consulting", desc: "We provide expert Azure consulting and reengineering to drive scalable, innovative cloud solutions...", img: soft2 ,path:"/AzureConsulting"},
+  { title: "Advisory", desc: "We offer expert software advisory services to help businesses make informed technology decisions...", img: soft3 ,path:"/SoftwareAdvisory"},
+  { title: "Technical Support", desc: "We provide comprehensive software technical support to ensure seamless operation and quick resolution...", img: soft4 ,path:"/SoftwareTechnicalSupport" },
 ];
 
 const testimonials = [
@@ -110,7 +111,7 @@ function SolutionInAction() {
               <Box sx={{ position: "absolute", bottom: 0, left: 0, right: 0, p: 3 }}>
                 <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "1.3rem", fontFamily: "'Segoe UI', sans-serif", mb: 1 }}>{card.title}</Typography>
                 <Typography sx={{ color: "rgba(255,255,255,0.88)", fontSize: "0.88rem", lineHeight: 1.7, fontFamily: "'Segoe UI', sans-serif", mb: 2 }}>{card.desc}</Typography>
-                <Button variant="contained" sx={{ bgcolor: ACCENT, color: "#fff", fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.88rem", textTransform: "none", borderRadius: "6px", px: 3, py: "8px", "&:hover": { bgcolor: "#d4541f" } }}>Read More</Button>
+                <Button  component={Link}   to={card.path} variant="contained" sx={{ bgcolor: ACCENT, color: "#fff", fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.88rem", textTransform: "none", borderRadius: "6px", px: 3, py: "8px", "&:hover": { bgcolor: "#d4541f" } }}>Read More</Button>
               </Box>
             </Box>
           ))}
@@ -244,15 +245,15 @@ function ContactSection() {
 // ─── ALL SERVICES DATA (8 total, 3 per page) ──────────────────────────────────
 
 const allServices = [
-  { title: "Location Intelligence", desc: "Empower decision-making with our cutting-edge geospatial intelligence solutions, offering superior analytics and actionable data.", img: goesslide1 },
-  { title: "Geospatial Advisory", desc: "Leverage our geospatial consultation to refine your strategy, maximize efficiency, and drive impactful decisions with precision insights.", img: goesslide2 },
-  { title: "Geospatial Technical Support", desc: "Overcome geospatial challenges with our expert support, ensuring seamless operations and enhanced efficiency.", img: goesslide3 },
-  { title: "GIS Development", desc: "We tailor geospatial applications with Esri and open-source technology to add measurable value to your business.", img: goesslide4 },
-  { title: "Remote Sensing", desc: "We leverage satellite imagery and aerial data to provide actionable geospatial insights for smarter decisions.", img: goesslide5 },
-  { title: "Spatial Data Management", desc: "Efficiently manage, store, and retrieve large-scale spatial datasets with our robust geospatial data solutions.", img: goesslide6 },
-  { title: "Web GIS Solutions", desc: "Deploy interactive, browser-based mapping applications that make geospatial data accessible to all stakeholders.", img: goesslide8 },
-  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide8 },
-  { title: "Field Data Collection", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide9 },
+  { title: "Location Intelligence", desc: "Empower decision-making with our cutting-edge geospatial intelligence solutions, offering superior analytics and actionable data.", img: goesslide1 , path:"/LocationIntelligence" },
+  { title: "Geospatial Advisory", desc: "Leverage our geospatial consultation to refine your strategy, maximize efficiency, and drive impactful decisions with precision insights.", img: goesslide2 ,path:"/Advisory" },
+  { title: "Geospatial Technical Support", desc: "Overcome geospatial challenges with our expert support, ensuring seamless operations and enhanced efficiency.", img: goesslide3 , path:"/GeospatialTechnicalSupport"},
+  { title: "GIS Development", desc: "We tailor geospatial applications with Esri and open-source technology to add measurable value to your business.", img: goesslide4 ,path:"/GISDevelopment" },
+  { title: "Drone Service", desc: "We leverage satellite imagery and aerial data to provide actionable geospatial insights for smarter decisions.", img: goesslide5 , path:"/DroneServices" },
+  { title: "Application Development", desc: "Efficiently manage, store, and retrieve large-scale spatial datasets with our robust geospatial data solutions.", img: goesslide6 ,path:"/ApplicationDevelopment"},
+  { title: "Azure Consulting", desc: "Deploy interactive, browser-based mapping applications that make geospatial data accessible to all stakeholders.", img: goesslide6 ,path:"/AzureConsulting" },
+  { title: "Software Advisory", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide8 ,path:"/SoftwareAdvisory"},
+  { title: "Software Technical Support", desc: "Streamline on-the-ground data gathering with mobile GIS tools that sync seamlessly with your enterprise systems.", img: goesslide9 ,path:"/SoftwareTechnicalSupport"},
 ];
 
 const CARDS_PER_PAGE = 3;
@@ -266,7 +267,7 @@ function ServiceCard({ svc }) {
       </Box>
       <Typography sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: "1.15rem", color: ACCENT, mb: 1.5 }}>{svc.title}</Typography>
       <Typography sx={{ color: "#4a6070", fontSize: "0.9rem", lineHeight: 1.75, fontFamily: "'Segoe UI', sans-serif", mb: 2 }}>{svc.desc}</Typography>
-      <Button endIcon={<ArrowForwardIcon sx={{ fontSize: "14px !important" }} />} sx={{ color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.88rem", textTransform: "none", borderBottom: `1.5px solid ${ACCENT}`, borderRadius: 0, pb: "2px", px: 0, minWidth: 0, "&:hover": { bgcolor: "transparent", color: ACCENT } }}>
+      <Button  component={Link}  to={svc.path} endIcon={<ArrowForwardIcon sx={{ fontSize: "14px !important" }} />} sx={{ color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600, fontSize: "0.88rem", textTransform: "none", borderBottom: `1.5px solid ${ACCENT}`, borderRadius: 0, pb: "2px", px: 0, minWidth: 0, "&:hover": { bgcolor: "transparent", color: ACCENT } }}>
         Read More
       </Button>
     </Box>

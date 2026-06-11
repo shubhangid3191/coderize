@@ -4,6 +4,7 @@ import {
   Box, Container, Typography, Button, Breadcrumbs,
   Divider, IconButton,
 } from "@mui/material";
+import ScheduleForm from "./ScheduleForm";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import MapIcon from "@mui/icons-material/Map";
@@ -398,7 +399,7 @@ export default function DroneServices() {
     goPrev,
     goTo,
   } = useCaseStudyCarousel(caseStudies);
-
+  const [scheduleOpen, setScheduleOpen] = useState(false); 
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -693,8 +694,7 @@ export default function DroneServices() {
               Step into the future of Surveying
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
               variant="contained"
               size="large"
               sx={{
@@ -916,6 +916,10 @@ export default function DroneServices() {
         </Box>
 
       </Box>
+      <ScheduleForm
+              open={scheduleOpen}
+              onClose={() => setScheduleOpen(false)}
+            />
     </ThemeProvider>
   );
 }

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   Box, Container, Typography, Button, Breadcrumbs,
   IconButton,
 } from "@mui/material";
+import ScheduleForm from "./ScheduleForm";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -306,7 +308,7 @@ export default function AzureConsulting() {
     goPrev,
     goTo,
   } = useCaseStudyCarousel(caseStudies);
-
+  const [scheduleOpen, setScheduleOpen] = useState(false); 
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -585,8 +587,7 @@ export default function AzureConsulting() {
               Optimize your Azure strategy with us
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
               variant="contained"
               size="large"
               sx={{
@@ -808,6 +809,10 @@ export default function AzureConsulting() {
         </Box>
 
       </Box>
+      <ScheduleForm
+              open={scheduleOpen}
+              onClose={() => setScheduleOpen(false)}
+            />
     </ThemeProvider>
   );
 }

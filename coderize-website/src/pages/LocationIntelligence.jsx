@@ -4,6 +4,7 @@ import {
   Box, Container, Typography, Button, Breadcrumbs,
   Divider, IconButton,
 } from "@mui/material";
+import ScheduleForm from "./ScheduleForm";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import MapIcon from "@mui/icons-material/Map";
@@ -389,7 +390,7 @@ export default function LocationIntelligence() {
     goPrev,
     goTo,
   } = useCaseStudyCarousel(caseStudies);
-
+  const [scheduleOpen, setScheduleOpen] = useState(false); 
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -676,8 +677,7 @@ export default function LocationIntelligence() {
               Share Your Business Goals With Us
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
               variant="contained"
               size="large"
               sx={{
@@ -899,6 +899,10 @@ export default function LocationIntelligence() {
         </Box>
 
       </Box>
+      <ScheduleForm
+              open={scheduleOpen}
+              onClose={() => setScheduleOpen(false)}
+            />
     </ThemeProvider>
   );
 }

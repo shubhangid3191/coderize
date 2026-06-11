@@ -35,6 +35,7 @@ import SoftwareTechnicalSupport from "../pages/SoftwareTechnicalSupport";
 import AzureConsulting from "../pages/AzureConsulting";
 import SoftwareAdvisory from "../pages/SoftwareAdvisory";
 import DroneServices from "../pages/DroneServices";
+import JobDetailPage from "../pages/JobDetailPage";
 
 
 
@@ -81,6 +82,7 @@ export default function AppRouter() {
         <Route path="/AzureConsulting" element={<AzureConsulting />} />
         <Route path="/SoftwareAdvisory" element={<SoftwareAdvisory />} />
         <Route path="/DroneServices" element={<DroneServices />} />
+        <Route path="/JobDetailPage" element={<JobDetailPage />} />
         
         
         

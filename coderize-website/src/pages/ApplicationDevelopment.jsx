@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   Box, Container, Typography, Button, Breadcrumbs,
   IconButton,
 } from "@mui/material";
+import ScheduleForm from "./ScheduleForm";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
@@ -300,7 +302,7 @@ export default function ApplicationDevelopment() {
     goPrev,
     goTo,
   } = useCaseStudyCarousel(caseStudies);
-
+  const [scheduleOpen, setScheduleOpen] = useState(false); 
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -579,8 +581,7 @@ export default function ApplicationDevelopment() {
               Partner with us for cutting-edge app development
             </Typography>
             <Button
-              component={Link}
-              to="/Contact"
+              onClick={() => setScheduleOpen(true)}
               variant="contained"
               size="large"
               sx={{
@@ -802,6 +803,10 @@ export default function ApplicationDevelopment() {
         </Box>
 
       </Box>
+      <ScheduleForm
+              open={scheduleOpen}
+              onClose={() => setScheduleOpen(false)}
+            />
     </ThemeProvider>
   );
 }
