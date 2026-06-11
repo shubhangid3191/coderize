@@ -5,13 +5,13 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+// ✅ Using picsum placeholders — replace with your actual imports once files are confirmed
+const careerImg1 = "https://picsum.photos/seed/career1/600/800";
+const careerImg2 = "https://picsum.photos/seed/career2/600/400";
+const careergrowth = "https://picsum.photos/seed/growth/600/400";
+
 const ACCENT = "#e8622a";
 const DARK = "#0d1b2a";
-
-// ── Replaced local imports with reliable Unsplash URLs ──
-const careerImg1 = "https://coderize.in/wp-content/uploads/2024/09/career-img1.jpg";
-const careerImg2 = "https://coderize.in/wp-content/uploads/2024/09/career-img2.jpg";
-const careerGrowth = "https://coderize.in/wp-content/uploads/2024/09/career-growth.jpg";
 
 const jobListings = [
   { title: "Python Developer Intern", desc: "We are looking for a Python Developer Intern to join our team" },
@@ -35,7 +35,7 @@ const testimonials = [
   },
   {
     name: "Swapna Bhide", role: "Project Manager",
-    text: "CodeRize Technologies fosters a supportive and collaborative work environment where we get the opportunity to focus on what we're passionate about and excel in our core interests. The culture here encourages continuous learning, with colleagues who are always ready to help. It's an ideal place to grow both personally and professionally through meaningful experiences.",
+    text: "CodeRize Technologies fosters a supportive and collaborative work environment where we get the opportunity to focus on what we're passionate about and excel in our core interests. The culture here encourages continuous learning, with colleagues who are always ready to help.",
   },
   {
     name: "Sanket Lodhe", role: "Software Engineer Intern",
@@ -98,8 +98,11 @@ function TickerBar() {
   const doubled = [...tickerTags, ...tickerTags];
   return (
     <Box sx={{
-      overflow: "hidden", bgcolor: "#fff",
-      borderTop: "1px solid #e8edf2", borderBottom: "1px solid #e8edf2", py: "14px",
+      overflow: "hidden",
+      bgcolor: "#fff",
+      borderTop: "1px solid #e8edf2",
+      borderBottom: "1px solid #e8edf2",
+      py: "14px",
     }}>
       <style>{`
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -123,7 +126,7 @@ function TickerBar() {
 }
 
 function TestimonialSlider() {
-  const [idx, setIdx] = useState(2);
+  const [idx, setIdx] = useState(0);
   const t = testimonials[idx];
   const prev = () => setIdx((i) => (i - 1 + testimonials.length) % testimonials.length);
   const next = () => setIdx((i) => (i + 1) % testimonials.length);
@@ -176,51 +179,54 @@ function TestimonialSlider() {
   );
 }
 
-// ── Hero image collage — matches the screenshot layout exactly ──
+// ✅ Only ONE HeroImages function — clean, no duplicate
 function HeroImages() {
-  const imgStyle = { width: "100%", height: "100%", objectFit: "cover", display: "block" };
-
   return (
     <Box sx={{
       position: "relative",
       width: "100%",
-      height: { xs: 320, sm: 400, md: 420 },
+      height: { xs: 340, sm: 420, md: 480 },
     }}>
-      {/* TOP-LEFT: woman at monitor */}
+
+      {/* TOP-LEFT */}
       <Box sx={{
         position: "absolute",
         top: 0, left: 0,
-        width: { xs: "56%", md: "54%" },
-        height: { xs: "55%", md: "57%" },
+        width: "52%", height: "52%",
         borderRadius: "10px", overflow: "hidden",
-        zIndex: 1, boxShadow: "0 4px 18px rgba(0,0,0,0.13)",
+        zIndex: 2, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
       }}>
-        <Box component="img" src={careerImg2} alt="Team at work" sx={imgStyle} />
+        <Box component="img" src={careerImg2} alt="Team at work"
+          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
       </Box>
 
-      {/* RIGHT TALL: man with laptop */}
+      {/* BOTTOM-LEFT */}
       <Box sx={{
         position: "absolute",
-        top: { xs: "8%", md: "6%" }, right: 0,
-        width: { xs: "48%", md: "49%" },
-        height: { xs: "88%", md: "92%" },
+        bottom: 0, left: "5%",
+        width: "48%", height: "46%",
         borderRadius: "10px", overflow: "hidden",
-        zIndex: 3, boxShadow: "0 6px 24px rgba(0,0,0,0.16)",
+        zIndex: 3, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
       }}>
-        <Box component="img" src={careerImg1} alt="Career growth" sx={imgStyle} />
+        <Box component="img" src={careergrowth} alt="Professional growth"
+          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
       </Box>
 
-      {/* BOTTOM-LEFT: growth/stairs */}
+      {/* RIGHT TALL */}
       <Box sx={{
         position: "absolute",
-        bottom: 0, left: { xs: "4%", md: "3%" },
-        width: { xs: "52%", md: "50%" },
-        height: { xs: "42%", md: "42%" },
+        top: "5%", right: 0,
+        width: "50%", height: "93%",
         borderRadius: "10px", overflow: "hidden",
-        zIndex: 2, boxShadow: "0 4px 18px rgba(0,0,0,0.13)",
+        zIndex: 4, boxShadow: "0 6px 28px rgba(0,0,0,0.18)",
       }}>
-        <Box component="img" src={careerGrowth} alt="Professional growth" sx={imgStyle} />
+        <Box component="img" src={careerImg1} alt="Career growth"
+          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
       </Box>
+
     </Box>
   );
 }
@@ -232,7 +238,8 @@ export default function CareerPage() {
       {/* ── HERO ── */}
       <Box sx={{
         background: "linear-gradient(160deg, #f9ede6 0%, #f5e0d3 30%, #eeddd8 55%, #e8dbd8 75%, #e0dce0 100%)",
-        pt: { xs: 5, md: "56px" }, overflow: "hidden",
+        pt: { xs: 5, md: "56px" },
+        overflow: "hidden",
       }}>
         <Container maxWidth="lg" sx={{ pb: { xs: 6, md: "64px" } }}>
           <Typography sx={{ fontSize: "0.82rem", color: "#6a8090", mb: 4, fontFamily: "'Segoe UI', sans-serif" }}>

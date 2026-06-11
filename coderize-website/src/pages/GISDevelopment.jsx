@@ -350,12 +350,12 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
-  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
-  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
-  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
-  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management", path:"/synlog", },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" , path:"/Solapur" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" , path:"/Ministry" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" , path:"/Maharashtra" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" , path:"/Thane" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" , path:"/Agriculture" },
 ];
 
 export default function GISDevelopment() {
@@ -817,7 +817,7 @@ export default function GISDevelopment() {
                       </Typography>
                       <Box
                         component={Link}
-                        to="/CaseStudies"
+                        to={cs.path}
                         sx={{
                           display: "inline-flex",
                           alignItems: "center",
