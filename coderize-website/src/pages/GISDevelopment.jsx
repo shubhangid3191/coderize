@@ -32,7 +32,7 @@ import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg"
 import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
-import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
+import GISDevelopmentScheduleCall from "../assets/GISDevelopmentScheduleCall.jpg";
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
 
 const ACCENT = "#E8581A";
@@ -639,7 +639,7 @@ export default function GISDevelopment() {
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src={LocationIntelligenceScheduleCall}
+            src={GISDevelopmentScheduleCall}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",

@@ -11,7 +11,7 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import locationIntro from "../assets/location-intelligence-1.jpg";
+
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -31,8 +31,12 @@ import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg"
 import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
-import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
+import ApplicationIntro from "../assets/ApplicationIntro.jpg";
+import ApplicationSchedule from "../assets/ApplicationSchedule.jpg";
+import softwarehero from "../assets/softwarehero.jpg";
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
+
+
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -269,13 +273,12 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
-  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
-  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
-  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
-  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
-
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management", path:"/synlog", },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" , path:"/Solapur" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" , path:"/Ministry" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" , path:"/Maharashtra" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" , path:"/Thane" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" , path:"/Agriculture" },
 ];
 
 
@@ -318,10 +321,10 @@ export default function ApplicationDevelopment() {
         }}>
           <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
             <Box component="img"
-              src="https://coderize.in/wp-content/uploads/2024/09/geospatial-service-title.jpg"
+              src={softwarehero}
               alt="Application Development"
               sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-            <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(10,25,41,0.85), rgba(10,25,41,0.85))" }} />
+            <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(rgba(10,25,41,0.5), rgba(10,25,41,0.5))" }} />
           </Box>
           <Container maxWidth="xl" sx={{
             position: "relative",
@@ -382,7 +385,7 @@ export default function ApplicationDevelopment() {
                 >
                   <Box
                     component="img"
-                    src={locationIntro}
+                    src={ApplicationIntro}
                     alt="Application Development"
                     sx={{
                       width: "100%",
@@ -554,7 +557,7 @@ export default function ApplicationDevelopment() {
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src={LocationIntelligenceScheduleCall}
+            src={ApplicationSchedule}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -732,7 +735,7 @@ export default function ApplicationDevelopment() {
                       </Typography>
                       <Box
                         component={Link}
-                        to="/CaseStudies"
+                        to={cs.path}
                         sx={{
                           display: "inline-flex",
                           alignItems: "center",

@@ -14,7 +14,7 @@ import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import locationIntro from "../assets/location-intelligence-1.jpg";
+
 import logo1 from "../assets/logo-1.jpg";
 import logo2 from "../assets/logo-2.jpg";
 import logo3 from "../assets/logo-3.jpg";
@@ -34,8 +34,12 @@ import locationintelligencecase3 from "../assets/locationintelligencecase3.jpeg"
 import locationintelligencecase4 from "../assets/locationintelligencecase4.jpeg";
 import locationintelligencecase5 from "../assets/locationintelligencecase5.jpeg";
 import locationintelligencecase6 from "../assets/locationintelligencecase6.jpeg";
-import LocationIntelligenceScheduleCall from "../assets/LocationIntelligenceScheduleCall.jpg";
+
 import { useCaseStudyCarousel } from "../hooks/useCaseStudyCarousel";
+import GeoTechnicalIntro from "../assets/GeoTechnicalIntro.jpg";
+import GeoTechnicalSchedule from "../assets/GeoTechnicalSchedule.jpg";
+
+
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
 const DARK = "#1a2b3c";
@@ -184,10 +188,10 @@ function TechMarqueeRow({ items, direction = "left", speed = 32 }) {
 
 // Page data 
 const stats = [
-  { value: "200+", label: "Clients Served" },
-  { value: "500+", label: "Projects Completed" },
-  { value: "50+", label: "Industries Served" },
-  { value: "100K+", label: "Hours Logged" },
+  { value: "20+", label: "Clients Served" },
+  { value: "20+", label: "Projects Completed" },
+  { value: "5+", label: "Industries Served" },
+  { value: "10000", label: "Hours Logged" },
 ];
 
 const services = [
@@ -368,13 +372,12 @@ const techRow3 = [
 ];
 
 const caseStudies = [
-  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management" },
-  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" },
-  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" },
-  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" },
-  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" },
-  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" },
-
+  { image: locationintelligencecase1, tags: ["Agriculture", "Geospatial", "Malaysia", "Private Sector"], title: "Synlog", description: "Automated Satellite Processing for Precision Monitoring of Palm Tree Estate Management", path:"/synlog", },
+  { image: locationintelligencecase2, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Solapur Municipal Corporation", description: "Customized Survey Solutions for Optimizing Water Billing Operations" , path:"/Solapur" },
+  { image: locationintelligencecase3, tags: ["Geospatial", "India", "Public Sector", "Utility"], title: "Ministry of Jalshakti, India", description: "Advanced Geoportal for Real-Time Water Resource Management and Data Visualization" , path:"/Ministry" },
+  { image: locationintelligencecase4, tags: ["Education", "Geospatial", "India", "Public Sector"], title: "Maharashtra Knowledge Corporation Ltd.", description: "WMS Service Development for Forest Encroachment Detection and Monitoring" , path:"/Maharashtra" },
+  { image: locationintelligencecase5, tags: ["Forestry", "Geospatial", "India", "Public Sector"], title: "Thane Forest Dept., Maharashtra", description: "Digitizing Forest Stock from Handwritten Maps for Enhanced Geospatial Data Management" , path:"/Thane" },
+  { image: locationintelligencecase6, tags: ["Agriculture", "Geospatial", "India", "Public Sector"], title: "Agriculture Dept., Maharashtra", description: "GIS-Based Mobile and Web Solutions for Scalable Agricultural Training and Management" , path:"/Agriculture" },
 ];
 
 
@@ -481,7 +484,7 @@ export default function GeospatialTechnicalSupport() {
                 >
                   <Box
                     component="img"
-                    src={locationIntro}
+                    src={GeoTechnicalIntro}
                     alt="Technical Support"
                     sx={{
                       width: "100%",
@@ -669,7 +672,7 @@ export default function GeospatialTechnicalSupport() {
           display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"
         }}>
           <Box component="img"
-            src={LocationIntelligenceScheduleCall}
+            src={GeoTechnicalSchedule}
             alt="CTA background"
             sx={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -847,7 +850,7 @@ export default function GeospatialTechnicalSupport() {
                       </Typography>
                       <Box
                         component={Link}
-                        to="/CaseStudies"
+                        to={cs.path}
                         sx={{
                           display: "inline-flex",
                           alignItems: "center",
