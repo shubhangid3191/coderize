@@ -37,11 +37,10 @@ import SoftwareAdvisory from "../pages/SoftwareAdvisory";
 import DroneServices from "../pages/DroneServices";
 import JobDetailPage from "../pages/JobDetailPage";
 import GeoSphereValueProposition from "../pages/product/GeoSp";
-
-
-
-
-
+import Blog1 from "../pages/Blog1";
+import Blog2 from "../pages/Blog2";
+import Blog3 from "../pages/Blog3";
+import Blog4 from "../pages/Blog4";
 
 export default function AppRouter() {
   return (
@@ -49,26 +48,29 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-         {/* Career Route */}
-        <Route path="/career" element={<CareerPage/>} />
+        {/* Career Route */}
+        <Route path="/career" element={<CareerPage />} />
         <Route path="/geospatial" element={<GeospatialPage />} />
         <Route path="/Software" element={<SoftwarePage />} />
-        <Route path="/Geoset" element={<GeoSetPage/>} />
-        <Route path="/GeoSphere" element={<GeoSpherePage/>} />
-        <Route path="/GeoScan" element={<GeoScanPage/>} />
-        <Route path="/GeoFlow" element={<GeoFlowPage/>} />
-        <Route path="/Industries" element={<IndustriesPage/>} />
-        <Route path="/Blogs" element={<BlogsPage/>} />
-        <Route path="/CaseStudies" element={<CaseStudiesPage/>} />
-        <Route path="/Contact" element={<ContactPage/>} />
-        <Route path="/CodeOfConduct" element={<CodeOfConduct/>} />
-        <Route path="/Leadership" element={<Leadership/>} />
-        <Route path="/PrivacyPolicy" element={<PrivacyPolicy/>} />
-        <Route path="/TermsConditions" element={<TermsConditions/>} />
+        <Route path="/Geoset" element={<GeoSetPage />} />
+        <Route path="/GeoSphere" element={<GeoSpherePage />} />
+        <Route path="/GeoScan" element={<GeoScanPage />} />
+        <Route path="/GeoFlow" element={<GeoFlowPage />} />
+        <Route path="/Industries" element={<IndustriesPage />} />
+        <Route path="/Blogs" element={<BlogsPage />} />
+        <Route path="/CaseStudies" element={<CaseStudiesPage />} />
+        <Route path="/Contact" element={<ContactPage />} />
+        <Route path="/CodeOfConduct" element={<CodeOfConduct />} />
+        <Route path="/Leadership" element={<Leadership />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/TermsConditions" element={<TermsConditions />} />
         <Route path="/AboutCompany" element={<AboutCompany />} />
         <Route path="/GISDevelopment" element={<GISDevelopment />} />
-        
-        <Route path="/LocationIntelligence" element={<LocationIntelligence />} />
+
+        <Route
+          path="/LocationIntelligence"
+          element={<LocationIntelligence />}
+        />
         <Route path="/Advisory" element={<Advisory />} />
         <Route path="/Synlog" element={<Synlog />} />
         <Route path="/Solapur" element={<Solapur />} />
@@ -77,17 +79,27 @@ export default function AppRouter() {
         <Route path="/Thane" element={<Thane />} />
         <Route path="/Agriculture" element={<Agriculture />} />
 
-        <Route path="/ApplicationDevelopment" element={<ApplicationDevelopment />} />
-        <Route path="/GeospatialTechnicalSupport" element={<GeospatialTechnicalSupport />} />
-        <Route path="/SoftwareTechnicalSupport" element={<SoftwareTechnicalSupport />} />
+        <Route
+          path="/ApplicationDevelopment"
+          element={<ApplicationDevelopment />}
+        />
+        <Route
+          path="/GeospatialTechnicalSupport"
+          element={<GeospatialTechnicalSupport />}
+        />
+        <Route
+          path="/SoftwareTechnicalSupport"
+          element={<SoftwareTechnicalSupport />}
+        />
         <Route path="/AzureConsulting" element={<AzureConsulting />} />
         <Route path="/SoftwareAdvisory" element={<SoftwareAdvisory />} />
-        <Route path="/DroneServices" element={<DroneServices />} />
+        <Route path="/drone-services" element={<DroneServices />} />
         <Route path="/JobDetailPage" element={<JobDetailPage />} />
         <Route path="/GeoSp" element={<GeoSphereValueProposition />} />
-        
-        
-        
+        <Route path="/Blog1" element={<Blog1 />} />
+        <Route path="/Blog2" element={<Blog2 />} />
+        <Route path="/Blog3" element={<Blog3 />} />
+        <Route path="/Blog4" element={<Blog4 />} />
       </Routes>
     </BrowserRouter>
   );
