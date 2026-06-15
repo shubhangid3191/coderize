@@ -46,6 +46,10 @@ import GeoSet2 from "../pages/product/GeoSet2";
 import GeoFlow1 from "../pages/product/GeoFlow1";
 import GeoFlow2 from "../pages/product/GeoFlow2";
 import GeoScan2 from "../pages/product/GeoScan2";
+import GeoScan1 from "../pages/product/GeoScan1";
+import Soil from "../pages/casestudies/Soil";
+import ADepartment from "../pages/casestudies/ADepartment";
+
 
 export default function AppRouter() {
   return (
@@ -106,6 +110,9 @@ export default function AppRouter() {
         <Route path="/GeoFlow1" element={<GeoFlow1 />} />
         <Route path="/GeoFlow2" element={<GeoFlow2 />} />
         <Route path="/GeoScan2" element={<GeoScan2 />} />
+        <Route path="/GeoScan1" element={<GeoScan1 />} />
+        <Route path="/Soil" element={<Soil />} />
+        <Route path="/ADepartment" element={<ADepartment />} />
         <Route path="/Blog1" element={<Blog1 />} />
         <Route path="/Blog2" element={<Blog2 />} />
         <Route path="/Blog3" element={<Blog3 />} />

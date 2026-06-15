@@ -289,7 +289,7 @@ const caseStudies = [
     title: "Soil & Water Conservation Dept., Maharashtra",
     description:
       "GIS-Driven Dashboard for Asset Optimization and Cost Reduction in Water Conservation",
-    href: "",
+    href: "/Soil",
   },
   {
     id: 8,
@@ -298,7 +298,7 @@ const caseStudies = [
     title: "Agriculture Department, Maharashtra",
     description:
       "GeoSets Collector for Post-Monsoon Crop Damage Assessment in Maharashtra",
-    href: "",
+    href: "/ADepartment",
   },
 ];
 

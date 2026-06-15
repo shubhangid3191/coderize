@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import Set1 from "../../assets/Set1.png";
 import Set2 from "../../assets/Set2.png";
 import Set3 from "../../assets/Set3.png";
@@ -393,7 +394,7 @@ export default function GeoSet1() {
             <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 600, fontSize: { xs: "1.6rem", md: "2rem" }, color: "#fff", mb: 4 }}>
               Let&apos;s Connect With Us
             </Typography>
-            <Button variant="contained" size="large" sx={{ bgcolor: ACCENT, color: "#fff", px: 5, py: 1.6, fontSize: "1rem", fontWeight: 700, borderRadius: 1, "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" }, boxShadow: "0 6px 24px rgba(232,88,26,0.45)", transition: "all 0.2s" }}>
+            <Button component={Link} to="/contact" variant="contained" size="large" sx={{ bgcolor: ACCENT, color: "#fff", px: 5, py: 1.6, fontSize: "1rem", fontWeight: 700, borderRadius: 1, "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" }, boxShadow: "0 6px 24px rgba(232,88,26,0.45)", transition: "all 0.2s" }}>
               Contact Us
             </Button>
           </Container>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import GeoFlow11 from "../../assets/GeoFlow11.png";
 import GeoFlow12 from "../../assets/GeoFlow12.png";
 import GeoFlow13 from "../../assets/GeoFlow13.png";
@@ -647,6 +648,8 @@ export default function GeoFlow2() {
               Let&apos;s Connect With Us
             </Typography>
             <Button
+              component={Link} 
+              to="/contact"
               variant="contained"
               size="large"
               sx={{

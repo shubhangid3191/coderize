@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GeoFlow11 from "../../assets/GeoFlow11.png";
-import GeoFlow12 from "../../assets/GeoFlow12.png";
-import GeoFlow13 from "../../assets/GeoFlow13.png";
-import GeoFlow14 from "../../assets/GeoFlow14.png";
-import GeoFlow15 from "../../assets/GeoFlow15.png";
+import { Link } from "react-router-dom";
+import GeoScan11 from "../../assets/GeoScan11.png";
+import GeoScan12 from "../../assets/GeoScan12.png";
+import GeoScan13 from "../../assets/GeoScan13.jpg";
+import GeoScan14 from "../../assets/GeoScan14.png";
+import GeoScan15 from "../../assets/GeoScan15.png";
 
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
@@ -127,19 +128,19 @@ const KeyFeaturesIcon = () => (
 const flipFeatures = [
   {
     icon: <KeyFeaturesIcon />,
-    title: "Workflow Management",
-    description: "Enhances business efficiency by seamlessly integrating geospatial data, optimizing processes, and facilitating informed decision-making.",
+    title: "Customizable Fields",
+    description: "A web dashboard allows customization of fields to display data that is most relevant to your needs.",
     bullets: [
-      "Process Automation",
-      "Collaboration Tools",
-      "Performance Tracking",
+      "Track Versions of Scanned Data",
+      "Assessing the quality",
+      "Add Comments, Notes",
     ],
   },
   {
     icon: <MapCreationIcon />,
-    title: "Real-Time Monitoring",
-    description: "Delivers instant data updates and insights on operational effectiveness, highlighting what is functioning well and what needs improvement.",
-    bullets: ["Instant Data Updates", "Alert Notifications", "User Interaction"],
+    title: "Data Synchronization",
+    description: "Data synchronization in a geoscanner ensures consistent, up-to-date data across devices and software instances.",
+    bullets: ["Multi source data integration", "Schedule synchronization", "Error handling & Logging"],
   },
   {
     icon: <LayerStylingIcon />,
@@ -149,21 +150,21 @@ const flipFeatures = [
   },
   {
     icon: <DataIngestionIcon />,
-    title: "Role-Based Hierarchical Access",
-    description: "It controls user permissions based on defined roles and organizational structure.",
-    bullets: ["Permission Management", "Role Inheritance", "Audit Trails"],
+    title: "Tracking",
+    description: "Fixed asset mode enables to track routine visits for efficient asset management, with real-time updates ensuring proper maintenance.",
+    bullets: ["Track routine visits and patrols", "Asset management", "Real-time updates"],
   },
   {
     icon: <WebMappingIcon />,
-    title: "Metrics & KPI Tracking",
-    description: "Performance metrics and KPIs enable tracking and evaluation of the auditing process's effectiveness and efficiency.",
-    bullets: ["Metric Definition & Configuration", "Data Collection & Aggregation", "Spatial Analytics"],
+    title: "Data Insights",
+    description: "Geoscanner Reviewer allows data editing, validation, import/export, and association of additional information for accurate geological analysis.",
+    bullets: ["Data Transformation & Connectivity", "Data Editing & Validation", "Quality Assurance"],
   },
   {
     icon: <CatalogIcon />,
-    title: "Reporting & Visualization",
-    description: "Analyzes and visualizes geospatial fluid flow data, enhancing reporting and communication of analysis results.",
-    bullets: ["Map- Based Visualization", "Data exploration & Filtering", "Dashboards & Custom reports"],
+    title: "Team Management",
+    description: "Collaboration in a geoscanner environment allows multiple users to efficiently share data and coordinate efforts.",
+    bullets: ["Multi-User Collaboration", "Data Sharing", "Efficient Coordination"],
   },
   
 ];
@@ -171,27 +172,27 @@ const flipFeatures = [
 // ─── Slideshow Data ───────────────────────────────────────────────────────
 const slides = [
   {
-    title: "WorkFlow Management",
-    bullets: ["Audit Task in Real-time","Track work progress", "Streamline Workflow"],
-    imgSrc: GeoFlow12,
+    title: "Common Gateway",
+    bullets: ["Single Gateway","Reduce Cost & Efforts", "Centralized KPI View"],
+    imgSrc: GeoScan12,
     imgAlt: "Grant Work Approvals",
   },
   {
-    title: "Real Time Data monitoring",
-    bullets: ["Valuable Insights", "Monitor Activities", "Identify Areas to Improve"],
-    imgSrc: GeoFlow13,
+    title:"Ready To Use",
+    bullets: ["Visualization Tools", "Valuable Insights", "Actionable Decicion Making"],
+    imgSrc: GeoScan13,
     imgAlt: "Beyond Auditing",
   },
   {
-    title: "Grant Work Approvals",
-    bullets: ["Allow Work Permission", "Predictive Analysis", "Enables timely insterventions"],
-    imgSrc: GeoFlow14,
+    title: "Reports & Geo Analytics",
+    bullets: ["Monitor Performances", "Generate Reports", "Better Planning"],
+    imgSrc: GeoScan14,
     imgAlt: "Spatial Monitoring",
   },
   {
-    title: "Beyond Auditing Capabilities",
-    bullets: ["Track History", "Maintain Transparency", "Data Intergrity & Reliability"],
-    imgSrc: GeoFlow15,
+    title: "Real Time",
+    bullets: ["Monitor And Track Activities", "Predict Success or Failure", "Timely Intervention"],
+    imgSrc: GeoScan15,
     imgAlt: "Collaborative Workflows",
   },
 ];
@@ -531,17 +532,17 @@ export default function GeoScan2() {
                     mb: 3,
                   }}
                 >
-                  GeoFlow Auditor
+                  GeoScan Reviewer
                 </Typography>
                 <Typography sx={{ color: "#2d3d4e", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, mb: 2 }}>
-                 Robust web dashboard that integrated GeoFlow Creator enhancing auditing processes.
+                 It is a mobile app to collect spatial data through scanning codes and real-time transmission.
                 </Typography>
         
                 <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                   {[
-                    "Real-time task auditing with GeoFlow Creator data.",
-                    "Monitors field staff and site activities in real time.",
-                    "Predicts performance and highlights areas needing attention.",
+                    "Real-time visualization and geo-analytics",
+                    "Real-time monitoring of field operations",
+                    "Enhance planning and decision-making",
                   ].map((item) => (
                     <Box
                       component="li"
@@ -573,7 +574,7 @@ export default function GeoScan2() {
               >
                 <Box
                   component="img"
-                  src={GeoFlow11}
+                  src={GeoScan11}
                   alt="GeoSphere platform"
                   sx={{ width: "100%", maxWidth: 540, height: "auto", display: "block", borderRadius: 2 }}
                 />
@@ -618,7 +619,7 @@ export default function GeoScan2() {
             position: "relative",
             py: { xs: 8, md: 10 },
             overflow: "hidden",
-            backgroundImage: `url(${GeoFlow11})`,
+            backgroundImage: `url(${GeoScan11})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -647,6 +648,8 @@ export default function GeoScan2() {
               Let&apos;s Connect With Us
             </Typography>
             <Button
+              component={Link} 
+              to="/contact"
               variant="contained"
               size="large"
               sx={{

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import valuepro1 from "../../assets/valuepro1.png";
 import valuepro2 from "../../assets/valuepro2.jpg";
 import valuepro3 from "../../assets/valuepro3.jpg";
@@ -685,6 +686,8 @@ export default function GeoSphereValueProposition() {
               Let&apos;s Connect With Us
             </Typography>
             <Button
+               component={Link} 
+               to="/contact"
               variant="contained"
               size="large"
               sx={{

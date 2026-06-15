@@ -13,6 +13,7 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -36,6 +37,7 @@ const products = [
     title: "GeoScanner",
     image:
       geosc1,
+      path:"/GeoScan1",
     description:
       "A data collection app for mobile, makes it easy to scan accurate spatial data and send it to the office in real time...",
   },
@@ -43,6 +45,7 @@ const products = [
     title: "GeoScan Reviewer",
     image:
       geosc2,
+      path:"/GeoScan2",
     description:
       "A Geo-Enabled web dashboard , makes it easy for visualization and geo-analytics for a real-time operational view...",
   },
@@ -124,6 +127,7 @@ function HeroSection() {
 }
 
 function FlipCard({ product }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -234,6 +238,7 @@ function FlipCard({ product }) {
 
             <Button
               variant="contained"
+              onClick={() => navigate(product.path)}
               sx={{
                 bgcolor: "#ff6b1a",
                 textTransform: "none",

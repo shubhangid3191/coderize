@@ -13,6 +13,7 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -36,6 +37,7 @@ const products = [
     title: "GeoFlow Creator",
     image:
       geof1,
+    path :"/GeoFlow1",
     description:
       "A data creation mobile app which makes it easy to create accurate spatial data and send it to the office in real time...",
   },
@@ -43,6 +45,7 @@ const products = [
     title: "GeoFlow Auditor",
     image:
       geof2,
+    path :"/GeoFlow2",
     description:
       "GeoFlow Auditor is a Geo-enabled web dashboard that allows to audit tasks in real-time based...",
   },
@@ -124,6 +127,7 @@ function HeroSection() {
 }
 
 function FlipCard({ product }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -234,6 +238,7 @@ function FlipCard({ product }) {
 
             <Button
               variant="contained"
+              onClick={() => navigate(product.path)}
               sx={{
                 bgcolor: "#ff6b1a",
                 textTransform: "none",

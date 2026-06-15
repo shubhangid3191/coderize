@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,6 +13,7 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -38,6 +39,7 @@ const products = [
     title: "GeoSet Collector",
     image:
       geose1,
+    path: "/GeoSet1",
     description:
       "A data collection app for Mobile, makes it easy to capture accurate spatial data and send it to the office in real time...",
   },
@@ -45,6 +47,7 @@ const products = [
     title: "GeoSet Viewer",
     image:
       geose2,
+    path: "/GeoSet2",
     description:
       "A Geo-Enabled web dashboard streamlines inter and intra-department workflows, facilitating real-time...",
   },
@@ -126,6 +129,7 @@ function HeroSection() {
 }
 
 function FlipCard({ product }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -236,6 +240,7 @@ function FlipCard({ product }) {
 
             <Button
               variant="contained"
+              onClick={() => navigate(product.path)}
               sx={{
                 bgcolor: "#ff6b1a",
                 textTransform: "none",

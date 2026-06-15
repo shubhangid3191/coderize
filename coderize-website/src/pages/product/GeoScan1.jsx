@@ -2,12 +2,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import Flow1 from "../../assets/Flow1.png";
-import Flow2 from "../../assets/Flow2.png";
-import Flow3 from "../../assets/Flow3.png";
-import Set4 from "../../assets/Set4.png";
-import Set5 from "../../assets/Set5.png";
-import Set6 from "../../assets/Set6.png";
+import GeoScan21 from "../../assets/GeoScan1.png";
+import GeoScan2 from "../../assets/GeoScan2.png";
+import GeoScan3 from "../../assets/GeoScan3.png";
+import GeoScan4 from "../../assets/GeoScan4.png";
+import GeoScan5 from "../../assets/GeoScan5.png";
+import GeoScan6 from "../../assets/GeoScan6.png";
+
 
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
@@ -113,48 +114,48 @@ const KeyFeaturesIcon = () => (
 const flipFeatures = [
   {
     icon: <KeyFeaturesIcon />,
-    title: "Spatial Data Creation",
-    description: "Creation involves drawing the GIS geometries such as points, lines, and polygons on the map.",
-    bullets: ["Precise Data", "Auto-Calculate Length/Area", "Choose your Geometry"],
+    title: "QR Scan",
+    description: "QR codes are two-dimensional barcodes that store information like text, URLs, or contacts.",
+    bullets: ["Ease of Use", "Inventory and Tracking", "Contactless Transactions"],
   },
   {
     icon: <MapCreationIcon />,
+    title: "GPS Location",
+    description: "",
+    bullets: ["Accurate Positioning", "Global Coverage", "Geotagging"],
+  },
+  {
+    icon: <LayerStylingIcon />,
+    title: "Real Time Data Collection",
+    description: "Captures and updates data instantly in the field for timely decision-making.",
+    bullets: ["Enhance Data Accuracy", "Immediate Insights", "Dynamic Data Visualization"],
+  },
+  {
+    icon: <DataIngestionIcon />,
     title: "Offline Mode & Synchronization",
     description: "Enables offline access with smooth data syncing when reconnected.",
     bullets: ["Offline Data Collection & Sync", "Real-Time Updates & Data Quality", "Cross-Platform & Secure Integration"],
   },
   {
-    icon: <LayerStylingIcon />,
-    title: "GPS Tracking",
-    description: "Allows monitoring and tracking the location of assets, vehicles, or individuals using Global Positioning System (GPS) technology.",
-    bullets: ["Real-Time Asset Tracking", "Historical Track Playback", "Speed & Distance Monitoring"],
-  },
-  {
-    icon: <DataIngestionIcon />,
-    title: "Geo-fencing",
-    description: "Geo-fencing enhances user experience by providing location-based functionalities and contextual information.",
-    bullets: ["Real-Time Asset Tracking", "Route Optimization", "Notifications & Alerts"],
-  },
-  {
     icon: <WebMappingIcon />,
-    title: "Role-Based Hierarchical Access",
-    description: "It controls user permissions based on defined roles and organizational structure.",
-    bullets: ["Permission Management", "Role Inheritance", "Audit Trails"],
+    title: "Seamless Integration",
+    description: "Integrated effortlessly with existing systems and platforms for smooth workflows.",
+    bullets: ["Efficient data exchange", "API Integration", "Custom Integration Solutions"],
   },
   {
     icon: <CatalogIcon />,
-    title: "Data Validation",
-    description: "Data validation and error checking in Geoflow Creator ensure accuracy and integrity of processed geographical data.",
-    bullets: ["Error Detection", "Data Integrity Checks", "Automated Validation Rules"],
+    title: "Cater to various Needs",
+    description: "Revolutionizes data collection with enhanced productivity, accuracy, and transparency.",
+    bullets: ["Logistics", "Asset Management", "Delivery Services"],
   },
 ];
 
 const slides = [
-  { title: "Creaate Work Request", bullets: ["Initiate work", "Custom Forms", "Auto-compute Ares & Budget"], imgSrc: Flow1, imgAlt: "Grant Work Approvals" },
-  { title:"GeoFencing Tracking", bullets:["Create virtual boundaries", "Trigger Alerts", "Timely Response"], imgSrc: Flow2, imgAlt: "Beyond Auditing" },
-  { title: "Role BAsed Hierarchical Access", bullets: ["Efficient Data Management", "Role based tasks", "Access Data from anywhere at anytime"], imgSrc: Set4, imgAlt: "Spatial Monitoring" },
-  { title: "One Stop Solution", bullets: ["Real-Time Analysis","Multiple Data Formats", "User Friendly interface"], imgSrc: Flow3, imgAlt: "Collaborative Workflows" },
-  { title: "Cater to Various Needs", bullets: ["Versatile App", "Various Purposes", "Robust Features"], imgSrc: Set5, imgAlt: "Collaborative Workflows" },
+  { title: "Spatial Data Collection", bullets: ["Scan & Edit Asset Data", "Offline Mode", "Used in Remote Areas"], imgSrc: GeoScan2, imgAlt: "Grant Work Approvals" },
+  { title: " Spatial Scanner", bullets: ["GeoFencing", "Designated Areas", "Scan accurate data"], imgSrc: GeoScan3, imgAlt: "Beyond Auditing" },
+  { title: "Accurate Spatial Data", bullets: ["Precise location", "GPS tracking", "Custom Forms"], imgSrc: GeoScan4, imgAlt: "Spatial Monitoring" },
+  { titl:"Maintain Data Integrity", bullets: ["Share data Real time", "Strong User Management", "Data Quality"], imgSrc: GeoScan6, imgAlt: "Collaborative Workflows" },
+  { title: "Say No to Paper", bullets: ["Reduce paperwork", "Save Environment", "Optimize resources & cost"], imgSrc: GeoScan5, imgAlt: "Collaborative Workflows" },
 ];
 
 // ─── Slide Card ───────────────────────────────────────────────────────────
@@ -325,7 +326,7 @@ function FlipFeatureCard({ icon, title, description, bullets }) {
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────
-export default function GeoFlow1() {
+export default function GeoScan1() {
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -345,17 +346,17 @@ export default function GeoFlow1() {
               {/* Text */}
               <Box sx={{ flex: 1, minWidth: 0, zIndex: 1 }}>
                 <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 700, fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.6rem" }, color: NAVY, lineHeight: 1.2, mb: 3 }}>
-                  GeoFlow Creator
+                  GeoScanner
                 </Typography>
                 <Typography sx={{ color: "#2d3d4e", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, mb: 2 }}>
-                  A data creation mobile app which makes it easy to create accurate spatial data and send it to the office in real time.
+                  It is a mobile app that simplifies scanning and sending spatial data to the office in real time.
                 </Typography>
 
                 <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                   {[
-                    "Create and share spatial data in real time from mobile device.",
-                    "Works offline and syncs when reconnected.",
-                    "Seamlessly integrates with existing workflows and devices.",
+                    "Scan and send spatial data in real time from a mobile device.",
+                    "Offline functionality with seamless syncing.",
+                    "Simple data collection and editing for field staff.",
                   ].map((item) => (
                     <Box component="li" key={item} sx={{ display: "flex", alignItems: "flex-start", gap: 1.5, mb: 1.5, color: "#2d3d4e", fontSize: { xs: "0.9rem", md: "0.95rem" }, lineHeight: 1.6 }}>
                       <Box sx={{ mt: "6px", flexShrink: 0, color: ACCENT, fontWeight: 700, fontSize: "1.1rem", lineHeight: 1 }}>»</Box>
@@ -366,7 +367,7 @@ export default function GeoFlow1() {
               </Box>
               {/* Image */}
               <Box sx={{ flex: { xs: "none", md: "0 0 45%" }, width: { xs: "100%", md: "45%" }, maxWidth: { xs: "100%", md: 520 }, overflow: "hidden", borderRadius: 2, zIndex: 1 }}>
-                <Box component="img" src={Set5} alt="GeoSphere platform" sx={{ width: "100%", height: "auto", display: "block", maxHeight: { xs: 400, md: 480 }, objectFit: "contain", objectPosition: "center" }} />
+                <Box component="img" src={GeoScan21} alt="GeoSphere platform" sx={{ width: "100%", height: "auto", display: "block", maxHeight: { xs: 400, md: 480 }, objectFit: "contain", objectPosition: "center" }} />
               </Box>
             </Box>
           </Container>
@@ -388,13 +389,13 @@ export default function GeoFlow1() {
         </Box>
 
         {/* 3. CTA */}
-        <Box sx={{ position: "relative", py: { xs: 8, md: 10 }, overflow: "hidden", backgroundImage: `url(${Set5})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+        <Box sx={{ position: "relative", py: { xs: 8, md: 10 }, overflow: "hidden", backgroundImage: `url(${GeoScan21})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
           <Box sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0, 43, 85, 0.82)", backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
           <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 4, md: 6, lg: 8 }, position: "relative", zIndex: 1 }}>
             <Typography sx={{ fontFamily: '"Sora", sans-serif', fontWeight: 600, fontSize: { xs: "1.6rem", md: "2rem" }, color: "#fff", mb: 4 }}>
               Let&apos;s Connect With Us
             </Typography>
-            <Button  component={Link} to="/contact" variant="contained" size="large" sx={{ bgcolor: ACCENT, color: "#fff", px: 5, py: 1.6, fontSize: "1rem", fontWeight: 700, borderRadius: 1, "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" }, boxShadow: "0 6px 24px rgba(232,88,26,0.45)", transition: "all 0.2s" }}>
+            <Button component={Link} to="/contact" variant="contained" size="large" sx={{ bgcolor: ACCENT, color: "#fff", px: 5, py: 1.6, fontSize: "1rem", fontWeight: 700, borderRadius: 1, "&:hover": { bgcolor: "#cc4a0f", transform: "translateY(-2px)" }, boxShadow: "0 6px 24px rgba(232,88,26,0.45)", transition: "all 0.2s" }}>
               Contact Us
             </Button>
           </Container>
