@@ -4,11 +4,14 @@ import {
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import careergrowth from "../assets/career-growth.png";
+import careerimg1 from "../assets/career-img1.png";
+import careerimg2 from "../assets/career-img2.png";
 
 // ✅ Using picsum placeholders — replace with your actual imports once files are confirmed
-const careerImg1 = "https://picsum.photos/seed/career1/600/800";
-const careerImg2 = "https://picsum.photos/seed/career2/600/400";
-const careergrowth = "https://picsum.photos/seed/growth/600/400";
+const careerImg1 = careerimg1;
+const careerImg2 = careerimg2;
+const careergrowth = careergrowth;
 
 const ACCENT = "#e8622a";
 const DARK = "#0d1b2a";
