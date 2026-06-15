@@ -41,6 +41,11 @@ import Blog1 from "../pages/Blog1";
 import Blog2 from "../pages/Blog2";
 import Blog3 from "../pages/Blog3";
 import Blog4 from "../pages/Blog4";
+import GeoSet1 from "../pages/product/GeoSet1";
+import GeoSet2 from "../pages/product/GeoSet2";
+import GeoFlow1 from "../pages/product/GeoFlow1";
+import GeoFlow2 from "../pages/product/GeoFlow2";
+import GeoScan2 from "../pages/product/GeoScan2";
 
 export default function AppRouter() {
   return (
@@ -96,6 +101,11 @@ export default function AppRouter() {
         <Route path="/drone-services" element={<DroneServices />} />
         <Route path="/JobDetailPage" element={<JobDetailPage />} />
         <Route path="/GeoSp" element={<GeoSphereValueProposition />} />
+        <Route path="/GeoSet1" element={<GeoSet1 />} />
+        <Route path="/GeoSet2" element={<GeoSet2 />} />
+        <Route path="/GeoFlow1" element={<GeoFlow1 />} />
+        <Route path="/GeoFlow2" element={<GeoFlow2 />} />
+        <Route path="/GeoScan2" element={<GeoScan2 />} />
         <Route path="/Blog1" element={<Blog1 />} />
         <Route path="/Blog2" element={<Blog2 />} />
         <Route path="/Blog3" element={<Blog3 />} />

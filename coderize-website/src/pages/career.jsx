@@ -1,17 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Box, Container, Typography, Grid, Button,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import careergrowth from "../assets/career-growth.png";
-import careerimg1 from "../assets/career-img1.png";
-import careerimg2 from "../assets/career-img2.png";
-
-// ✅ Using picsum placeholders — replace with your actual imports once files are confirmed
-const careerImg1 = careerimg1;
-const careerImg2 = careerimg2;
-const careergrowth = careergrowth;
+import career from "../assets/career1.png";
+import careerimg1 from "../assets/career2.png";
+import careerimg2 from "../assets/career3.png";
 
 const ACCENT = "#e8622a";
 const DARK = "#0d1b2a";
@@ -199,7 +195,7 @@ function HeroImages() {
         borderRadius: "10px", overflow: "hidden",
         zIndex: 2, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
       }}>
-        <Box component="img" src={careerImg2} alt="Team at work"
+        <Box component="img" src={careerimg2} alt="Team at work"
           sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
       </Box>
@@ -212,7 +208,7 @@ function HeroImages() {
         borderRadius: "10px", overflow: "hidden",
         zIndex: 3, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
       }}>
-        <Box component="img" src={careergrowth} alt="Professional growth"
+        <Box component="img" src={career} alt="Professional growth"
           sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
       </Box>
@@ -225,7 +221,7 @@ function HeroImages() {
         borderRadius: "10px", overflow: "hidden",
         zIndex: 4, boxShadow: "0 6px 28px rgba(0,0,0,0.18)",
       }}>
-        <Box component="img" src={careerImg1} alt="Career growth"
+        <Box component="img" src={careerimg1} alt="Career growth"
           sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
       </Box>
@@ -373,7 +369,8 @@ export default function CareerPage() {
                 </Box>
               </Box>
               <Button
-                href="#"
+                component={Link}
+                to="/JobDetailPage"
                 endIcon={<ArrowForwardIcon sx={{ fontSize: "15px !important" }} />}
                 sx={{
                   color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600,

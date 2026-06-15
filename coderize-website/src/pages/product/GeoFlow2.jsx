@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import valuepro1 from "../../assets/valuepro1.png";
-import valuepro2 from "../../assets/valuepro2.jpg";
-import valuepro3 from "../../assets/valuepro3.jpg";
-import valuepro4 from "../../assets/valuepro4.jpg";
-import valuepro5 from "../../assets/valuepro5.jpg";
+import GeoFlow11 from "../../assets/GeoFlow11.png";
+import GeoFlow12 from "../../assets/GeoFlow12.png";
+import GeoFlow13 from "../../assets/GeoFlow13.png";
+import GeoFlow14 from "../../assets/GeoFlow14.png";
+import GeoFlow15 from "../../assets/GeoFlow15.png";
 
 const ACCENT = "#E8581A";
 const NAVY = "#002B55";
@@ -127,106 +127,71 @@ const KeyFeaturesIcon = () => (
 const flipFeatures = [
   {
     icon: <KeyFeaturesIcon />,
-    title: "Dataset Management",
-    description: "Securely manage and publish geospatial datasets in a centralized enterprise environment.",
+    title: "Workflow Management",
+    description: "Enhances business efficiency by seamlessly integrating geospatial data, optimizing processes, and facilitating informed decision-making.",
     bullets: [
-      "Upload multiple GIS data formats",
-      "Intuitive metadata editing",
-      "Controlled publishing & archiving workflows",
+      "Process Automation",
+      "Collaboration Tools",
+      "Performance Tracking",
     ],
   },
   {
     icon: <MapCreationIcon />,
-    title: "Map Creation",
-    description: "Create interactive, multi-layer maps with powerful tools for editing, styling, and visualization.",
-    bullets: ["Navigation Controls & Multi-layer selection", "Layer Management", "Basemaps & Sharing options"],
+    title: "Real-Time Monitoring",
+    description: "Delivers instant data updates and insights on operational effectiveness, highlighting what is functioning well and what needs improvement.",
+    bullets: ["Instant Data Updates", "Alert Notifications", "User Interaction"],
   },
   {
     icon: <LayerStylingIcon />,
-    title: "Layer Styling",
-    description: "Visually customize spatial layers with flexible, data-driven styling controls.",
-    bullets: ["Multiple Layer Styling Options", "Label Management", "Save & Reuse Style Presets"],
+    title: "Work Approvals",
+    description: "Work approvals ensure standards are met and streamline auditing through task management and collaboration.",
+    bullets: ["Task Authorization", "Feedback Mechanism", "Status Tracking"],
   },
   {
     icon: <DataIngestionIcon />,
-    title: "Data Ingestion & Management",
-    description: "Upload multiple GIS data formats, manage metadata, and control publishing workflows at scale.",
-    bullets: ["Vector & Raster Data ingestion & Creation", "Metadata creation & Dataset Management", "Geometry Validation & Editing"],
+    title: "Role-Based Hierarchical Access",
+    description: "It controls user permissions based on defined roles and organizational structure.",
+    bullets: ["Permission Management", "Role Inheritance", "Audit Trails"],
   },
   {
     icon: <WebMappingIcon />,
-    title: "Web Mapping & Visualization",
-    description: "Powerful spatial visualization engine to explore, query, and display geospatial data on the web.",
-    bullets: ["Map Composer with Layer Controls", "Feature Identify, Query & Measure", "Annotations and Map Export Options"],
+    title: "Metrics & KPI Tracking",
+    description: "Performance metrics and KPIs enable tracking and evaluation of the auditing process's effectiveness and efficiency.",
+    bullets: ["Metric Definition & Configuration", "Data Collection & Aggregation", "Spatial Analytics"],
   },
   {
     icon: <CatalogIcon />,
-    title: "Catalog, Search & Discovery",
-    description: "Find, organize, and access datasets quickly with intelligent catalog and search capabilities.",
-    bullets: ["Smart Search", "Dataset Organization", "Quick Discovery"],
+    title: "Reporting & Visualization",
+    description: "Analyzes and visualizes geospatial fluid flow data, enhancing reporting and communication of analysis results.",
+    bullets: ["Map- Based Visualization", "Data exploration & Filtering", "Dashboards & Custom reports"],
   },
-  {
-    icon: <DashboardIcon />,
-    title: "Dashboards & Analytics",
-    description: "Build interactive dashboards to track KPIs and visualize geospatial insights in real time.",
-    bullets: ["Charts, Counters, and Data Tables", "Dataset-Driven Widgets with Filters", "Share and Publish Live Dashboards"],
-  },
-  {
-    icon: <DashboardIcon />,
-    title: "User & Group Collaboration",
-    description: "Collaborate across teams with controlled access, visibility, and shared geospatial resources.",
-    bullets: ["Role-Based User & Group Management", "Shared Workspaces, Bookmarks & Favorites", "Activity Tracking, Notifications & Alerts"],
-  },
-  {
-    icon: <DashboardIcon />,
-    title: "Dashboards & Analytics",
-    description: "Build interactive dashboards to track KPIs and visualize geospatial insights in real time.",
-    bullets: ["Charts, Counters, and Data Tables", "Dataset-Driven Widgets with Filters", "Share and Publish Live Dashboards"],
-  },
-  {
-    icon: <DashboardIcon />,
-    title: "Security & Access Control",
-    description: "Secure geospatial assets with fine-grained access control and enterprise-level permissions.",
-    bullets: ["Role-Based Access Control (RBAC)", "Dataset, Map & Layer-Level Permissions", "Anonymous Access & User-Specific Overrides"],
-  },
-  {
-    icon: <DashboardIcon />,
-    title: "Dashboard Builder",
-    description: "Design configurable dashboards for real-time, data-driven monitoring and decision-making.",
-    bullets: ["Drag-and-Drop Layout Builder", "Charts, Tables & KPI Indicators", "Conditional Formatting & Auto-Refresh"],
-  },
-  {
-    icon: <DashboardIcon />,
-    title: "Administration & Operations",
-    description: "Manage, configure, and maintain the platform efficiently with centralized administrative controls.",
-    bullets: ["Backup, Restore & Maintenance Management", "User, Role & Access Administration", "Platform Configuration & System Controls"],
-  },
+  
 ];
 
 // ─── Slideshow Data ───────────────────────────────────────────────────────
 const slides = [
   {
-    title: "Grant Work Approvals",
-    bullets: ["Allow Work Permission", "Predictive Analysis", "Enables timely interventions"],
-    imgSrc: valuepro2,
+    title: "WorkFlow Management",
+    bullets: ["Audit Task in Real-time","Track work progress", "Streamline Workflow"],
+    imgSrc: GeoFlow12,
     imgAlt: "Grant Work Approvals",
   },
   {
-    title: "Beyond Auditing Capabilities",
-    bullets: ["Track History", "Maintain Transparency", "Data Integrity & Reliability"],
-    imgSrc: valuepro3,
+    title: "Real Time Data monitoring",
+    bullets: ["Valuable Insights", "Monitor Activities", "Identify Areas to Improve"],
+    imgSrc: GeoFlow13,
     imgAlt: "Beyond Auditing",
   },
   {
-    title: "Real-Time Spatial Monitoring",
-    bullets: ["Live Data Feeds", "Geofencing Alerts", "Automated Reporting"],
-    imgSrc: valuepro4,
+    title: "Grant Work Approvals",
+    bullets: ["Allow Work Permission", "Predictive Analysis", "Enables timely insterventions"],
+    imgSrc: GeoFlow14,
     imgAlt: "Spatial Monitoring",
   },
   {
-    title: "Collaborative Workflows",
-    bullets: ["Team-Based Editing", "Role-Based Access Control", "Shared Map Workspaces"],
-    imgSrc: valuepro5,
+    title: "Beyond Auditing Capabilities",
+    bullets: ["Track History", "Maintain Transparency", "Data Intergrity & Reliability"],
+    imgSrc: GeoFlow15,
     imgAlt: "Collaborative Workflows",
   },
 ];
@@ -530,7 +495,7 @@ function FlipFeatureCard({ icon, title, description, bullets }) {
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────
-export default function GeoSphereValueProposition() {
+export default function GeoFlow2() {
   return (
     <ThemeProvider theme={theme}>
       <style>{`
@@ -566,20 +531,17 @@ export default function GeoSphereValueProposition() {
                     mb: 3,
                   }}
                 >
-                  GeoSphere Value Proposition
+                  GeoFlow Auditor
                 </Typography>
                 <Typography sx={{ color: "#2d3d4e", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, mb: 2 }}>
-                  GeoSphere transforms raw spatial data into actionable intelligence by combining data management, mapping, analytics, and collaboration in a single secure platform.
+                 Robust web dashboard that integrated GeoFlow Creator enhancing auditing processes.
                 </Typography>
-                <Typography sx={{ color: "#2d3d4e", fontSize: { xs: "0.95rem", md: "1rem" }, lineHeight: 1.8, mb: 3, fontWeight: 500 }}>
-                  Welcome to GeoSpace.<br />Where location becomes intelligence.
-                </Typography>
+        
                 <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                   {[
-                    "Centralized repository for all geospatial data and documents",
-                    "Powerful web mapping and visualization tools",
-                    "Secure, role-based access and collaboration",
-                    "Built for enterprise-scale spatial decision-making",
+                    "Real-time task auditing with GeoFlow Creator data.",
+                    "Monitors field staff and site activities in real time.",
+                    "Predicts performance and highlights areas needing attention.",
                   ].map((item) => (
                     <Box
                       component="li"
@@ -611,7 +573,7 @@ export default function GeoSphereValueProposition() {
               >
                 <Box
                   component="img"
-                  src={valuepro1}
+                  src={GeoFlow11}
                   alt="GeoSphere platform"
                   sx={{ width: "100%", maxWidth: 540, height: "auto", display: "block", borderRadius: 2 }}
                 />
@@ -656,7 +618,7 @@ export default function GeoSphereValueProposition() {
             position: "relative",
             py: { xs: 8, md: 10 },
             overflow: "hidden",
-            backgroundImage: `url(${valuepro1})`,
+            backgroundImage: `url(${GeoFlow11})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
