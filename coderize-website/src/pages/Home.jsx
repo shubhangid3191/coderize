@@ -893,7 +893,7 @@ function Home() {
                     title: "Technical Support",
                     description:
                       "Dedicated expert support to keep your GIS infrastructure running smoothly, from troubleshooting to system upgrades.",
-                    link: "/TechnicalSupport",
+                    link: "/GeospatialTechnicalSupport",
                   },
                   {
                     key: "Drone Services",

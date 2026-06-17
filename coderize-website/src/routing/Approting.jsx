@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
-import CareerPage from "../pages/Career";
+import Careers from "../pages/career";
 import GeospatialPage from "../pages/services/Geospatial";
 import SoftwarePage from "../pages/services/Software";
 import GeoSetPage from "../pages/product/GeoSet";
@@ -58,7 +58,7 @@ export default function AppRouter() {
         <Route path="/" element={<Home />} />
 
         {/* Career Route */}
-        <Route path="/career" element={<CareerPage />} />
+        <Route path="/career" element={<Careers />} />
         <Route path="/geospatial" element={<GeospatialPage />} />
         <Route path="/Software" element={<SoftwarePage />} />
         <Route path="/Geoset" element={<GeoSetPage />} />

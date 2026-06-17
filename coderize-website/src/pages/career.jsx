@@ -1,393 +1,669 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  Box, Container, Typography, Grid, Button,
-} from "@mui/material";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import career from "../assets/career1.png";
-import careerimg1 from "../assets/career2.png";
-import careerimg2 from "../assets/career3.png";
+import React, { useState } from 'react';
+import { Box, Typography, Stack, Divider, IconButton } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import career1 from "../assets/career1.png";
+import career3 from "../assets/career3.png";
 
-const ACCENT = "#e8622a";
-const DARK = "#0d1b2a";
+const NAVY = '#102A43';
+const ORANGE = '#E07A36';
+const ICON_BG = '#AFC4DD';
 
-const jobListings = [
-  { title: "Python Developer Intern", desc: "We are looking for a Python Developer Intern to join our team" },
-  { title: "Digital Marketing Intern", desc: "We are looking for a Digital Marketing Intern to join our team" },
-  { title: "Graphic Design Intern", desc: "We are looking for a Graphic Design Intern to join our team" },
-  { title: "Software Tester Intern", desc: "We are looking for a Software Tester Intern to join our team" },
-  { title: "Sales Intern", desc: "We are looking for a Sales Intern to join our team" },
-  { title: "Marketing Intern", desc: "We are looking for a Marketing Intern to join our team" },
-  { title: "Sales Executive", desc: "We are looking for a Sales Executive to join our team" },
-  { title: "E-Mail Marketing Specialist", desc: "We are looking for a E-Mail Marketing Specialist to join our team" },
-];
-
-const testimonials = [
-  {
-    name: "Amey Ranjane", role: "Business Analyst",
-    text: "Working here has been a game-changer for me. The flexible working hours allow me to maintain a great work-life balance. The management team goes above and beyond to ensure a supportive and collaborative working environment.",
-  },
-  {
-    name: "Dipika Gote", role: "Project Lead Intern",
-    text: "CodeRize Technologies offers a dynamic and professional work culture that encourages collaboration and innovation. The supportive and skilled team ensures a productive environment with excellent opportunities for career development.",
-  },
-  {
-    name: "Swapna Bhide", role: "Project Manager",
-    text: "CodeRize Technologies fosters a supportive and collaborative work environment where we get the opportunity to focus on what we're passionate about and excel in our core interests. The culture here encourages continuous learning, with colleagues who are always ready to help.",
-  },
-  {
-    name: "Sanket Lodhe", role: "Software Engineer Intern",
-    text: "Working at CodeRize Technologies has been a great experience. The team is supportive, and there are plenty of opportunities to learn and grow. I'm grateful for the positive environment.",
-  },
-];
-
-const whyUs = [
-  {
-    title: "Company Values",
-    desc: "We are committed to innovation, collaboration, and excellence in everything we do.",
-    icon: (
-      <Box component="svg" width={44} height={44} viewBox="0 0 44 44" fill="none">
-        <circle cx="22" cy="22" r="22" fill="#c8d8e8" />
-        <path d="M22 12 L30 17 L30 27 L22 32 L14 27 L14 17 Z" stroke={ACCENT} strokeWidth="1.5" fill="none" />
-        <path d="M18 22 L21 25 L27 19" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </Box>
-    ),
-  },
-  {
-    title: "Culture & Environment",
-    desc: "We foster a dynamic, supportive, and collaborative workspace where creativity and growth thrive.",
-    icon: (
-      <Box component="svg" width={44} height={44} viewBox="0 0 44 44" fill="none">
-        <circle cx="22" cy="22" r="22" fill="#c8d8e8" />
-        <circle cx="17" cy="18" r="3" stroke={ACCENT} strokeWidth="1.5" />
-        <circle cx="27" cy="18" r="3" stroke={ACCENT} strokeWidth="1.5" />
-        <circle cx="22" cy="26" r="3" stroke={ACCENT} strokeWidth="1.5" />
-        <path d="M14 32 Q17 26 22 27 Q27 26 30 32" stroke={ACCENT} strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      </Box>
-    ),
-  },
-  {
-    title: "Benefits & Perks",
-    desc: "We offer competitive salaries, flexible hours, and ongoing professional development opportunities.",
-    icon: (
-      <Box component="svg" width={44} height={44} viewBox="0 0 44 44" fill="none">
-        <circle cx="22" cy="22" r="22" fill="#c8d8e8" />
-        <rect x="13" y="20" width="18" height="11" rx="2" stroke={ACCENT} strokeWidth="1.5" />
-        <path d="M17 20 V17 Q17 13 22 13 Q27 13 27 17 V20" stroke={ACCENT} strokeWidth="1.5" fill="none" />
-        <circle cx="22" cy="25.5" r="1.5" fill={ACCENT} />
-      </Box>
-    ),
-  },
-];
-
-const tickerTags = [
-  "Mapping Specialists", "Azure Cloud Experts.", "EX-ESRI Professionals",
-  "Custom Software Developers", "GIS Consultants", "Drone Mapping Specialists",
-];
-
-const TickerDot = () => (
-  <Box component="svg" width={16} height={16} viewBox="0 0 16 16" fill="none" sx={{ flexShrink: 0 }}>
-    <circle cx="8" cy="8" r="5.5" stroke={ACCENT} strokeWidth="1.5" />
-    <circle cx="8" cy="8" r="2" fill={ACCENT} />
+const Wrap = ({ children, sx }) => (
+  <Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 3, sm: 4, md: 5 }, ...sx }}>
+    {children}
   </Box>
 );
 
-function TickerBar() {
-  const doubled = [...tickerTags, ...tickerTags];
-  return (
-    <Box sx={{
-      overflow: "hidden",
-      bgcolor: "#fff",
-      borderTop: "1px solid #e8edf2",
-      borderBottom: "1px solid #e8edf2",
-      py: "14px",
-    }}>
-      <style>{`
-        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .ticker-inner { display: flex; width: max-content; animation: ticker 28s linear infinite; }
-        .ticker-inner:hover { animation-play-state: paused; }
-      `}</style>
-      <Box className="ticker-inner">
-        {doubled.map((tag, i) => (
-          <Box key={i} component="span" sx={{
-            display: "inline-flex", alignItems: "center", gap: 1,
-            px: "24px", whiteSpace: "nowrap",
-            fontSize: "0.88rem", color: "#3a5068", fontFamily: "'Segoe UI', sans-serif",
-          }}>
-            <TickerDot />
-            {tag}
-          </Box>
-        ))}
+/* ---------------- Inline SVG Icons ---------------- */
+
+const StepsIcon = () => (
+  <svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="80" width="26" height="20" rx="3" fill="#9FB8D6" />
+    <rect x="42" y="60" width="26" height="40" rx="3" fill="#B8CBE3" />
+    <rect x="74" y="40" width="26" height="60" rx="3" fill="#CFDCEE" />
+    <circle cx="95" cy="22" r="18" fill="#1B3A5C" />
+    <circle cx="95" cy="16" r="5" fill="#fff" />
+    <path d="M87 30c2-5 6-7 8-7s6 2 8 7" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
+  </svg>
+);
+
+const PersonPhotoIcon = () => (
+  <svg width="40%" height="40%" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="1.4">
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+  </svg>
+);
+
+const DotIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" style={{ flexShrink: 0 }}>
+    <circle cx="8" cy="8" r="6.5" fill="none" stroke="#444" strokeWidth="1.2" />
+    <circle cx="8" cy="8" r="2" fill="#444" />
+  </svg>
+);
+
+const BuildingIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="1.6">
+    <rect x="4" y="3" width="10" height="18" />
+    <rect x="14" y="9" width="6" height="12" />
+    <line x1="7" y1="6" x2="7" y2="6.2" strokeLinecap="round" />
+    <line x1="11" y1="6" x2="11" y2="6.2" strokeLinecap="round" />
+    <line x1="7" y1="10" x2="7" y2="10.2" strokeLinecap="round" />
+    <line x1="11" y1="10" x2="11" y2="10.2" strokeLinecap="round" />
+    <line x1="7" y1="14" x2="7" y2="14.2" strokeLinecap="round" />
+    <line x1="11" y1="14" x2="11" y2="14.2" strokeLinecap="round" />
+  </svg>
+);
+
+const PeopleIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="1.6">
+    <circle cx="8" cy="8" r="2.6" />
+    <circle cx="16" cy="8" r="2.6" />
+    <path d="M3 19c0-3 2.5-5 5-5s5 2 5 5" />
+    <path d="M11 19c0-3 2.5-5 5-5s5 2 5 5" />
+  </svg>
+);
+
+const PerksIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="1.6">
+    <rect x="3" y="13" width="6" height="8" />
+    <rect x="9" y="8" width="6" height="13" />
+    <rect x="15" y="3" width="6" height="18" />
+  </svg>
+);
+
+const QuoteIcon = () => (
+  <svg width="46" height="38" viewBox="0 0 48 40" fill="none">
+    <path d="M14 0C6.3 0 0 6.3 0 14c0 7 5 12.7 11.6 13.8L8 40h8L20 26V14C20 6.3 21.7 0 14 0z" fill={ORANGE} />
+    <path d="M38 0c-7.7 0-14 6.3-14 14 0 7 5 12.7 11.6 13.8L32 40h8l4-14V14C44 6.3 45.7 0 38 0z" fill={ORANGE} />
+  </svg>
+);
+
+const ArrowLeftIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+);
+
+const ArrowRightIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+
+const ClockSwirlIcon = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const WaveDecoration = () => (
+  <svg viewBox="0 0 500 500" width="100%" height="100%" style={{ opacity: 0.5 }}>
+    {[...Array(8)].map((_, i) => (
+      <path
+        key={i}
+        d={`M ${20 + i * 8} 0 C ${250 + i * 10} ${150 + i * 10}, ${150 - i * 10} ${300 - i * 5}, ${400 + i * 6} 500`}
+        stroke="#C9B8E8"
+        strokeWidth="1"
+        fill="none"
+      />
+    ))}
+  </svg>
+);
+
+const SafeImage = ({ src, alt, sx }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <Box sx={{ ...sx, bgcolor: '#E7EDF5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <PersonPhotoIcon />
       </Box>
-    </Box>
-  );
-}
+    );
+  }
 
-function TestimonialSlider() {
-  const [idx, setIdx] = useState(0);
-  const t = testimonials[idx];
-  const prev = () => setIdx((i) => (i - 1 + testimonials.length) % testimonials.length);
-  const next = () => setIdx((i) => (i + 1) % testimonials.length);
+  return <Box component="img" src={src} alt={alt} sx={sx} onError={() => setFailed(true)} />;
+};
+
+/* ---------------- Static Content ---------------- */
+
+const tickerItems = [
+  'Drone Mapping Specialists',
+  'Azure Cloud Experts.',
+  'EX-ESRI Professionals',
+  'Custom Software Developers',
+  'GIS Consultants',
+];
+
+const features = [
+  {
+    icon: <BuildingIcon />,
+    title: 'Company Values',
+    desc: 'We are committed to innovation, collaboration, and excellence in everything we do.',
+  },
+  {
+    icon: <PeopleIcon />,
+    title: 'Culture & Environment',
+    desc: 'We foster a dynamic, supportive, and collaborative workspace where creativity and growth thrive.',
+  },
+  {
+    icon: <PerksIcon />,
+    title: 'Benefits & Perks',
+    desc: 'We offer competitive salaries, flexible hours, and ongoing professional development opportunities.',
+  },
+];
+
+// NOTE: only the first testimonial's text has been confirmed against your
+// live-site screenshot and corrected to match exactly. Replace the other
+// two with your real copy whenever you have it — they're placeholders so
+// the arrow navigation has something to cycle through.
+const testimonials = [
+  {
+    quote:
+      'I am overwhelmed to share my experience with CodeRize Technologies Pvt. Ltd which offers a dynamic and professional work culture that encourages collaboration and innovation. The supportive and skilled team ensures a productive environment with excellent opportunities for career development.',
+    name: 'Dipika Gote',
+    role: 'Project Lead Intern',
+    
+  },
+  {
+    quote:
+      'Working here helped me maintain a great work-life balance. We have a supportive and friendly team that is incredibly insightful and helps you grow every single day.',
+    name: 'Rohit Sharma',
+    role: 'GIS Developer Intern',
+  },
+  {
+    quote:
+      'The mentorship and hands-on project exposure at CodeRize gave me the confidence to take on real client work within my first few months here.',
+    name: 'Ananya Patil',
+    role: 'Software Developer Intern',
+  },
+];
+
+const jobs = [
+  {
+    title: 'Python Developer Intern',
+    desc: 'We are looking for a Python Developer Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+  {
+    title: 'Digital Marketing Intern',
+    desc: 'We are looking for a Digital Marketing Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+  {
+    title: 'Graphic Design Intern',
+    desc: 'We are looking for a Graphic Design Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+    {
+    title: 'Software Tester Intern',
+    desc: 'We are looking for a Software Tester Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+  {
+    title: 'Sales Intern',
+    desc: 'We are looking for a Sales Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+    {
+    title: 'Marketing Intern',
+    desc: 'We are looking for a Marketing Intern to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+   {
+    title: 'Sales Executive',
+    desc: 'We are looking for a Sales Executive to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+  {
+    title: 'E-Mail Marketing Specialist',
+    desc: 'We are looking for a E-Mail Marketing Specialist to join our team',
+    tags: ['Full Time', 'Intern', 'Work From Office'],
+    path: "/JobDetailPage",
+  },
+];
+
+/* ---------------- Page Component ---------------- */
+
+const Careers = () => {
+  const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
+  const maxIndex = testimonials.length - 1;
+
+  const handlePrev = () => setIndex((i) => Math.max(0, i - 1));
+  const handleNext = () => setIndex((i) => Math.min(maxIndex, i + 1));
+
+  const baseUnit = [...tickerItems, ...tickerItems, ...tickerItems];
+  const loopItems = [...baseUnit, ...baseUnit];
 
   return (
-    <Box sx={{ bgcolor: "#cdd9e3", py: { xs: 6, md: "72px" }, pb: { xs: 8, md: "88px" } }}>
-      <Container maxWidth="lg" sx={{ position: "relative" }}>
-        <Typography variant="h4" sx={{
-          fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
-          fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 5.5,
-        }}>
-          What Our Employee Say
-        </Typography>
-        <Box sx={{ display: "flex", gap: 3.5, alignItems: "flex-start" }}>
-          <Box component="svg" width={56} height={44} viewBox="0 0 56 44" sx={{ flexShrink: 0 }}>
-            <text x="0" y="42" fontSize="68" fill={ACCENT} fontFamily="Georgia, serif" opacity="0.85">"</text>
-          </Box>
-          <Box sx={{ flex: 1 }}>
-            <Typography sx={{
-              fontFamily: "'Segoe UI', sans-serif", fontSize: "1rem",
-              color: "#1e3347", lineHeight: 1.85, mb: 3.5, maxWidth: 860,
-            }}>
-              {t.text}
-            </Typography>
-            <Typography sx={{ fontFamily: "'Segoe UI', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: DARK }}>
-              {t.name}
-            </Typography>
-            <Typography sx={{ color: ACCENT, fontSize: "0.875rem", fontFamily: "'Segoe UI', sans-serif", mt: "3px" }}>
-              {t.role}
-            </Typography>
-          </Box>
-        </Box>
-        <Box sx={{ display: "flex", gap: 1.5, position: "absolute", right: { xs: 16, md: 24 }, bottom: { xs: -48, md: -52 } }}>
-          {[{ fn: prev, icon: <ArrowBackIcon sx={{ fontSize: 16, color: "#4a6070" }} /> },
-            { fn: next, icon: <ArrowForwardIcon sx={{ fontSize: 16, color: "#4a6070" }} /> },
-          ].map(({ fn, icon }, i) => (
-            <Box key={i} component="button" onClick={fn} sx={{
-              width: 42, height: 42, borderRadius: "50%",
-              border: "1.5px solid #8aaabb", bgcolor: "#fff",
-              cursor: "pointer", display: "flex", alignItems: "center",
-              justifyContent: "center", transition: "border-color 0.2s",
-              "&:hover": { borderColor: ACCENT },
-            }}>
-              {icon}
-            </Box>
-          ))}
-        </Box>
-      </Container>
-    </Box>
-  );
-}
+    <Box sx={{ position: 'relative' }}>
+      {/* ---------- HERO ---------- */}
+      <Box
+        sx={{
+          background: 'linear-gradient(120deg, #FBE3CF 0%, #FCEFE2 35%, #FFFFFF 75%)',
+          pt: { xs: 12, sm: 13, md: 15 },
+          pb: { xs: 6, md: 10 },
+        }}
+      >
+        <Wrap>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: { xs: 5, md: 6 } }}>
+            <Box sx={{ width: { xs: '100%', md: '50%' } }}>
+              <Typography variant="body2" sx={{ color: '#8a8f98', mb: 2, fontSize: '0.95rem' }}>
+                <Box component="span" sx={{ color: NAVY, fontWeight: 700 }}>Home</Box>
+                {'  »  '}
+                <Box component="span" sx={{ color: '#8a8f98' }}>Career</Box>
+              </Typography>
 
-// ✅ Only ONE HeroImages function — clean, no duplicate
-function HeroImages() {
-  return (
-    <Box sx={{
-      position: "relative",
-      width: "100%",
-      height: { xs: 340, sm: 420, md: 480 },
-    }}>
-
-      {/* TOP-LEFT */}
-      <Box sx={{
-        position: "absolute",
-        top: 0, left: 0,
-        width: "52%", height: "52%",
-        borderRadius: "10px", overflow: "hidden",
-        zIndex: 2, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
-      }}>
-        <Box component="img" src={careerimg2} alt="Team at work"
-          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
-      </Box>
-
-      {/* BOTTOM-LEFT */}
-      <Box sx={{
-        position: "absolute",
-        bottom: 0, left: "5%",
-        width: "48%", height: "46%",
-        borderRadius: "10px", overflow: "hidden",
-        zIndex: 3, boxShadow: "0 4px 18px rgba(0,0,0,0.15)",
-      }}>
-        <Box component="img" src={career} alt="Professional growth"
-          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
-      </Box>
-
-      {/* RIGHT TALL */}
-      <Box sx={{
-        position: "absolute",
-        top: "5%", right: 0,
-        width: "50%", height: "93%",
-        borderRadius: "10px", overflow: "hidden",
-        zIndex: 4, boxShadow: "0 6px 28px rgba(0,0,0,0.18)",
-      }}>
-        <Box component="img" src={careerimg1} alt="Career growth"
-          sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
-      </Box>
-
-    </Box>
-  );
-}
-
-export default function CareerPage() {
-  return (
-    <Box sx={{ bgcolor: "#fff", minHeight: "100vh", fontFamily: "'Segoe UI', sans-serif" }}>
-
-      {/* ── HERO ── */}
-      <Box sx={{
-        background: "linear-gradient(160deg, #f9ede6 0%, #f5e0d3 30%, #eeddd8 55%, #e8dbd8 75%, #e0dce0 100%)",
-        pt: { xs: 5, md: "56px" },
-        overflow: "hidden",
-      }}>
-        <Container maxWidth="lg" sx={{ pb: { xs: 6, md: "64px" } }}>
-          <Typography sx={{ fontSize: "0.82rem", color: "#6a8090", mb: 4, fontFamily: "'Segoe UI', sans-serif" }}>
-            Home » Career
-          </Typography>
-          <Grid container spacing={{ xs: 4, md: 7 }} alignItems="flex-start">
-            <Grid item xs={12} md={5}>
-              <Typography variant="h1" sx={{
-                fontFamily: "'Segoe UI', sans-serif", fontWeight: 800,
-                fontSize: { xs: "2rem", md: "2.6rem" }, color: DARK, mb: 2.5, lineHeight: 1.2,
-              }}>
+              <Typography
+                variant="h2"
+                sx={{ color: NAVY, fontWeight: 800, mb: 3, fontSize: { xs: '2.2rem', sm: '2.6rem', md: '3rem' } }}
+              >
                 Grow With Us!!
               </Typography>
-              <Typography sx={{
-                color: "#3a5068", fontSize: "0.96rem", lineHeight: 1.85,
-                mb: 1.5, maxWidth: 500, fontFamily: "'Segoe UI', sans-serif",
-              }}>
-                At CodeRize Technologies, we drive innovation and excellence in geospatial and IT solutions.
-                Our dynamic team values creativity and collaboration. We provide exciting career opportunities
-                through internships. Exploratory programs and entry-level roles are also available. These positions
-                provide valuable training for students and recent graduates eager to start their careers.
+
+              <Typography sx={{ color: '#3c3c3c', fontSize: '1.05rem', lineHeight: 1.8, mb: 3 }}>
+                At CodeRize Technologies, we drive innovation and excellence in geospatial
+                and IT solutions. Our dynamic team values creativity and collaboration. We
+                provide exciting career opportunities through internships. Exploratory
+                programs and entry-level roles are also available. These positions provide
+                valuable training for students and recent graduates eager to start their
+                careers.
               </Typography>
-              <Typography sx={{ color: "#3a5068", fontSize: "0.93rem", fontFamily: "'Segoe UI', sans-serif" }}>
-                Share your CV with us at{" "}
-                <Box component="a" href="mailto:ctplhr@coderize.in" sx={{ color: ACCENT, fontWeight: 700, textDecoration: "none" }}>
+
+              <Typography sx={{ color: '#3c3c3c', fontSize: '1.05rem', lineHeight: 1.8 }}>
+                Share your CV with us at{' '}
+                <Box component="span" sx={{ fontWeight: 700, color: '#222' }}>
                   ctplhr@coderize.in
-                </Box>
-                {" "}and discover how you can contribute to our mission.
+                </Box>{' '}
+                and discover how you can contribute to our mission.
               </Typography>
-            </Grid>
-            <Grid item xs={12} md={7}>
-              <HeroImages />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+            </Box>
 
-      <TickerBar />
-
-      {/* ── WHY WORK WITH US ── */}
-      <Box sx={{ py: { xs: 6, md: "80px" }, bgcolor: "#fff" }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={10} alignItems="flex-start">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{
-                fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
-                fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK, mb: 2.5,
-              }}>
-                Why Work With Us?
-              </Typography>
-              <Typography sx={{ color: "#4a6070", fontSize: "0.95rem", lineHeight: 1.9, fontFamily: "'Segoe UI', sans-serif" }}>
-                At CodeRize, we foster a culture of innovation, collaboration, and continuous learning.
-                Our team is committed to tackling real-world challenges while providing opportunities to
-                work on exciting projects that align with your skills and passions. Join us to grow
-                professionally in a supportive and dynamic environment.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                {whyUs.map((item) => (
-                  <Box key={item.title} sx={{ display: "flex", gap: 2.5, alignItems: "flex-start" }}>
-                    <Box sx={{ flexShrink: 0 }}>{item.icon}</Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 600, fontSize: "0.98rem", color: ACCENT, mb: 0.75, fontFamily: "'Segoe UI', sans-serif" }}>
-                        {item.title}
-                      </Typography>
-                      <Typography sx={{ color: "#4a6070", fontSize: "0.875rem", lineHeight: 1.75, fontFamily: "'Segoe UI', sans-serif" }}>
-                        {item.desc}
-                      </Typography>
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      <TestimonialSlider />
-
-      {/* ── JOB LISTINGS ── */}
-      <Box sx={{ py: { xs: 6, md: "80px" }, pb: { xs: 8, md: "100px" }, bgcolor: "#fff" }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={7} sx={{ mb: 5 }} alignItems="flex-start">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{
-                fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
-                fontSize: { xs: "1.5rem", md: "1.9rem" }, color: DARK,
-              }}>
-                Our Job Offers
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography sx={{ color: "#4a6070", fontSize: "0.93rem", lineHeight: 1.8, fontFamily: "'Segoe UI', sans-serif" }}>
-                We offer you a unique opportunity to learn, grow, and be part of an exciting team and experience.
-              </Typography>
-            </Grid>
-          </Grid>
-          <Box sx={{ height: 1, bgcolor: "#dde5ec" }} />
-          {jobListings.map((job) => (
-            <Box key={job.title} sx={{
-              borderBottom: "1px solid #dde5ec", py: "30px",
-              display: "flex", alignItems: { xs: "flex-start", sm: "center" },
-              justifyContent: "space-between", gap: 3,
-              flexDirection: { xs: "column", sm: "row" },
-            }}>
-              <Box sx={{ flex: 1 }}>
-                <Typography sx={{
-                  fontFamily: "'Segoe UI', sans-serif", fontWeight: 700,
-                  fontSize: "1.1rem", color: DARK, mb: 0.75,
-                }}>
-                  {job.title}
-                </Typography>
-                <Typography sx={{ color: "#4a6070", fontSize: "0.88rem", mb: 1.75, fontFamily: "'Segoe UI', sans-serif" }}>
-                  {job.desc}
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
-                  {["Full Time", "Intern", "Work From Office"].map((tag, i) => (
-                    <Box key={tag} component="span" sx={{ display: "inline-flex", alignItems: "center" }}>
-                      <Typography component="span" sx={{ color: "#4a6070", fontSize: "0.86rem", fontFamily: "'Segoe UI', sans-serif" }}>
-                        {tag}
-                      </Typography>
-                      {i < 2 && (
-                        <Typography component="span" sx={{ color: "#b0bec8", mx: "12px", fontSize: "1rem", fontWeight: 300 }}>|</Typography>
-                      )}
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-              <Button
-                component={Link}
-                to="/JobDetailPage"
-                endIcon={<ArrowForwardIcon sx={{ fontSize: "15px !important" }} />}
+            <Box sx={{ width: { xs: '100%', md: '50%' } }}>
+              <Box
                 sx={{
-                  color: DARK, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600,
-                  fontSize: "0.88rem", textTransform: "none", flexShrink: 0,
-                  borderBottom: `1.5px solid ${ACCENT}`, borderRadius: 0,
-                  pb: "2px", px: 0, minWidth: 0,
-                  alignSelf: { xs: "flex-start", sm: "center" },
-                  "&:hover": { bgcolor: "transparent", color: ACCENT },
+                  position: 'relative',
+                  height: { xs: 300, sm: 380, md: 460 },
+                  width: '100%',
+                  maxWidth: 520,
+                  mx: { xs: 'auto', md: 0 },
+                  ml: { md: 'auto' },
                 }}
               >
-                View Details
-              </Button>
+                <SafeImage
+                  src={career1}
+                  alt="Team member working at desk"
+                  sx={{
+                    position: 'absolute', top: 0, left: 0,
+                    width: { xs: '70%', sm: '65%' }, height: { xs: '60%', sm: '62%' },
+                    objectFit: 'cover', borderRadius: 2, boxShadow: 4,
+                  }}
+                />
+                <SafeImage
+                  src={career3}
+                  alt="Team member working on laptop"
+                  sx={{
+                    position: 'absolute', bottom: 0, right: 0,
+                    width: { xs: '62%', sm: '58%' }, height: { xs: '58%', sm: '60%' },
+                    objectFit: 'cover', borderRadius: 2, boxShadow: 4,
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute', left: '20%', bottom: '12%',
+                    width: { xs: 100, sm: 130 }, height: { xs: 100, sm: 130 },
+                    bgcolor: '#E7EDF5', borderRadius: 2, boxShadow: 4, p: 1.5,
+                  }}
+                >
+                  <StepsIcon />
+                </Box>
+              </Box>
             </Box>
-          ))}
-        </Container>
+          </Box>
+        </Wrap>
       </Box>
 
+      {/* ---------- TICKER ---------- */}
+      <Box sx={{ bgcolor: '#EFEFEF', overflow: 'hidden', py: 2.5, whiteSpace: 'nowrap' }}>
+        <Box
+          sx={{
+            display: 'inline-flex', alignItems: 'center', gap: 2,
+            animation: 'ticker-scroll 35s linear infinite',
+            '@keyframes ticker-scroll': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+          }}
+        >
+          {loopItems.map((item, idx) => (
+            <Box key={idx} sx={{ display: 'inline-flex', alignItems: 'center', gap: 2, fontSize: { xs: '0.95rem', md: '1.1rem' }, color: '#2b2b2b', fontWeight: 500 }}>
+              <DotIcon />
+              <span>{item}</span>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* ---------- WHY WORK WITH US ---------- */}
+      <Box sx={{ bgcolor: '#fff', py: { xs: 6, md: 10 } }}>
+        <Wrap>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, md: 8 } }}>
+            <Box sx={{ width: { xs: '100%', md: '42%' } }}>
+              <Typography variant="h3" sx={{ color: NAVY, fontWeight: 800, mb: 3, fontSize: { xs: '1.9rem', md: '2.3rem' } }}>
+                Why Work With Us?
+              </Typography>
+              <Typography sx={{ color: '#3c3c3c', fontSize: '1.05rem', lineHeight: 1.8 }}>
+                At CodeRize, we foster a culture of innovation, collaboration, and
+                continuous learning. Our team is committed to tackling real-world
+                challenges while providing opportunities to work on exciting projects
+                that align with your skills and passions. Join us to grow professionally
+                in a supportive and dynamic environment.
+              </Typography>
+            </Box>
+
+            <Box sx={{ width: { xs: '100%', md: '58%' } }}>
+              <Stack spacing={4}>
+                {features.map((f, idx) => (
+                  <Stack key={idx} direction="row" spacing={3} alignItems="flex-start">
+                    <Box sx={{ width: 64, height: 64, borderRadius: '50%', bgcolor: ICON_BG, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      {f.icon}
+                    </Box>
+                    <Box>
+                      <Typography sx={{ color: ORANGE, fontWeight: 700, fontSize: '1.2rem', mb: 0.5 }}>{f.title}</Typography>
+                      <Typography sx={{ color: '#3c3c3c', fontSize: '1rem', lineHeight: 1.7 }}>{f.desc}</Typography>
+                    </Box>
+                  </Stack>
+                ))}
+              </Stack>
+            </Box>
+          </Box>
+        </Wrap>
+      </Box>
+
+      {/* ---------- TESTIMONIALS ---------- */}
+      <Box
+        sx={{
+          bgcolor: "#C7D4E3",
+          py: { xs: 6, md: 8 },
+        }}
+      >
+        <Wrap>
+          <Typography
+            sx={{
+              color: NAVY,
+              fontSize: { xs: "2rem", md: "2.1rem" },
+              fontWeight: 500,
+              mb: { xs: 4, md: 5 },
+            }}
+          >
+            What Our Employee Say
+          </Typography>
+
+          <Box sx={{ display: "flex", gap: { xs: 2, md: 5 } }}>
+            {/* Quote Icon */}
+            <Box
+              sx={{
+                color: ORANGE,
+                fontSize: { xs: "4rem", md: "5rem" },
+                lineHeight: 1,
+                fontWeight: 700,
+                flexShrink: 0,
+                mt: 1,
+              }}
+            >
+              ❝
+            </Box>
+
+            {/* Testimonial Content */}
+            <Box sx={{ flex: 1, maxWidth: "950px" }}>
+              <Typography
+                sx={{
+                  color: "#17324D",
+                  fontSize: { xs: "1rem", md: "1.05rem" },
+                  lineHeight: 1.7,
+                  mb: 4,
+                }}
+              >
+                {testimonials[index].quote}
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: NAVY,
+                  fontSize: { xs: "1.25rem", md: "1.5rem" },
+                  fontWeight: 500,
+                }}
+              >
+                {testimonials[index].name}
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: ORANGE,
+                  fontSize: { xs: "0.95rem", md: "1rem" },
+                  fontWeight: 500,
+                  mt: 0.5,
+                }}
+              >
+                {testimonials[index].role}
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Navigation Buttons */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 1.5,
+              mt: { xs: 4, md: 5 },
+            }}
+          >
+            <IconButton
+              onClick={handlePrev}
+              sx={{
+                width: 46,
+                height: 46,
+                border: `1px solid ${NAVY}`,
+                color: NAVY,
+              }}
+            >
+              <ArrowLeftIcon fontSize="small" />
+            </IconButton>
+
+            <IconButton
+              onClick={handleNext}
+              sx={{
+                width: 46,
+                height: 46,
+                border: `1px solid ${NAVY}`,
+                color: NAVY,
+              }}
+            >
+              <ArrowRightIcon fontSize="small" />
+            </IconButton>
+          </Box>
+        </Wrap>
+      </Box>
+  
+    {/* ---------- JOB OFFERS ---------- */}
+    <Box
+      sx={{
+        bgcolor: "#fff",
+        py: { xs: 6, md: 10 },
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          right: { xs: -100, md: -40 },
+          top: 0,
+          width: { xs: 320, md: 480 },
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <WaveDecoration />
+      </Box>
+
+      <Wrap sx={{ position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: 3,
+            mb: { xs: 4, md: 6 },
+          }}
+        >
+          <Box sx={{ flex: 1 }}>
+            <Typography
+              sx={{
+                color: NAVY,
+                fontWeight: 800,
+                fontSize: { xs: "2rem", md: "2.5rem" },
+              }}
+            >
+              Our Job Offers
+            </Typography>
+          </Box>
+
+          <Box sx={{ flex: 1 }}>
+            <Typography
+              sx={{
+                color: "#555",
+                fontSize: "1rem",
+                lineHeight: 1.8,
+                maxWidth: 500,
+              }}
+            >
+              We offer you a unique opportunity to learn, grow, and be part
+              of an exciting team and experience.
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Jobs List */}
+        <Stack divider={<Divider sx={{ borderColor: "#E0E0E0" }} />} spacing={4}>
+          {jobs.map((job, idx) => (
+            <Box key={idx} sx={{ py: 1 }}>
+              {/* Title + View Details */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: 2,
+                  mb: 1.5,
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: NAVY,
+                    fontWeight: 700,
+                    fontSize: { xs: "1.3rem", md: "1.6rem" },
+                  }}
+                >
+                  {job.title}
+                </Typography>
+
+                <Box
+                onClick={() => navigate(job.path)}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                    cursor: "pointer",
+                    color: ORANGE,
+                    "&:hover": {
+                      opacity: 0.8,
+                    },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: ORANGE,
+                      fontWeight: 600,
+                      fontSize: "0.95rem",
+                      borderBottom: `2px solid ${ORANGE}`,
+                      pb: 0.2,
+                    }}
+                  >
+                    View Details
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      color: ORANGE,
+                      fontSize: "1rem",
+                      fontWeight: 600,
+                    }}
+                  >
+                    →
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Description */}
+              <Typography
+                sx={{
+                  color: "#555",
+                  fontSize: "1rem",
+                  lineHeight: 1.8,
+                  mb: 2,
+                  maxWidth: "85%",
+                }}
+              >
+                {job.desc}
+              </Typography>
+
+              {/* Tags */}
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                flexWrap="wrap"
+                sx={{ color: "#6b6b6b" }}
+              >
+                {job.tags.map((tag, tIdx) => (
+                  <React.Fragment key={tIdx}>
+                    {tIdx > 0 && (
+                      <Box
+                        sx={{
+                          width: "1px",
+                          height: 16,
+                          bgcolor: "#ccc",
+                        }}
+                      />
+                    )}
+
+                    <Typography
+                      sx={{
+                        fontSize: "0.95rem",
+                        color: "#777",
+                      }}
+                    >
+                      {tag}
+                    </Typography>
+                  </React.Fragment>
+                ))}
+              </Stack>
+            </Box>
+          ))}
+        </Stack>
+      </Wrap>
+    </Box>
     </Box>
   );
-}
+};
+
+export default Careers;

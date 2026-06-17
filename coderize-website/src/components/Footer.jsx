@@ -9,6 +9,7 @@ import {
   Stack,
   Button,
 } from '@mui/material';
+import { Link as RouterLink } from "react-router-dom";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -38,7 +39,7 @@ const geospatialLinks = [
   { label: 'Location Intelligence', href: '/LocationIntelligence' },
   { label: 'Advisory', href: '/Advisory' },
   { label: 'Technical Support', href: '/GeospatialTechnicalSupport' },
-  { label: 'Drone Services', href: '/DroneServices' },
+  { label: 'Drone Services', href: '/drone-services' },
 ];
 
 const softwareLinks = [
@@ -52,7 +53,7 @@ const quickLinks = [
   { label: 'Industries', href: '/Industries' },
   { label: 'Career', href: '/career' },
   { label: 'Contact Us', href: '/Contact' },
-  { label: 'About Us', href: '#' },
+  { label: 'About Us', href: '/AboutCompany' },
   { label: 'Privacy Policy', href: 'PrivacyPolicy' },
   { label: 'Terms & Conditions', href: 'TermsConditions' },
 ];
