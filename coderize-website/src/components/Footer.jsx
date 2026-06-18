@@ -9,6 +9,8 @@ import {
   Stack,
   Button,
 } from '@mui/material';
+import { useState } from 'react';
+import ScheduleForm from '../pages/ScheduleForm';
 import { Link as RouterLink } from "react-router-dom";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -100,9 +102,9 @@ const SocialBtn = ({ icon, href }) => (
   </IconButton>
 );
 
-const CTAButton = ({ children, href }) => (
+const CTAButton = ({ children, href, onClick }) => (
   <Button
-    href={href}
+    {...(onClick ? { onClick } : { href })}
     variant="contained"
     sx={{
       bgcolor: ACCENT,
@@ -126,7 +128,8 @@ const CTAButton = ({ children, href }) => (
 );
 
 export default function Footer() {
-  
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+
   return (
     <Box sx={{ bgcolor: DARK_BG, color: 'white' }}>
       <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
@@ -155,7 +158,7 @@ export default function Footer() {
           </Typography>
           <Stack direction="row" spacing={2} sx={{ flexShrink: 0 }}>
             <CTAButton href="#">Write To Us</CTAButton>
-            <CTAButton href="#">Schedule</CTAButton>
+            <CTAButton onClick={() => setScheduleOpen(true)}>Schedule</CTAButton>
           </Stack>
         </Box>
 
@@ -247,6 +250,11 @@ export default function Footer() {
         </Box>
 
       </Container>
+
+      <ScheduleForm
+        open={scheduleOpen}
+        onClose={() => setScheduleOpen(false)}
+      />
     </Box>
   );
 }

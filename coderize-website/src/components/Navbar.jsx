@@ -242,9 +242,9 @@ export default function Navbar({ transparentHero = false }) {
                     href={item.href}
                     disableRipple
                     sx={{
-                      color: item.label === 'Careers' ? ACCENT : isTransparent ? '#ffffff' : '#1a2a3a',
+                      color: isTransparent ? '#ffffff' : '#1a2a3a',
                       fontFamily: "'Segoe UI', sans-serif",
-                      fontWeight: item.label === 'Careers' ? 700 : 500,
+                      fontWeight: 500,
                       fontSize: { md: '0.9rem', lg: '1rem' },
                       textTransform: 'none',
                       px: { md: 1, lg: 1.5 },
