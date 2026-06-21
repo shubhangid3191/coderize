@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   AppBar, Toolbar, Typography, Button, Box, IconButton,
   Drawer, List, ListItem, ListItemText, Container,
@@ -18,10 +19,10 @@ import blog4 from "../../assets/blog4.jpg";
 const menuItems = ["Services","Products","Industries","About Us","Careers","Library"];
 
 const blogs = [
-  { id:1, date:"July 15, 2024", title:"Driving Supply Chain Excellence with Geospatial Intelligence: Trends and Benefits", image:blog1, fallback:"https://picsum.photos/seed/supplychain/800/500" },
-  { id:2, date:"June 23, 2024", title:"KnowAge and GIS: Powering Data-Driven Decision-Making in Smart Cities", image:blog2, fallback:"https://picsum.photos/seed/smartcity/800/500" },
-  { id:3, date:"May 10, 2024", title:"3D GIS for Real Estate – CodeRize's Approach to Property Development and Urban Growth", image:blog3, fallback:"https://picsum.photos/seed/realestate3d/800/500" },
-  { id:4, date:"April 21, 2024", title:"From Crop Health Monitoring to Processing Crop Damage Claim – All You Need is GIS", image:blog4, fallback:"https://picsum.photos/seed/cropgis/800/500" },
+  { id:1, date:"July 15, 2024", title:"Driving Supply Chain Excellence with Geospatial Intelligence: Trends and Benefits", image:blog1, fallback:"https://picsum.photos/seed/supplychain/800/500",  path: "/Blog1" },
+  { id:2, date:"June 23, 2024", title:"KnowAge and GIS: Powering Data-Driven Decision-Making in Smart Cities", image:blog2, fallback:"https://picsum.photos/seed/smartcity/800/500" ,path: "/Blog2"},
+  { id:3, date:"May 10, 2024", title:"3D GIS for Real Estate – CodeRize's Approach to Property Development and Urban Growth", image:blog3, fallback:"https://picsum.photos/seed/realestate3d/800/500" ,path: "/Blog3"},
+  { id:4, date:"April 21, 2024", title:"From Crop Health Monitoring to Processing Crop Damage Claim – All You Need is GIS", image:blog4, fallback:"https://picsum.photos/seed/cropgis/800/500" ,path: "/Blog4"},
 ];
 
 function HeroSection() {
@@ -40,6 +41,7 @@ function HeroSection() {
 }
 
 function BlogCard({ blog }) {
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
   return (
@@ -55,7 +57,7 @@ function BlogCard({ blog }) {
         <Typography sx={{ color:"#888", fontSize:"14px", mb:1.5, fontWeight:400 }}>{blog.date}</Typography>
         <Box sx={{ width:"100%", height:"1px", bgcolor:"#e0dbd5", mb:2 }} />
         <Typography sx={{ color:"#111", fontWeight:700, fontSize:{ xs:"15px", sm:"16px", md:"17px" }, lineHeight:1.45, mb:2.5, flexGrow:1 }}>{blog.title}</Typography>
-        <Box sx={{ display:"inline-flex", alignItems:"center", gap:0.5, color:hovered?"#ff6b1a":"#111", fontWeight:500, fontSize:"14px", borderBottom:hovered?"1px solid #ff6b1a":"1px solid #111", pb:0.3, width:"fit-content", transition:"color 0.2s, border-color 0.2s" }}>
+        <Box onClick={() => navigate(blog.path)} sx={{ display:"inline-flex", alignItems:"center", gap:0.5, color:hovered?"#ff6b1a":"#111", fontWeight:500, fontSize:"14px", borderBottom:hovered?"1px solid #ff6b1a":"1px solid #111", pb:0.3, width:"fit-content", transition:"color 0.2s, border-color 0.2s" }}>
           Read More
           <ArrowForwardIcon sx={{ fontSize:15, transition:"transform 0.2s", transform:hovered?"translateX(4px)":"translateX(0)" }} />
         </Box>
